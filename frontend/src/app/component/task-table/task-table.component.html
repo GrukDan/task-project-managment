@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <table class="table table-hover table-dark mt-5">
+    <thead class="h4">
+    <tr>
+      <th class="text-center">Код задачи</th>
+      <th style="cursor: pointer" (click)="sort(parameters[0])">Название задачи</th>
+      <th style="cursor: pointer" (click)="sort(parameters[1])">Приоритет</th>
+      <th style="cursor: pointer" (click)="sort(parameters[2])">Статус</th>
+      <th style="cursor: pointer" (click)="sort(parameters[3])">Дата создания</th>
+      <th style="cursor: pointer" (click)="sort(parameters[4])">Дата выполнения</th>
+      <th style="cursor: pointer" (click)="sort(parameters[5])">Обновлено</th>
+      <th style="cursor: pointer" >Испонитель</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody *ngIf="taskViewModels.length>0; then table else void_table;">
+    </tbody>
+    <ng-template #table>
+      <tr *ngFor="let task of taskViewModels " class="text-center ">
+        <td class="h6">{{task.taskCode}}</td>
+        <td class="h6">{{task.taskName}}</td>
+        <td class="h6">{{task.priority}}</td>
+        <td class="h6">{{task.status}}</td>
+        <td class="h6">{{task.dateOfCreation | date}}</td>
+        <td class="h6">{{task.dueDate | date}}</td>
+        <td class="h6">{{task.updated | date }}</td>
+        <td class="h6"><a [routerLink]="['/account',task.taskExecutor]">{{task.taskExecutorSurname}} {{task.taskExecutorName}}</a></td>
+        <td>
+          <button class="btn btn-primary" [routerLink]="['/task']">Подробнее</button>
+        </td>
+      </tr>
+    </ng-template>
+  </table>
+  <div class="row">
+    <div class="col-xs-12 col-12">
+      <pagination [boundaryLinks]="true" [totalItems]=""  class="justify-content-center"
+                  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
+                  (pageChanged)="pageChanged($event)">
+      </pagination>
+    </div>
+  </div>
+  <ng-template #void_table>
+    <tr>
+      <td colspan="6" class="h3">Созданных задач нет.</td>
+    </tr>
+  </ng-template>
+</div>

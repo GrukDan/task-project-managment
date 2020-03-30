@@ -1,0 +1,122 @@
+<carousel>
+  <slide>
+    <img src="assets/images/first-page/1.jpg" alt="first slide" style="display: block; height: 100%;">
+    <div class="carousel-caption d-none d-md-block " >
+      <div *ngIf="templateShow; then welcome"></div>
+      <div class="text-center py-5 text-white">
+        <h2>First custom content</h2>
+        <div class="lead">
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+      </div>
+    </div>
+  </slide>
+  <slide>
+    <img src="assets/images/first-page/2.jpg" alt="second slide" style="display: block; height: 100%;">
+    <div class="carousel-caption d-none d-md-block " >
+      <div *ngIf="templateShow; then welcome"></div>
+      <div class="text-center py-5 text-white">
+        <h2>First custom content</h2>
+        <div class="lead">
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+      </div>
+    </div>
+  </slide>
+  <slide>
+    <img src="assets/images/first-page/3.jpg" alt="third slide" style="display: block; height: 100%;">
+    <div class="carousel-caption d-none d-md-block " >
+      <div *ngIf="templateShow; then welcome"></div>
+      <div class="text-center py-5 text-white">
+        <h2>First custom content</h2>
+        <div class="lead">
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+      </div>
+    </div>
+  </slide>
+  <slide>
+    <img src="assets/images/first-page/4.jpg" alt="third slide" style="display: block; height: 100%;">
+    <div class="carousel-caption d-none d-md-block " >
+      <div *ngIf="templateShow; then welcome"></div>
+      <div class="text-center py-5 text-white">
+        <h2>First custom content</h2>
+        <div class="lead">
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+      </div>
+    </div>
+  </slide>
+  <slide>
+    <img src="assets/images/first-page/5.jpg" alt="third slide" style="display: block; height: 100%;">
+    <div class="carousel-caption d-none d-md-block " >
+      <div *ngIf="templateShow; then welcome"></div>
+      <div class="text-center py-5 text-white">
+        <h2>First custom content</h2>
+        <div class="lead">
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+      </div>
+    </div>
+  </slide>
+  <slide>
+    <img src="assets/images/first-page/6.jpg" alt="third slide" style="display: block; height: 100%;">
+    <div class="carousel-caption d-none d-md-block " >
+      <div *ngIf="templateShow; then welcome"></div>
+      <div class="text-center py-5 text-white">
+        <h2>First custom content</h2>
+        <div class="lead">
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+      </div>
+    </div>
+  </slide>
+</carousel>
+
+
+<ng-template #welcome>
+  <div>
+    <div style=" margin-bottom: 20%">
+    <h1>
+      <span style="font-weight: bolder">
+        WELCOME
+      </span>
+    </h1>
+    <button class="btn btn-primary btn-lg mt-3 h3" (click)="openModal(logIn)">LOG IN</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #logIn>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Log in</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <form>
+        <div class="form-group">
+          <label for="loginInput">Login</label>
+          <input type="text" id="loginInput" class="form-control" name="userLogin"/>
+        </div>
+        <div class="form-group">
+          <label for="passwordInput">Password</label>
+          <input type="password" id="passwordInput" class="form-control" name="userPassword" />
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
+    <button class="btn btn-primary" (click)="authorization()">Log in</button>
+  </div>
+</ng-template>

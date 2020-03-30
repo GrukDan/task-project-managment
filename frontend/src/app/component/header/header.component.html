@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark sticky-top">
+  <a class="navbar-brand mx-3" routerLink="">T<i class="fa fa-font"></i>SK AND PR<i class="fa fa-dot-circle-o"></i>JECT MANAGMENT</a>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link text-white" routerLink="/tasks/table">Задачи <i class="fa fa-tasks"></i></a>
+      <a class="nav-item nav-link text-white" routerLink="/projects/table">Проекты <i class="fa fa-line-chart"></i></a>
+      <a class="nav-item nav-link text-white" routerLink="/users/table">Пользователи <i class="fa fa-users"></i></a>
+      <a class="btn nav-item nav-link text-white" (click)="openModal(addUserModal)">Новый пользователь <i class="fa fa-user-plus"></i></a>
+      <a class="btn nav-item nav-link text-white" (click)="openModal(addProjectModal)">Новый проект <i class="fa fa-plus"></i></a>
+      <a class="btn nav-item nav-link text-white" (click)="openModal(addTaskModal)">Новая задача <i class="fa fa-plus-circle"></i></a>
+    </div>
+  </div>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+  </form>
+  <div class="btn-group" style="margin-left: 40px; margin-right: 100px"  dropdown>
+    <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-animated">
+      <i class="fa fa-user"></i> <span class="caret"></span>
+    </button>
+    <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu"
+        role="menu" aria-labelledby="button-animated">
+      <li role="menuitem"><a class="dropdown-item" routerLink="/home"><i class="fa fa-home"> Home</i></a></li>
+      <li role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-info-circle"> Информация</i></a>
+      </li>
+      <li class="divider dropdown-divider"></li>
+      <li role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-sign-out">Sign out</i></a></li>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>
+
+
+<ng-template #addUserModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add user</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<!--  <div class="modal-body">-->
+<!--    <div class="container-fluid">-->
+<!--      <form>-->
+<!--        <div class="form-group">-->
+<!--          <label for="nameInput">Name</label>-->
+<!--          <input type="text" id="nameInput" class="form-control"  name="userName" [(ngModel)]="user.userName"/>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="surnameInput">Surname</label>-->
+<!--          <input type="text" id="surnameInput" class="form-control" name="userSurname"[(ngModel)]="user.userSurname"/>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="emailInput">Email</label>-->
+<!--          <input type="email" id="emailInput" class="form-control" name="userSurname" [(ngModel)]="user.email"/>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="roleSelect">Role</label>-->
+<!--          <select class="form-control" id="roleSelect" name="roleSelect"-->
+<!--                  #role>-->
+<!--            <option *ngFor="let role of roles"-->
+<!--                    [value]="role.idrole">{{role.role}}</option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="loginInput">Login</label>-->
+<!--          <input type="text" id="loginInput" class="form-control" name="userLogin"[(ngModel)]="user.login"/>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="passwordInput">Password</label>-->
+<!--          <input type="password" id="passwordInput" class="form-control" name="userPassword" [(ngModel)]="user.password"/>-->
+<!--        </div>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="modal-footer">-->
+<!--    <button class="btn btn-secondary" (click)="modalRef.hide()">Close</button>-->
+<!--    <button class="btn btn-primary" (click)="addUser(role)">Add user</button>-->
+<!--  </div>-->
+</ng-template>
+
+<ng-template #addProjectModal>
+
+</ng-template>
+
+<ng-template #addTaskModal>
+
+</ng-template>

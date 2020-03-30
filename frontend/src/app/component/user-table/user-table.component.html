@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <table class="table table-hover table-dark mt-5">
+    <thead class="h4">
+    <tr>
+      <th style="cursor: pointer" (click)="sort(parameters[0])">Имя</th>
+      <th style="cursor: pointer" (click)="sort(parameters[1])">Фамилия</th>
+      <th style="cursor: pointer" (click)="sort(parameters[2])">Email</th>
+      <th style="cursor: pointer" (click)="sort(parameters[2])">Должность</th>
+      <th class="text-center">Выполняемый проект</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody *ngIf="userViewModels.length>0; then table else void_table;">
+    </tbody>
+    <ng-template #table>
+      <tr *ngFor="let user of userViewModels" class="text-center ">
+        <td class="h6">{{user.userName}}</td>
+        <td class="h6">{{user.userSurname}}</td>
+        <td class="h6">{{user.email}}</td>
+        <td class="h6">{{user.roleName}}</td>
+        <td class="h6"><a
+          [routerLink]="['/home']">{{user.assignProjectName}}</a>
+        </td>
+        <td>
+          <button class="btn btn-primary" [routerLink]="['/projects']">Подробнее</button>
+        </td>
+      </tr>
+    </ng-template>
+  </table>
+  <div class="row">
+    <div class="col-xs-12 col-12">
+      <pagination [boundaryLinks]="true" [totalItems]="" class="justify-content-center"
+                  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
+                  (pageChanged)="pageChanged($event)">
+      </pagination>
+    </div>
+  </div>
+  <ng-template #void_table>
+    <tr>
+      <td colspan="6" class="h3">Нет пользователей.</td>
+    </tr>
+  </ng-template>
+</div>
