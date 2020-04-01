@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TaskViewModel} from "../../model/view-model/task-view-model";
 
 @Component({
   selector: 'app-project-page',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectPageComponent implements OnInit {
 
-  constructor() { }
+  private taskViewModels:TaskViewModel[];
+
+  constructor() {
+    this.taskViewModels = [];
+
+  }
 
   ngOnInit() {
   }

@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     ModalModule.forRoot(),
     CarouselModule.forRoot(),
     PaginationModule.forRoot(),
+    TabsModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

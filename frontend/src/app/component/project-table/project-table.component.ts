@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ProjectViewModel} from "../../model/project-view-model";
+import {ProjectViewModel} from "../../model/view-model/project-view-model";
 import {PageChangedEvent} from "ngx-bootstrap";
 
 @Component({

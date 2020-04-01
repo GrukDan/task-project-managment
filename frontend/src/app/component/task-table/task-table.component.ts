@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TaskViewModel} from "../../model/task-view-model";
+import {TaskViewModel} from "../../model/view-model/task-view-model";
 import {PageChangedEvent} from "ngx-bootstrap";
 
 @Component({

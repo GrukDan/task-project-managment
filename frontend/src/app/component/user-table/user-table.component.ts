@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserViewModel} from "../../model/user-view-model";
+import {UserViewModel} from "../../model/view-model/user-view-model";
 import {PageChangedEvent} from "ngx-bootstrap";
 
 @Component({

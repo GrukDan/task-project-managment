@@ -2,14 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0aa6911-27e9-42cb-b138-ed54147570d6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/first-page/first-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/first-page/first-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/project-page/project-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/project-page/project-page.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/project-page/project-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/project-page/project-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/project-table/project-table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/project-table/project-table.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/task-page/task-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/task-page/task-page.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/task-table/task-table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/task-table/task-table.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/user-table/user-table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/user-table/user-table.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/project-view-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/view-model/project-view-model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/task-view-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/view-model/task-view-model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/user-view-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/view-model/user-view-model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/module/custom/custom.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/module/custom/custom.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/module/header/header.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/module/header/header.module.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +73,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/frontend" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -74,7 +83,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1ZngwRhz17orfuuEwh9j11l4roM" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
@@ -84,20 +95,21 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/frontend/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.applicationServers" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="ts.external.directory.path" value="D:\kurs_project\frontend\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\kurs_project\frontend\src\app\module" />
-      <recent name="D:\kurs_project\frontend\src\app\component" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.bsuir.service.serviceImpl" />
+      <recent name="com.bsuir.service" />
     </key>
     <key name="ImportMappingsDialog.RecentPackages">
       <recent name="com.bsuir.model" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.bsuir.service.serviceImpl" />
-      <recent name="com.bsuir.service" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\kurs_project\frontend\src\app\model\view-model" />
+      <recent name="D:\kurs_project\frontend\src\app\module" />
+      <recent name="D:\kurs_project\frontend\src\app\component" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -181,6 +193,7 @@
       <updated>1585480509854</updated>
       <workItem from="1585480513339" duration="19334000" />
       <workItem from="1585568765164" duration="19427000" />
+      <workItem from="1585653043273" duration="14635000" />
     </task>
     <servers />
   </component>
@@ -199,5 +212,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/frontend" />
+    </ignored-roots>
   </component>
 </project>

@@ -38,21 +38,18 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-<!--  <div class="modal-body">-->
-<!--    <div class="container-fluid">-->
-<!--      <form>-->
-<!--        <div class="form-group">-->
-<!--          <label for="nameInput">Name</label>-->
-<!--          <input type="text" id="nameInput" class="form-control"  name="userName" [(ngModel)]="user.userName"/>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <label for="surnameInput">Surname</label>-->
-<!--          <input type="text" id="surnameInput" class="form-control" name="userSurname"[(ngModel)]="user.userSurname"/>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <label for="emailInput">Email</label>-->
-<!--          <input type="email" id="emailInput" class="form-control" name="userSurname" [(ngModel)]="user.email"/>-->
-<!--        </div>-->
+<div class="modal-body">
+  <form [formGroup]="userForm" novalidate>
+<div class="form-group">
+  <label for="userNameInput">Имя пользователя</label>
+  <input type="text" class="form-control" id="userNameInput" formControlName="userName" [(ngModel)]="user.userName">
+  <label for="userSurnameInput">Фамилия пользователя</label>
+  <input type="text" class="form-control" id="userSurnameInput" formControlName="userSurname" [(ngModel)]="user.userSurname">
+  <label for="userEmailInput">Email</label>
+  <input type="text" class="form-control" id="userEmailInput" formControlName="email" [(ngModel)]="user.email">
+</div>
+  </form>
+</div>
 <!--        <div class="form-group">-->
 <!--          <label for="roleSelect">Role</label>-->
 <!--          <select class="form-control" id="roleSelect" name="roleSelect"-->
@@ -61,21 +58,11 @@
 <!--                    [value]="role.idrole">{{role.role}}</option>-->
 <!--          </select>-->
 <!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <label for="loginInput">Login</label>-->
-<!--          <input type="text" id="loginInput" class="form-control" name="userLogin"[(ngModel)]="user.login"/>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <label for="passwordInput">Password</label>-->
-<!--          <input type="password" id="passwordInput" class="form-control" name="userPassword" [(ngModel)]="user.password"/>-->
-<!--        </div>-->
-<!--      </form>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="modal-footer">-->
-<!--    <button class="btn btn-secondary" (click)="modalRef.hide()">Close</button>-->
-<!--    <button class="btn btn-primary" (click)="addUser(role)">Add user</button>-->
-<!--  </div>-->
+
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
+    <button class="btn btn-primary" [disabled]="userForm.invalid" (click)="addUser()">Add user</button>
+  </div>
 </ng-template>
 
 <ng-template #addProjectModal>

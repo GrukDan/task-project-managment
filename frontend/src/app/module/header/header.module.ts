@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {HeaderComponent} from "../../component/header/header.component";
 import {AppRoutingModule} from "../../app-routing.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BsDropdownModule} from "ngx-bootstrap";
 
@@ -16,6 +16,7 @@ import {BsDropdownModule} from "ngx-bootstrap";
     FormsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
+    ReactiveFormsModule,
   ],
   exports:[HeaderComponent]
 })

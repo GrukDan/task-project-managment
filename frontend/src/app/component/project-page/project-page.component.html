@@ -1,1 +1,106 @@
-<p>project-page works!</p>
+<div class="container-fluid">
+  <div class="mt-2">
+    <tabset [justified]="true">
+      <tab>
+        <ng-template tabHeading>
+          <div>
+            <h2>Информация о проекте</h2>
+          </div>
+        </ng-template>
+        <div *ngTemplateOutlet="tabBody1"></div>
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          <div>
+            <h2>Задачи проекта</h2>
+          </div>
+        </ng-template>
+        <div *ngTemplateOutlet="tabBody2"></div>
+      </tab>
+    </tabset>
+  </div>
+</div>
+
+
+<ng-template #tabBody1>
+  <div class="container mt-5">
+    <div>
+      <h1>Название проекта:</h1>
+      <h2>Name</h2>
+    </div>
+    <div>
+      <h1>Код проекта:</h1>
+      <h2>Name</h2>
+    </div>
+    <div>
+      <h1>Дата завершения:</h1>
+      <h2>Name</h2>
+    </div>
+    <div>
+      <h1>Степень готовности:</h1>
+      <h2>Name</h2>
+    </div>
+
+    <div>
+      <h1>Создатель проекта:</h1>
+      <h2><a routerLink="">Name</a></h2></div>
+    <div>
+      <h1>Описание проекта:</h1>
+      <h3 class="text-justify">Note that tabs can be given role="tablist", role="tab" and role="tabpanel" attributes.
+        These are
+        appropriate for tabbed interfaces, as described in the WAIARIA Authoring Practices.
+        If your control element is targeting a single collapsible element - you should add the aria-c
+        ontrols attribute to the control element, containing the id of the collapsible element. </h3>
+    </div>
+    <div class="my-5 text-right">
+      <span >
+        <button class="btn btn-primary mr-5">Редактировать</button>
+        <button class="btn btn-primary">Удалить</button>
+      </span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #tabBody2>
+  <div class="container-fluid">
+    <table class="table table-hover table-dark mt-5">
+      <thead class="h4">
+      <tr>
+        <th class="text-center">Код задачи</th>
+        <th>Название задачи</th>
+        <th>Приоритет</th>
+        <th>Статус</th>
+        <th>Дата создания</th>
+        <th>Дата выполнения</th>
+        <th>Обновлено</th>
+        <th>Испонитель</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody *ngIf="taskViewModels.length>0; then table else void_table;">
+      </tbody>
+      <ng-template #table>
+        <tr *ngFor="let task of taskViewModels " class="text-center ">
+          <td class="h6">{{task.taskCode}}</td>
+          <td class="h6">{{task.taskName}}</td>
+          <td class="h6">{{task.priority}}</td>
+          <td class="h6">{{task.status}}</td>
+          <td class="h6">{{task.dateOfCreation | date}}</td>
+          <td class="h6">{{task.dueDate | date}}</td>
+          <td class="h6">{{task.updated | date }}</td>
+          <td class="h6"><a
+            [routerLink]="['/account',task.taskExecutor]">{{task.taskExecutorSurname}} {{task.taskExecutorName}}</a>
+          </td>
+          <td>
+            <button class="btn btn-primary" [routerLink]="['/task']">Подробнее</button>
+          </td>
+        </tr>
+      </ng-template>
+    </table>
+    <ng-template #void_table>
+      <tr>
+        <td colspan="6" class="h3">Созданных задач нет.</td>
+      </tr>
+    </ng-template>
+  </div>
+</ng-template>

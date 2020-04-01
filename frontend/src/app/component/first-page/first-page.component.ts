@@ -6,7 +6,7 @@ import {BsModalRef, BsModalService, CarouselConfig} from "ngx-bootstrap";
   templateUrl: './first-page.component.html',
   styleUrls: ['./first-page.component.css'],
   providers: [
-    { provide: CarouselConfig, useValue: { interval: 2500, noPause: false, showIndicators: true } }
+    { provide: CarouselConfig, useValue: { interval: 2500, noPause: true, showIndicators: true } }
   ]
 })
 export class FirstPageComponent implements OnInit {
