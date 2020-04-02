@@ -2,23 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0aa6911-27e9-42cb-b138-ed54147570d6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/service/serviceImpl/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/service/serviceImpl/RoleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/model/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/model/Task.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/first-page/first-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/first-page/first-page.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/project-page/project-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/project-page/project-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/project-page/project-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/project-page/project-page.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/project-table/project-table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/project-table/project-table.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/task-page/task-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/task-page/task-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/task-table/task-table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/task-table/task-table.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/user-table/user-table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/user-table/user-table.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/project-view-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/view-model/project-view-model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/task-view-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/view-model/task-view-model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/user-view-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/view-model/user-view-model.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/module/custom/custom.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/module/custom/custom.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/module/header/header.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/module/header/header.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +57,7 @@
         <item name="mydb@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="mydb: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="user: table" type="285a2a93:MysqlImplModel$Table" />
+        <item name="project: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -67,8 +66,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="TypeScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -92,6 +91,7 @@
     <property name="JPA.DatabaseSchemaImportDialog" value="a5e9f2cb-f5bf-4287-8c07-72d908d0b347" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last.edited.regexp" value="den@mail.ru" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/frontend/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -173,7 +173,12 @@
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@5482468f" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@146e42e6" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@146e42e6" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@75f2a50" type="9fbbdea:ServiceModel$ServiceNode" />
             </path>
           </expand>
           <select />
@@ -194,6 +199,8 @@
       <workItem from="1585480513339" duration="19334000" />
       <workItem from="1585568765164" duration="19427000" />
       <workItem from="1585653043273" duration="14635000" />
+      <workItem from="1585782871584" duration="597000" />
+      <workItem from="1585834057225" duration="17305000" />
     </task>
     <servers />
   </component>

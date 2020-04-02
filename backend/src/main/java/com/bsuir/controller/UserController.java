@@ -1,6 +1,7 @@
 package com.bsuir.controller;
 
 
+import com.bsuir.model.Role;
 import com.bsuir.model.User;
 import com.bsuir.model.httpModel.UserViewModel;
 import com.bsuir.service.UserService;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -32,4 +35,5 @@ public class UserController {
     public boolean save(@RequestBody UserViewModel userViewModel){
         return userService.saveUser(userViewModel);
     }
+
 }

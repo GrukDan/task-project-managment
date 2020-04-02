@@ -4,7 +4,8 @@ import {HeaderComponent} from "../../component/header/header.component";
 import {AppRoutingModule} from "../../app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {BsDropdownModule} from "ngx-bootstrap";
+import {BsDatepickerModule, BsDropdownModule, DatepickerModule} from "ngx-bootstrap";
+import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 
 
 
@@ -17,6 +18,9 @@ import {BsDropdownModule} from "ngx-bootstrap";
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
+    Ng4LoadingSpinnerModule,
+    BsDatepickerModule,
+    DatepickerModule,
   ],
   exports:[HeaderComponent]
 })

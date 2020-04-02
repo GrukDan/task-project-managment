@@ -5,12 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {CustomModule} from "./module/custom/custom.module";
 import {HeaderModule} from "./module/header/header.module";
-import {BsDropdownModule, ModalModule, TooltipModule} from "ngx-bootstrap";
+import {BsDatepickerModule, BsDropdownModule, DatepickerModule, ModalModule, TooltipModule} from "ngx-bootstrap";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     CarouselModule.forRoot(),
     PaginationModule.forRoot(),
     TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    DatepickerModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

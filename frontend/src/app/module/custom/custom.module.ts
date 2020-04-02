@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {UserService} from "../../service/user.service";
 import {TaskService} from "../../service/task.service";
 import {ProjectService} from "../../service/project.service";
@@ -8,12 +8,13 @@ import {HomeComponent} from "../../component/home/home.component";
 import {NotFoundPageComponent} from "../../component/not-found-page/not-found-page.component";
 import {ProjectPageComponent} from "../../component/project-page/project-page.component";
 import {TaskPageComponent} from "../../component/task-page/task-page.component";
-import {CarouselModule, PaginationModule, TabsModule} from "ngx-bootstrap";
+import {BsDatepickerModule, BsLocaleService, CarouselModule, PaginationModule, TabsModule} from "ngx-bootstrap";
 import {TaskTableComponent} from "../../component/task-table/task-table.component";
 import {ProjectTableComponent} from "../../component/project-table/project-table.component";
 import {UserTableComponent} from "../../component/user-table/user-table.component";
 import {AppRoutingModule} from "../../app-routing.module";
-
+import {HttpClientModule} from "@angular/common/http";
+import {RoleService} from "../../service/role.service";
 
 
 @NgModule({
@@ -33,8 +34,10 @@ import {AppRoutingModule} from "../../app-routing.module";
     AppRoutingModule,
     PaginationModule,
     TabsModule,
+    HttpClientModule,
+
   ],
-  exports:[
+  exports: [
     FirstPageComponent,
     HomeComponent,
     NotFoundPageComponent,
@@ -42,10 +45,17 @@ import {AppRoutingModule} from "../../app-routing.module";
     TaskPageComponent,
     TaskTableComponent,
     ProjectTableComponent,
-    UserTableComponent
+    UserTableComponent,
+    BsDatepickerModule,
   ],
-  providers:[UserService,
-  TaskService,
-  ProjectService]
+
+  providers: [
+    UserService,
+    TaskService,
+    ProjectService,
+    RoleService,
+    BsLocaleService
+  ]
 })
-export class CustomModule { }
+export class CustomModule {
+}
