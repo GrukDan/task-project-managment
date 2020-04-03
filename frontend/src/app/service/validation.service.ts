@@ -6,7 +6,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class ValidationService {
 
-
   constructor(private fb: FormBuilder) { }
 
   public getUserFormGroup():FormGroup {
@@ -63,7 +62,8 @@ export class ValidationService {
           Validators.pattern(/^[а-яА-ЯёЁa-zA-Z0-9]+$/)]],
       status: ['', [Validators.required]],
       priority: ['', [Validators.required]],
-      dueDate:['',[Validators.required]]
+      dueDate:['',[Validators.required]],
+      taskProject:['',[Validators.required]]
     })
   }
 
@@ -74,12 +74,11 @@ export class ValidationService {
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(20),
-          Validators.pattern(/^[а-яА-ЯёЁa-zA-Z0-9]+$/)]],
+          Validators.pattern(/^[ а-яА-ЯёЁa-zA-Z0-9]+$/)]],
       description: ['',
         [
           Validators.minLength(2),
-          Validators.maxLength(200),
-          Validators.pattern(/[^[а-яА-ЯёЁa-zA-Z0-9]+$]/)]],
+          Validators.maxLength(200)]],
       dateOfCompletion:['',[Validators.required]]
     })
   }

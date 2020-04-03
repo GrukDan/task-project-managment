@@ -6,11 +6,11 @@
       <a class="nav-item nav-link text-white" routerLink="/tasks/table">Задачи <i class="fa fa-tasks"></i></a>
       <a class="nav-item nav-link text-white" routerLink="/projects/table">Проекты <i class="fa fa-line-chart"></i></a>
       <a class="nav-item nav-link text-white" routerLink="/users/table">Пользователи <i class="fa fa-users"></i></a>
-      <a class="btn nav-item nav-link text-white" (click)="openModal(addUserModal)">Новый пользователь <i
+      <a class="btn nav-item nav-link text-white" (click)="openUserModal(addUserModal)">Новый пользователь <i
         class="fa fa-user-plus"></i></a>
-      <a class="btn nav-item nav-link text-white" (click)="openModal(addProjectModal)">Новый проект <i
+      <a class="btn nav-item nav-link text-white" (click)="openProjectModal(addProjectModal)">Новый проект <i
         class="fa fa-plus"></i></a>
-      <a class="btn nav-item nav-link text-white" (click)="openModal(addTaskModal)">Новая задача <i
+      <a class="btn nav-item nav-link text-white" (click)="openTaskModal(addTaskModal)">Новая задача <i
         class="fa fa-plus-circle"></i></a>
     </div>
   </div>
@@ -37,7 +37,7 @@
 
 <ng-template #addUserModal>
   <div class="modal-header">
-    <ng4-loading-spinner [threshold]="2000" [timeout]="40000"  [loadingText]="'Please wait...'" [zIndex]="9999"></ng4-loading-spinner>
+    <ng4-loading-spinner [threshold]="2000" [timeout]="400"  [loadingText]="'Please wait...'" [zIndex]="9999"></ng4-loading-spinner>
     <h4 class="modal-title pull-left">Новый пользователь</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
@@ -123,29 +123,21 @@
           <p *ngIf="_projectName.errors?.maxlength">Слишком длинное название</p>
           <p *ngIf="_projectName.errors?.pattern">Ошибка введенных данных</p>
         </div>
-
-<!--        <label for="dateCompletion">Date of completion</label>-->
-<!--        <input type="date" class="form-control" id="dateCompletion" placeholder="Date of completion"-->
-<!--               name="dateCompletion" [(ngModel)]="project.dateOfCompletion" -->
-<!--               required/>-->
-
         <label for="dateOfCompletion" class="mt-3 h5">Дата сдачи проета</label>
         <input type="text"
-               placeholder="Datepicker"
+               placeholder="Выберите дату"
                class="form-control"
                id="dateOfCompletion"
                formControlName="dateOfCompletion"
                [(ngModel)]="project.dateOfCompletion"
                bsDatepicker
-               [minDate]="minDate">
-<!--               [bsConfig]="{-->
-<!--               isAnimated: true,-->
-<!--                dateInputFormat: 'DD.MM.YYYY'}"-->
-<!--        >-->
+               [minDate]="minDate"
+               [bsConfig]="{
+               isAnimated: true,
+                dateInputFormat: 'DD.MM.YYYY'}">
         <div *ngIf="_dateOfCompletion.invalid && (_dateOfCompletion.touched || _dateOfCompletion.dirty)" class="alert alert-danger">
           <p *ngIf="_dateOfCompletion.errors?.required">Обязательное поле</p>
         </div>
-
         <label for="description" class="mt-3 h5">Описание проекта</label>
         <input type="text" class="form-control" id="description" formControlName="description" [(ngModel)]="project.description" >
         <div *ngIf="_projectDescription.invalid && (_projectDescription.touched || _projectDescription.dirty)" class="alert alert-danger">
@@ -153,13 +145,12 @@
           <p *ngIf="_projectDescription.errors?.minlength">Слишком короткое описание</p>
           <p *ngIf="_projectDescription.errors?.maxlength">Слишком длинное описание</p>
         </div>
-
       </div>
     </form>
   </div>
   <div class="modal-footer">
     <button class="btn btn-secondary" (click)="modalRef.hide()">Закрыть</button>
-    <button class="btn btn-primary" [disabled]="userForm.invalid" (click)="addUser()">Добавить</button>
+    <button class="btn btn-primary" [disabled]="projectForm.invalid" (click)="addProject()">Добавить</button>
   </div>
 </ng-template>
 
@@ -172,61 +163,65 @@
     </button>
   </div>
   <div class="modal-body">
-<!--    <form [formGroup]="userForm" novalidate>-->
-<!--      <div class="form-group">-->
-<!--        <label for="userNameInput" class="mt-3 h5">Имя пользователя</label>-->
-<!--        <input type="text" class="form-control" id="userNameInput" formControlName="userName"-->
-<!--               [(ngModel)]="user.userName">-->
-<!--        <div *ngIf="_userName.invalid && (_userName.touched || _userName.dirty)" class="alert alert-danger">-->
-<!--          <p *ngIf="_userName.errors?.required">Обязательное поле</p>-->
-<!--          <p *ngIf="_userName.errors?.minlength">Слишком короткое имя</p>-->
-<!--          <p *ngIf="_userName.errors?.maxlength">Слишком длинное имя</p>-->
-<!--          <p *ngIf="_userName.errors?.pattern">Ошибка введенных данных</p>-->
-<!--        </div>-->
-<!--        <label for="userSurnameInput" class="mt-3 h5">Фамилия пользователя</label>-->
-<!--        <input type="text" class="form-control" id="userSurnameInput" formControlName="userSurname"-->
-<!--               [(ngModel)]="user.userSurname">-->
-<!--        <div *ngIf="_userSurname.invalid && (_userSurname.touched || _userSurname.dirty)" class="alert alert-danger">-->
-<!--          <p *ngIf="_userSurname.errors?.required">Обязательное поле</p>-->
-<!--          <p *ngIf="_userSurname.errors?.minlength">Слишком короткая фамилия</p>-->
-<!--          <p *ngIf="_userSurname.errors?.maxlength">Слишком длинная фамилия</p>-->
-<!--          <p *ngIf="_userSurname.errors?.pattern">Ошибка введенных данных</p>-->
-<!--        </div>-->
-<!--        <label for="userEmailInput" class="mt-3 h5">Email</label>-->
-<!--        <input type="email" class="form-control" id="userEmailInput" formControlName="email" [(ngModel)]="user.email" >-->
-<!--        <div *ngIf="_email.invalid && (_email.touched || _email.dirty)" class="alert alert-danger">-->
-<!--          <p *ngIf="_email.errors?.required">Обязательное поле</p>-->
-<!--          <p *ngIf="_email.errors?.pattern">Ошибка введенных данных</p>-->
-<!--        </div>-->
-<!--        <label for="roleSelect" class="mt-3 h5">Должность</label>-->
-<!--        <select class="form-control" id="roleSelect" name="roleSelect" formControlName="role" [(ngModel)]="user.role">-->
-<!--          <option *ngFor="let role of roles"-->
-<!--                  [value]="role.idrole">{{role.role}}</option>-->
-<!--        </select>-->
-<!--        <div *ngIf="_role.invalid && (_role.touched || _role.dirty)" class="alert alert-danger">-->
-<!--          <p *ngIf="_role.errors?.required">Обязательное поле</p>-->
-<!--        </div>-->
-<!--        <label for="loginInput" class="mt-3 h5">Логин</label>-->
-<!--        <input type="email" class="form-control" id="loginInput" formControlName="login" [(ngModel)]="user.login" >-->
-<!--        <div *ngIf="_login.invalid && (_login.touched || _login.dirty)" class="alert alert-danger">-->
-<!--          <p *ngIf="_login.errors?.required">Обязательное поле</p>-->
-<!--          <p *ngIf="_login.errors?.pattern">Ошибка введенных данных</p>-->
-<!--          <p *ngIf="_login.errors?.minlength">Слишком короткий логин</p>-->
-<!--          <p *ngIf="_login.errors?.maxlength">Слишком длинный логин</p>-->
-<!--        </div>-->
-<!--        <label for="passwordInput" class="mt-3 h5">Пароль</label>-->
-<!--        <input type="email" class="form-control" id="passwordInput" formControlName="password" [(ngModel)]="user.password" >-->
-<!--        <div *ngIf="_password.invalid && (_password.touched || _password.dirty)" class="alert alert-danger">-->
-<!--          <p *ngIf="_password.errors?.required">Обязательное поле</p>-->
-<!--          <p *ngIf="_password.errors?.pattern">Ошибка введенных данных</p>-->
-<!--          <p *ngIf="_password.errors?.minlength">Слишком короткий пароль</p>-->
-<!--          <p *ngIf="_password.errors?.maxlength">Слишком длинный пароль</p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </form>-->
+    <form [formGroup]="taskForm" novalidate>
+      <div class="form-group">
+        <label for="taskName" class="mt-3 h5">Название задачи</label>
+        <input type="text" class="form-control" id="taskName" formControlName="taskName"
+               [(ngModel)]="task.taskName">
+        <div *ngIf="_taskName.invalid && (_taskName.touched || _taskName.dirty)" class="alert alert-danger">
+          <p *ngIf="_taskName.errors?.required">Обязательное поле</p>
+          <p *ngIf="_taskName.errors?.minlength">Слишком короткое название</p>
+          <p *ngIf="_taskName.errors?.maxlength">Слишком длинное название</p>
+          <p *ngIf="_taskName.errors?.pattern">Ошибка введенных данных</p>
+        </div>
+        <label for="dueDate" class="mt-3 h5">Срок выполнения</label>
+        <input type="text"
+               placeholder="Выберите дату"
+               class="form-control"
+               id="dueDate"
+               formControlName="dueDate"
+               [(ngModel)]="task.dueDate"
+               bsDatepicker
+               [minDate]="minDate"
+               [bsConfig]="{
+               isAnimated: true,
+                dateInputFormat: 'DD.MM.YYYY'}">
+        <div *ngIf="_dueDate.invalid && (_dueDate.touched || _dueDate.dirty)" class="alert alert-danger">
+          <p *ngIf="_dueDate.errors?.required">Обязательное поле</p>
+      </div>
+        <label for="prioritySelect" class="mt-3 h5">Приоритет задачи</label>
+        <select class="form-control" id="prioritySelect" name="prioritySelect" formControlName="priority" [(ngModel)]="task.priority">
+          <option *ngFor="let priority of priorities"
+                  [value]="priority.idpriority">{{priority.priority}}</option>
+        </select>
+        <div *ngIf="_priority.invalid && (_priority.touched || _priority.dirty)" class="alert alert-danger">
+          <p *ngIf="_priority.errors?.required">Обязательное поле</p>
+        </div>
+        <label for="taskProject" class="mt-3 h5">Проект задачи</label>
+        <select class="form-control" id="taskProject" name="taskProject" formControlName="taskProject" [(ngModel)]="task.project">
+          <option *ngFor="let projectForTask of projectsForTask"
+                  [value]="projectForTask.idproject">{{projectForTask.projectName}}</option>
+        </select>
+        <div *ngIf="_taskProject.invalid && (_taskProject.touched || _taskProject.dirty)" class="alert alert-danger">
+          <p *ngIf="_taskProject.errors?.required">Обязательное поле</p>
+        </div>
+        <label for="taskExecutor" class="mt-3 h5">Исполнитель задачи</label>
+        <select class="form-control" id="taskExecutor" name="taskExecutor" [(ngModel)]="task.taskExecutor">
+          <option *ngFor="let executor of userForTask"
+                  [value]="executor.iduser">{{executor.userSurname}} {{executor.userName}}</option>
+        </select>
+        <label for="descriptionTask" class="mt-3 h5">Описание задачи</label>
+        <textarea type="text" class="form-control" id="descriptionTask" formControlName="description" [(ngModel)]="task.description"></textarea>
+        <div *ngIf="_taskDescription.invalid && (_taskDescription.touched || _taskDescription.dirty)" class="alert alert-danger">
+          <p *ngIf="_taskDescription.errors?.pattern">Ошибка введенных данных</p>
+          <p *ngIf="_taskDescription.errors?.minlength">Слишком короткое описание</p>
+          <p *ngIf="_taskDescription.errors?.maxlength">Слишком длинное описание</p>
+        </div>
+      </div>
+    </form>
   </div>
   <div class="modal-footer">
     <button class="btn btn-secondary" (click)="modalRef.hide()">Закрыть</button>
-    <button class="btn btn-primary" [disabled]="userForm.invalid" (click)="addTask()">Добавить</button>
+    <button class="btn btn-primary" [disabled]="taskForm.invalid" (click)="addTask()">Добавить</button>
   </div>
 </ng-template>

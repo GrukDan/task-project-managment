@@ -8,8 +8,8 @@ export class UserViewModel {
   userSurname:string;
   email:string;
 
-  assignProject;
-  assignProjectName;
+  assignProject:number;
+  assignProjectName:string;
 
   login:string;
   password:string;

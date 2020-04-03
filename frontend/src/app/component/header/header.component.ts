@@ -14,6 +14,11 @@ import {Status} from "../../model/status";
 import {Priority} from "../../model/priority";
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 import { ruLocale } from 'ngx-bootstrap/locale';
+import {StatusService} from "../../service/status.service";
+import {PriorityService} from "../../service/priority.service";
+import {ProjectService} from "../../service/project.service";
+import {ProjectForTask} from "../../model/view-model/project-for-task";
+import {UserForTask} from "../../model/view-model/user-for-task";
 defineLocale('ru', ruLocale);
 
 @Component({
@@ -34,6 +39,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   task: Task;
   project: Project;
 
+
+  userForTask:UserForTask[];
+  projectsForTask:ProjectForTask[];
   roles: Role[];
   statuses: Status[];
   priorities: Priority[];
@@ -51,7 +59,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private fb: FormBuilder,
               private validationService: ValidationService,
               private roleService: RoleService,
-              private localeService: BsLocaleService) {
+              private statusService: StatusService,
+              private priorityService:PriorityService,
+              private localeService: BsLocaleService,
+              private projectService:ProjectService) {
     this._createForm();
     this.minDate = new Date();
     this.localeService.use(this.locale);
@@ -60,6 +71,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.project = new Project();
     this.task = new Task();
 
+
+    this.userForTask = [];
+    this.projectsForTask = [];
     this.roles = [];
     this.statuses = [];
     this.priorities = [];
@@ -76,12 +90,43 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private loadRole():void{
-    this.spinnerService.show();
-    this.subscriptions.push(this.roleService.getAllRole().subscribe(roles=>{
-       this.roles = roles as Role[];
-       this.spinnerService.hide()
-    }))
+    if(this.roles.length==0) {
+      this.spinnerService.show();
+      this.subscriptions.push(this.roleService.getAllRole().subscribe(roles => {
+        this.roles = roles as Role[];
+        this.spinnerService.hide()
+      }))
+    }
+  }
 
+  private loadPriority():void{
+    if(this.priorities.length==0) {
+      this.spinnerService.show();
+      this.subscriptions.push(this.priorityService.getAllPriority().subscribe(priorities => {
+        this.priorities = priorities as Priority[];
+        this.spinnerService.hide()
+      }))
+    }
+  }
+
+  private loadStatus():void{
+    if(this.statuses.length==0) {
+      this.spinnerService.show();
+      this.subscriptions.push(this.statusService.getAllStatus().subscribe(statuses => {
+        this.statuses = statuses as Status[];
+        this.spinnerService.hide()
+      }))
+    }
+  }
+
+  private loadProjectForTask():void{
+    if(this.projectsForTask.length==0) {
+      this.spinnerService.show();
+      this.subscriptions.push(this.projectService.getAllProjectForTask().subscribe(projectForTask => {
+        this.projectsForTask = projectForTask as ProjectForTask[];
+        this.spinnerService.hide()
+      }))
+    }
   }
 
   private _createForm() {
@@ -130,8 +175,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return this.taskForm.get('taskName')
   }
 
+  get _taskProject() {
+    return this.taskForm.get('taskProject')
+  }
+
   get _taskDescription() {
-    return this.userForm.get('description')
+    return this.taskForm.get('description')
   }
 
   get _status() {
@@ -140,6 +189,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   get _priority() {
     return this.taskForm.get('priority')
+  }
+
+  get _dueDate() {
+    return this.taskForm.get('dueDate')
   }
 
   get _projectName() {
@@ -154,8 +207,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return this.projectForm.get('dateOfCompletion')
   }
 
-  openModal(template: TemplateRef<any>) {
+  openUserModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, this.config);
     this.loadRole();
+  }
+
+  openProjectModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, this.config);
+
+  }
+
+  openTaskModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, this.config);
+    this.loadPriority();
+    this.loadStatus();
+    this.loadProjectForTask();
   }
 }

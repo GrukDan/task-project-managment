@@ -15,6 +15,8 @@ import {UserTableComponent} from "../../component/user-table/user-table.componen
 import {AppRoutingModule} from "../../app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {RoleService} from "../../service/role.service";
+import {PriorityService} from "../../service/priority.service";
+import {StatusService} from "../../service/status.service";
 
 
 @NgModule({
@@ -54,6 +56,8 @@ import {RoleService} from "../../service/role.service";
     TaskService,
     ProjectService,
     RoleService,
+    PriorityService,
+    StatusService,
     BsLocaleService
   ]
 })

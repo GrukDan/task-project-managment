@@ -3,21 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="d0aa6911-27e9-42cb-b138-ed54147570d6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/service/serviceImpl/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/service/serviceImpl/RoleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/model/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/model/Task.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/repository/UserRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/view-model/user-view-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/view-model/user-view-model.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/module/custom/custom.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/module/custom/custom.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/module/header/header.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/module/header/header.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/service/project.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/service/project.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/service/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/service/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/service/validation.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/service/validation.service.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +49,7 @@
         <item name="mydb@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="mydb: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="project: table" type="285a2a93:MysqlImplModel$Table" />
+        <item name="task: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -66,8 +58,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="TypeScript File" />
         <option value="Class" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -170,17 +162,7 @@
     <option name="allServicesViewState">
       <serviceView>
         <treeState>
-          <expand>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@146e42e6" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@146e42e6" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@75f2a50" type="9fbbdea:ServiceModel$ServiceNode" />
-            </path>
-          </expand>
+          <expand />
           <select />
         </treeState>
       </serviceView>
@@ -201,6 +183,8 @@
       <workItem from="1585653043273" duration="14635000" />
       <workItem from="1585782871584" duration="597000" />
       <workItem from="1585834057225" duration="17305000" />
+      <workItem from="1585923974389" duration="167000" />
+      <workItem from="1585930167081" duration="8255000" />
     </task>
     <servers />
   </component>
