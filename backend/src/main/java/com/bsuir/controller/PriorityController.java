@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/priorities")
 public class PriorityController {
 
     @Autowired
     private PriorityService priorityService;
 
-    @RequestMapping(value = "/priority",method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<Priority> getPriority(){
         return priorityService.getAllPriority();
     }

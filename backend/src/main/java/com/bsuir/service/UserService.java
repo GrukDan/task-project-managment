@@ -8,7 +8,8 @@ import java.util.List;
 public interface UserService {
 
     List<User> getAllUser();
-    boolean saveUser(User user);
+    List<UserViewModel> getAllUserViewModel();
+    UserViewModel saveUser(User user);
     boolean saveUser(UserViewModel userViewModel);
     User authorization(String login,String password);
     User getUserById(long iduser);

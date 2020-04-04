@@ -14,24 +14,29 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/user",method = RequestMethod.PUT)
-    public boolean save(@RequestBody User user){
+    @RequestMapping(method = RequestMethod.PUT)
+    public UserViewModel save(@RequestBody User user){
         return userService.saveUser(user);
     }
 
-    @RequestMapping(value ="/user/authorization",method = RequestMethod.POST)
+    @RequestMapping(value ="/authorization",method = RequestMethod.POST)
     public UserViewModel authorization(@RequestBody User user){
         userService.authorization(user.getLogin(),user.getPassword());
         return new UserViewModel();
     }
 
-    @RequestMapping(value = "/user",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.GET)
+    public List<UserViewModel> getAllUserViewModel(){
+        return userService.getAllUserViewModel();
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
     public boolean save(@RequestBody UserViewModel userViewModel){
         return userService.saveUser(userViewModel);
     }

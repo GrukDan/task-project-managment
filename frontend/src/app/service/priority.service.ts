@@ -12,6 +12,6 @@ export class PriorityService {
   constructor(private http: HttpClient) { }
 
   getAllPriority(): Observable<Priority[]> {
-    return this.http.get<Priority[]>('/api/priority');
+    return this.http.get<Priority[]>('/api/priorities');
   }
 }

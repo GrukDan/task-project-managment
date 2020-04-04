@@ -139,7 +139,7 @@
           <p *ngIf="_dateOfCompletion.errors?.required">Обязательное поле</p>
         </div>
         <label for="description" class="mt-3 h5">Описание проекта</label>
-        <input type="text" class="form-control" id="description" formControlName="description" [(ngModel)]="project.description" >
+        <textarea type="text" class="form-control" id="description" formControlName="description" [(ngModel)]="project.description" ></textarea>
         <div *ngIf="_projectDescription.invalid && (_projectDescription.touched || _projectDescription.dirty)" class="alert alert-danger">
           <p *ngIf="_projectDescription.errors?.pattern">Ошибка введенных данных</p>
           <p *ngIf="_projectDescription.errors?.minlength">Слишком короткое описание</p>
@@ -206,7 +206,7 @@
           <p *ngIf="_taskProject.errors?.required">Обязательное поле</p>
         </div>
         <label for="taskExecutor" class="mt-3 h5">Исполнитель задачи</label>
-        <select class="form-control" id="taskExecutor" name="taskExecutor" [(ngModel)]="task.taskExecutor">
+        <select class="form-control" id="taskExecutor" name="taskExecutor" formControlName="taskExecutor" [(ngModel)]="task.taskExecutor">
           <option *ngFor="let executor of userForTask"
                   [value]="executor.iduser">{{executor.userSurname}} {{executor.userName}}</option>
         </select>

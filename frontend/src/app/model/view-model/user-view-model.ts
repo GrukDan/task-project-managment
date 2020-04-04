@@ -11,6 +11,4 @@ export class UserViewModel {
   assignProject:number;
   assignProjectName:string;
 
-  login:string;
-  password:string;
 }

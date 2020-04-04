@@ -21,6 +21,6 @@ public class PriorityServiceImpl implements PriorityService {
 
     @Override
     public List<Priority> getAllPriority() {
-        return null;
+        return (List<Priority>) priorityRepository.findAll();
     }
 }

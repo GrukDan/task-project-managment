@@ -7,6 +7,7 @@ import com.bsuir.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,8 +22,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean saveUser(User user) {
-        return false;
+    public List<UserViewModel> getAllUserViewModel() {
+        List<User> users = userRepository.findAll();
+        List<UserViewModel> userViewModels = new ArrayList<>();
+        for(User user:users){
+            userViewModels.add(new UserViewModel(user));
+        }
+        return userViewModels;
+    }
+
+    @Override
+    public UserViewModel saveUser(User user) {
+        UserViewModel userViewModel = null;
+        if(userRepository.findByLoginAndPassword(user.getLogin(),user.getPassword())!=null){
+            userViewModel = new UserViewModel(userRepository.save(user));
+        }
+        return userViewModel;
     }
 
     @Override

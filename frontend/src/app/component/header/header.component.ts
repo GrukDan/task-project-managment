@@ -133,15 +133,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userForm = this.validationService.getUserFormGroup();
     this.taskForm = this.validationService.getTaskFormGroup();
     this.projectForm = this.validationService.getProjectFormGroup();
+    this.taskForm.controls['taskExecutor'].disabled;
+    this.taskForm.controls['status'].clearValidators()
   }
 
   addUser(): void {
-    console.log(this.user);
+    this.subscriptions.push(this.userService.save(this.user).subscribe(user=>{
+      this.modalRef.hide();
+      }
+    ))
   }
 
   addProject(): void {
-    console.log(this.project);
+    this.project.projectCreator = 1;
+    this.project.readinessDegree = 0;
+    this.subscriptions.push(this.projectService.save(this.project).subscribe(project=>{
+      this.modalRef.hide();
+    }))
   }
+
 
   addTask(): void {
     console.log(this.task);
@@ -214,7 +224,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   openProjectModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, this.config);
-
   }
 
   openTaskModal(template: TemplateRef<any>) {
