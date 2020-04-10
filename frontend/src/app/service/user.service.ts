@@ -3,6 +3,8 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../model/user";
 import {UserViewModel} from "../model/view-model/user-view-model";
+import {ProjectPaginationModel} from "../model/pagnation-model/project-pagination-model";
+import {UserPaginationModel} from "../model/pagnation-model/user-pagination-model";
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +26,25 @@ export class UserService {
     return this.http.put<UserViewModel>('/api/users', user);
   }
 
+  authorization(user:User):Observable<UserViewModel>{
+    return  this.http.post<UserViewModel>('/api/users/authorization',user);
+  }
 
+  getSortParameter(): Observable<string[]> {
+    return this.http.get<string[]>('/api/users/sort-parameter');
+  }
+
+  getSortedUser(parameter: string, page: number, size: number, direction: boolean, search: string = ''): Observable<UserPaginationModel> {
+    console.log(parameter,page,size,direction);
+    return this.http.get<UserPaginationModel>(
+      '/api/users/sort',
+      {
+        params: new HttpParams()
+          .set('parameter',parameter)
+          .set('page',page.toString())
+          .set('size',size.toString())
+          .set('direction',direction.toString())
+          .set('search',search)
+      })
+  }
 }

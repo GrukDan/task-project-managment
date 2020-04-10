@@ -25,7 +25,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getAllByExecutor(long taskExecitor) {
+    public List<Task> getAllByExecutor(long taskExecutor) {
         return null;
     }
 
@@ -35,7 +35,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public boolean saveTask(Task task) {
-        return false;
+    public Task saveTask(Task task) {
+        String taskCode = task.getTaskName() + " " + (int) (Math.random() * 100);
+        task.setTaskCode(taskCode);
+        if (taskRepository.findByTaskCode(task.getTaskCode()) == null) {
+            return taskRepository.save(task);
+        } else return null;
     }
 }

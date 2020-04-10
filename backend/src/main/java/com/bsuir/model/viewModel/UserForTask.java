@@ -1,4 +1,4 @@
-package com.bsuir.model.httpModel;
+package com.bsuir.model.viewModel;
 
 public class UserForTask {
 

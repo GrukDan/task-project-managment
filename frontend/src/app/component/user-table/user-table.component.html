@@ -1,12 +1,13 @@
 <div class="container-fluid">
+  <ng4-loading-spinner [threshold]="2000" [timeout]="40000"  [loadingText]="'Please wait...'" [zIndex]="9999"></ng4-loading-spinner>
   <table class="table table-hover table-dark mt-5">
     <thead class="h4">
     <tr>
-      <th style="cursor: pointer" (click)="sort(parameters[0])">Имя</th>
-      <th style="cursor: pointer" (click)="sort(parameters[1])">Фамилия</th>
-      <th style="cursor: pointer" (click)="sort(parameters[2])">Email</th>
-      <th style="cursor: pointer" (click)="sort(parameters[2])">Должность</th>
-      <th class="text-center">Выполняемый проект</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[0])">Имя</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[1])">Фамилия</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[2])">Email</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[2])">Должность</th>
+      <th class="text-center" class="text-center">Выполняемый проект</th>
       <th></th>
     </tr>
     </thead>
@@ -18,8 +19,9 @@
         <td class="h6">{{user.userSurname}}</td>
         <td class="h6">{{user.email}}</td>
         <td class="h6">{{user.roleName}}</td>
-        <td class="h6"><a
-          [routerLink]="['/home']">{{user.assignProjectName}}</a>
+        <td class="h6">
+          <a *ngIf="user?.assignProject!=null;" [routerLink]="['/home']">{{user.assignProjectName}}</a>
+          <span *ngIf="user?.assignProject==null;">Нет проекта!</span>
         </td>
         <td>
           <button class="btn btn-primary" [routerLink]="['/projects']">Подробнее</button>
@@ -29,7 +31,7 @@
   </table>
   <div class="row">
     <div class="col-xs-12 col-12">
-      <pagination [boundaryLinks]="true" [totalItems]="" class="justify-content-center"
+      <pagination [boundaryLinks]="true" [totalItems]="countOfPages" class="justify-content-center"
                   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
                   (pageChanged)="pageChanged($event)">
       </pagination>

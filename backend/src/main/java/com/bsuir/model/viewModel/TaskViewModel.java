@@ -1,4 +1,4 @@
-package com.bsuir.model.httpModel;
+package com.bsuir.model.viewModel;
 
 import java.sql.Date;
 import java.sql.Timestamp;

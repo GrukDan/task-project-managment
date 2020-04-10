@@ -19,6 +19,7 @@ import {PriorityService} from "../../service/priority.service";
 import {ProjectService} from "../../service/project.service";
 import {ProjectForTask} from "../../model/view-model/project-for-task";
 import {UserForTask} from "../../model/view-model/user-for-task";
+import {TaskService} from "../../service/task.service";
 defineLocale('ru', ruLocale);
 
 @Component({
@@ -62,7 +63,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private statusService: StatusService,
               private priorityService:PriorityService,
               private localeService: BsLocaleService,
-              private projectService:ProjectService) {
+              private projectService:ProjectService,
+              private taskService:TaskService) {
     this._createForm();
     this.minDate = new Date();
     this.localeService.use(this.locale);
@@ -153,8 +155,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
 
+  //todo: пофиксить исполнителя и создателя, добавить статус и на бэке
   addTask(): void {
+    this.task.taskExecutor;
+    this.task.dateOfCreation = Date.now().toString();
+    if(this.task.status == null)this.task.status = 1;
+    this.task.taskCreator = 4;
+    this.task.taskExecutor = 11;
     console.log(this.task);
+    this.subscriptions.push(this.taskService.save(this.task).subscribe(task=>{
+      this.modalRef.hide();
+    }))
   }
 
   get _userName() {

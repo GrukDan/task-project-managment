@@ -17,6 +17,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {RoleService} from "../../service/role.service";
 import {PriorityService} from "../../service/priority.service";
 import {StatusService} from "../../service/status.service";
+import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {StatusService} from "../../service/status.service";
     PaginationModule,
     TabsModule,
     HttpClientModule,
+    Ng4LoadingSpinnerModule,
 
   ],
   exports: [

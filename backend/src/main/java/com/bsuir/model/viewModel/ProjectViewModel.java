@@ -1,4 +1,4 @@
-package com.bsuir.model.httpModel;
+package com.bsuir.model.viewModel;
 
 import com.bsuir.model.Project;
 

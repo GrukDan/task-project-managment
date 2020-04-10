@@ -9,10 +9,12 @@ import java.util.List;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     @Override
     List<User> findAll();
+
     List<User> findByIduserIn(Collection<Long> idusers);
-    User findByLoginAndPassword(String login,String password);
+
+    User findByLoginAndPassword(String login, String password);
 }

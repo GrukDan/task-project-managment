@@ -10,6 +10,6 @@ public interface TaskService {
     List<Task> getAllTask();
     List<Task> getAllByExecutor(long taskExecitor);
     List<Task> getByProject(long project);
-    boolean saveTask(Task task);
+    Task saveTask(Task task);
 
 }

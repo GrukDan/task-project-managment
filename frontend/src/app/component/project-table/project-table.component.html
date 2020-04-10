@@ -1,20 +1,22 @@
 <div class="container-fluid">
+  <ng4-loading-spinner [threshold]="2000" [timeout]="40000"  [loadingText]="'Please wait...'" [zIndex]="9999"></ng4-loading-spinner>
   <table class="table table-hover table-dark mt-5">
     <thead class="h4">
     <tr>
-      <th class="text-center h4">№</th>
-      <th class="text-center h4">Код проекта</th>
-      <th style="cursor: pointer" (click)="sort(parameters[0])">Название проекта</th>
-      <th style="cursor: pointer" (click)="sort(parameters[1])">Срок сдачи</th>
-      <th style="cursor: pointer" (click)="sort(parameters[2])">Степень готовности</th>
-      <th class="waves-button ">Создатель проекта</th>
+      <th class="text-center">№</th>
+      <th class="text-center">Код проекта</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[0])">Название проекта</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[1])">Срок сдачи</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[2])">Степень готовности</th>
+      <th class="text-center" >Создатель проекта</th>
+      <th></th>
     </tr>
     </thead>
     <tbody *ngIf="projects.length>0; then table else void_table;">
     </tbody>
     <ng-template #table>
       <tr *ngFor="let project of projects;let i = index" class="text-center ">
-        <td class="h6">{{i}}</td>
+        <td class="h6">{{i + 1}}</td>
         <td class="h6">{{project.projectCode}}</td>
         <td class="h6">{{project.projectName}}</td>
         <td class="h6">{{project.dateOfCompletion | date}}</td>
@@ -28,9 +30,10 @@
       </tr>
     </ng-template>
   </table>
+
   <div class="row">
     <div class="col-xs-12 col-12">
-      <pagination [boundaryLinks]="true" [totalItems]="" class="justify-content-center"
+      <pagination [boundaryLinks]="true" [totalItems]="countOfPages" class="justify-content-center"
                   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
                   (pageChanged)="pageChanged($event)">
       </pagination>
