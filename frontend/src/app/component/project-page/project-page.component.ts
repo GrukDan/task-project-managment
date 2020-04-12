@@ -30,6 +30,7 @@ export class ProjectPageComponent implements OnInit {
 
   locale = "ru";
   minDate: Date;
+  date:Date;
 
   constructor(private projectService: ProjectService,
               private taskService: TaskService,
@@ -59,6 +60,7 @@ this.edit = false;
     this.subscriptions.push(this.projectService.getProjectViewModelById(this.idProject).subscribe(projectViewModel => {
       this.projectViewModel = projectViewModel as ProjectViewModel;
       this.editProjectViewModel = ProjectViewModel.clone(projectViewModel);
+      this.date = new Date(projectViewModel.dateOfCompletion);
       this.spinnerService.hide();
     }))
   }
@@ -97,6 +99,7 @@ this.edit = false;
   saveProjectViewModel(projectViewModel: ProjectViewModel) {
     this.spinnerService.show()
     this.subscriptions.push(this.projectService.saveProjectViewModel(projectViewModel).subscribe(projectViewModel => {
+      console.log(projectViewModel)
       this.projectViewModel = projectViewModel as ProjectViewModel;
       this.editProjectViewModel = ProjectViewModel.clone(projectViewModel);
       this.spinnerService.hide();
@@ -105,7 +108,8 @@ this.edit = false;
 
   save() {
     this.changeEdit();
-    this.saveProjectViewModel(this.editProjectViewModel);
+    this.editProjectViewModel.dateOfCompletion = this.date.toISOString();
+     this.saveProjectViewModel(this.editProjectViewModel);
   }
 
   startEdit() {
@@ -115,5 +119,10 @@ this.edit = false;
 
   btoa(s: string) {
     return btoa(s);
+  }
+
+
+  delete() {
+    console.log(this.projectViewModel)
   }
 }

@@ -55,8 +55,16 @@ public class ProjectViewModel {
                 '}';
     }
 
-    public Project getProject(){
+    public Project buildProject(){
         return new Project(idproject,projectCode,projectName,projectCreator,dateOfCompletion,readinessDegree,description);
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public long getIdproject() {

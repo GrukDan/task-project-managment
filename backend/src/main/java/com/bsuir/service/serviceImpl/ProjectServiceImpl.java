@@ -146,7 +146,13 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectViewModel saveProjectViewModel(ProjectViewModel projectViewModel) {
-        Project project = projectViewModel.getProject();
+        Project project = projectViewModel.buildProject();
+        projectRepository.save(project);
+        return getProjectViewModelById(project.getIdproject());
+    }
+
+    @Override
+    public ProjectViewModel saveProject(Project project) {
         projectRepository.save(project);
         return getProjectViewModelById(project.getIdproject());
     }

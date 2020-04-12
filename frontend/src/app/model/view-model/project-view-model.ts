@@ -1,3 +1,5 @@
+import {Project} from "../project";
+
 export class ProjectViewModel{
   idproject:number;
   projectCode:string;
@@ -22,4 +24,5 @@ export class ProjectViewModel{
     clone.description = projectViewModel.description;
     return clone;
   }
+
 }

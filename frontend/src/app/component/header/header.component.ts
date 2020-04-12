@@ -159,6 +159,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   addTask(): void {
     this.task.taskExecutor;
     this.task.dateOfCreation = Date.now().toString();
+    this.task.updated = Date.now().toString();
     if(this.task.status == null)this.task.status = 1;
     this.task.taskCreator = 4;
     this.task.taskExecutor = 11;

@@ -15,9 +15,10 @@ public class UserViewModel {
     private Long assignProject;
     private String assignProjectName;
 
-    public UserViewModel(){}
+    public UserViewModel() {
+    }
 
-    public UserViewModel(User user){
+    public UserViewModel(User user) {
         this.iduser = user.getIduser();
         this.role = user.getRole();
         this.userName = user.getUserName();
@@ -37,8 +38,8 @@ public class UserViewModel {
         this.assignProjectName = assignProjectName;
     }
 
-    public User getUser(){
-        return new User(iduser,role,userName,userSurname,email,assignProject);
+    public User buildUser() {
+        return new User(iduser, role, userName, userSurname, email, assignProject);
     }
 
     @Override

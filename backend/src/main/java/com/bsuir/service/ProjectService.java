@@ -26,4 +26,6 @@ public interface ProjectService {
     ProjectViewModel getProjectViewModelById(long id);
 
     ProjectViewModel saveProjectViewModel(ProjectViewModel projectViewModel);
+
+    ProjectViewModel saveProject(Project project);
 }

@@ -26,6 +26,7 @@ export class ProjectService {
     return this.http.get<ProjectForTask[]>('/api/projects/for-task');
   }
 
+  //todo заменть буль на объект
   save(project: Project): Observable<boolean> {
     return this.http.put<boolean>('/api/projects', project);
   }
@@ -35,7 +36,6 @@ export class ProjectService {
   }
 
   getSortedProject(parameter: string, page: number, size: number, direction: boolean, search: string = ''): Observable<ProjectPaginationModel> {
-    console.log(parameter,page,size,direction);
     return this.http.get<ProjectPaginationModel>(
       '/api/projects/sort',
       {
@@ -50,6 +50,22 @@ export class ProjectService {
 
   getProjectViewModelById(idProject: number):Observable<ProjectViewModel> {
     return this.http.get<ProjectViewModel>('/api/projects',{params:new HttpParams().set('id',idProject.toString())});
+  }
+
+  public static getProject(projectViewModel:ProjectViewModel):Project{
+    let project:Project = new Project();
+    project.idproject = projectViewModel.idproject;
+    project.projectName = projectViewModel.projectName;
+    project.projectCode = projectViewModel.projectCode;
+    project.readinessDegree = projectViewModel.readinessDegree;
+    project.dateOfCompletion = projectViewModel.dateOfCompletion
+    project.projectCreator = projectViewModel.projectCreator;
+    project.description = projectViewModel.description;
+    return project;
+  }
+
+  saveProject(projectViewModel: ProjectViewModel):Observable<ProjectViewModel> {
+    return this.http.post<ProjectViewModel>('/api/projects/project-view-model',ProjectService.getProject(projectViewModel));
   }
 
   saveProjectViewModel(projectViewModel: ProjectViewModel):Observable<ProjectViewModel> {

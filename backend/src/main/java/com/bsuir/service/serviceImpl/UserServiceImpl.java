@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserViewModel saveUserViewModel(UserViewModel userViewModel) {
-        User user = userViewModel.getUser();
+        User user = userViewModel.buildUser();
         User user2 = userRepository.getOne(user.getIduser());
         user.setLogin(user2.getLogin());
         user.setPassword(user2.getPassword());
