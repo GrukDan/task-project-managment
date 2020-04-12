@@ -2,7 +2,7 @@ package com.bsuir.model.viewModel;
 
 import com.bsuir.model.Project;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ProjectViewModel {
 
@@ -14,6 +14,7 @@ public class ProjectViewModel {
     private Double readinessDegree;
     private String projectCreatorName;
     private String projectCreatorSurname;
+    private String description;
 
     public ProjectViewModel(){}
 
@@ -24,9 +25,10 @@ public class ProjectViewModel {
         this.projectCreator = project.getProjectCreator();
         this.dateOfCompletion = project.getDateOfCompletion();
         this.readinessDegree = project.getReadinessDegree();
+        this.description = project.getDescription();
     }
 
-    public ProjectViewModel(long idproject, String projectCode, String projectName, long projectCreator, Date dateOfCompletion, Double readinessDegree, String projectCreatorName, String projectCreatorSurname) {
+    public ProjectViewModel(long idproject, String projectCode, String projectName, long projectCreator, Date dateOfCompletion, Double readinessDegree, String projectCreatorName, String projectCreatorSurname, String description) {
         this.idproject = idproject;
         this.projectCode = projectCode;
         this.projectName = projectName;
@@ -35,6 +37,7 @@ public class ProjectViewModel {
         this.readinessDegree = readinessDegree;
         this.projectCreatorName = projectCreatorName;
         this.projectCreatorSurname = projectCreatorSurname;
+        this.description = description;
     }
 
     @Override
@@ -48,7 +51,12 @@ public class ProjectViewModel {
                 ", readinessDegree=" + readinessDegree +
                 ", projectCreatorName='" + projectCreatorName + '\'' +
                 ", projectCreatorSurname='" + projectCreatorSurname + '\'' +
+                ", description='" + description + '\'' +
                 '}';
+    }
+
+    public Project getProject(){
+        return new Project(idproject,projectCode,projectName,projectCreator,dateOfCompletion,readinessDegree,description);
     }
 
     public long getIdproject() {

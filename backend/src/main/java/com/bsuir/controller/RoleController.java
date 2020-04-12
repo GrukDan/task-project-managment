@@ -18,7 +18,6 @@ public class RoleController {
 
     @RequestMapping(value = "/role",method = RequestMethod.GET)
     public List<Role> getRole(){
-        System.out.println("Hello from ROLE!");
         return roleService.getAllRole();
     }
 

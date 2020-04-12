@@ -23,19 +23,25 @@ public class UserController {
         return userService.saveUser(user);
     }
 
+    @RequestMapping(value = "/user-view-model",method = RequestMethod.POST)
+    public UserViewModel saveUserViewModel(@RequestBody UserViewModel userViewModel) {
+        userService.saveUserViewModel(userViewModel);
+        return userService.getUserViewModelById(userViewModel.getIduser());
+    }
+
     @RequestMapping(value = "/authorization", method = RequestMethod.POST)
     public UserViewModel authorization(@RequestBody User user) {
         return userService.authorization(user.getLogin(), user.getPassword());
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<UserViewModel> getAllUserViewModel() {
-        return userService.getAllUserViewModel();
+    public UserViewModel getUserViewModelById(@RequestParam("id")long id){
+        return userService.getUserViewModelById(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public boolean save(@RequestBody UserViewModel userViewModel) {
-        return userService.saveUser(userViewModel);
+    @RequestMapping(value = "/all",method = RequestMethod.GET)
+    public List<UserViewModel> getAllUserViewModel() {
+        return userService.getAllUserViewModel();
     }
 
     @RequestMapping(value = "/sort-parameter", method = RequestMethod.GET)

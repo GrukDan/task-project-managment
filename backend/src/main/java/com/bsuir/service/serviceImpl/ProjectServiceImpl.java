@@ -44,12 +44,12 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project getProjectById(long idproject) {
-        return null;
+        return projectRepository.getOne(idproject);
     }
 
     @Override
     public List<Project> getAllProject() {
-        return null;
+        return projectRepository.findAll();
     }
 
     @Override
@@ -132,5 +132,22 @@ public class ProjectServiceImpl implements ProjectService {
             projectForTasks.add(new ProjectForTask(project));
         }
         return projectForTasks;
+    }
+
+    @Override
+    public ProjectViewModel getProjectViewModelById(long id) {
+        Project project = projectRepository.getOne(id);
+        ProjectViewModel projectViewModel = new ProjectViewModel(project);
+        User user = userRepository.getOne(project.getProjectCreator());
+        projectViewModel.setProjectCreatorName(user.getUserName());
+        projectViewModel.setProjectCreatorSurname(user.getUserSurname());
+        return projectViewModel;
+    }
+
+    @Override
+    public ProjectViewModel saveProjectViewModel(ProjectViewModel projectViewModel) {
+        Project project = projectViewModel.getProject();
+        projectRepository.save(project);
+        return getProjectViewModelById(project.getIdproject());
     }
 }

@@ -1,5 +1,6 @@
 <div class="container-fluid">
-  <ng4-loading-spinner [threshold]="2000" [timeout]="40000"  [loadingText]="'Please wait...'" [zIndex]="9999"></ng4-loading-spinner>
+  <ng4-loading-spinner [threshold]="2000" [timeout]="40000" [loadingText]="'Please wait...'"
+                       [zIndex]="9999"></ng4-loading-spinner>
   <table class="table table-hover table-dark mt-5">
     <thead class="h4">
     <tr>
@@ -8,7 +9,7 @@
       <th class="text-center" style="cursor: pointer" (click)="sort(parameters[0])">Название проекта</th>
       <th class="text-center" style="cursor: pointer" (click)="sort(parameters[1])">Срок сдачи</th>
       <th class="text-center" style="cursor: pointer" (click)="sort(parameters[2])">Степень готовности</th>
-      <th class="text-center" >Создатель проекта</th>
+      <th class="text-center">Создатель проекта</th>
       <th></th>
     </tr>
     </thead>
@@ -22,10 +23,14 @@
         <td class="h6">{{project.dateOfCompletion | date}}</td>
         <td class="h6">{{project.readinessDegree}}</td>
         <td class="h6"><a
-          [routerLink]="['/home',project.projectCreator]">{{project.projectCreatorSurname}} {{project.projectCreatorName}}</a>
+          [routerLink]="['/home',btoa(project.projectCreator.toString()),project.projectCreatorName + ' ' + project.projectCreatorSurname]"
+          routerLinkActive="active">
+          {{project.projectCreatorSurname}} {{project.projectCreatorName}}</a>
         </td>
         <td>
-          <button class="btn btn-primary" [routerLink]="['/projects',project.idproject]">Подробнее</button>
+          <button class="btn btn-primary"
+                  [routerLink]="['/projects',btoa(project.idproject.toString()),project.projectName]">Подробнее
+          </button>
         </td>
       </tr>
     </ng-template>

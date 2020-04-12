@@ -1,5 +1,7 @@
 package com.bsuir.model.viewModel;
 
+import com.bsuir.model.Task;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -30,6 +32,20 @@ public class TaskViewModel {
     private Timestamp updated;
 
     public TaskViewModel(){}
+
+    public TaskViewModel(Task task){
+        this.idtask = task.getIdtask();
+        this.taskName = task.getTaskName();
+        this.dateOfCreation = task.getDateOfCreation();
+        this.dueDate = task.getDueDate();
+        this.taskCode = task.getTaskName();
+        this.status = task.getStatus();
+        this.priority = task.getPriority();
+        this.taskCreator = task.getTaskCreator();
+        this.taskExecutor = task.getTaskExecutor();
+        this.project = task.getProject();
+        this.updated = task.getUpdated();
+    }
 
     public TaskViewModel(long idtask, String taskName, Date dateOfCreation, Date dueDate, String taskCode, long status, String statusName, long priority, String priorityName, long taskCreator, String taskCreatorName, String taskCreatorSurname, Long taskExecutor, String taskExecutorName, String taskExecutorSurname, long project, String projectName, Timestamp updated) {
         this.idtask = idtask;

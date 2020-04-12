@@ -23,9 +23,24 @@ public class ProjectController {
         return projectService.save(project);
     }
 
+    @RequestMapping(value = "/project-view-model",method = RequestMethod.POST)
+    public ProjectViewModel saveProjectViewModel(@RequestBody ProjectViewModel projectViewModel){
+        return projectService.saveProjectViewModel(projectViewModel);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ProjectViewModel getProjectViewModelById(@RequestParam("id")long id){
+        return projectService.getProjectViewModelById(id);
+    }
+
     @RequestMapping(value = "/views", method = RequestMethod.GET)
     public List<ProjectViewModel> getAllProjectViewModels() {
         return projectService.projectToProjectViewModel();
+    }
+
+    @RequestMapping(value = "/all-projects", method = RequestMethod.GET)
+    public List<Project> getAllProject() {
+        return projectService.getAllProject();
     }
 
     @RequestMapping(value = "/for-task", method = RequestMethod.GET)
@@ -44,7 +59,7 @@ public class ProjectController {
             @RequestParam("page") int page,
             @RequestParam("size") int size,
             @RequestParam("direction") boolean direction,
-            @RequestParam("search") String search){
+            @RequestParam("search") String search) {
         return projectService.getSortedProject(parameter, page, size, direction);
     }
 }

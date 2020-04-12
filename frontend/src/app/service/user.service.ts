@@ -26,8 +26,12 @@ export class UserService {
     return this.http.put<UserViewModel>('/api/users', user);
   }
 
-  authorization(user:User):Observable<UserViewModel>{
-    return  this.http.post<UserViewModel>('/api/users/authorization',user);
+  saveUserViewModel(userViewModel: UserViewModel): Observable<UserViewModel> {
+    return this.http.post<UserViewModel>('/api/users/user-view-model', userViewModel);
+  }
+
+  authorization(user: User): Observable<UserViewModel> {
+    return this.http.post<UserViewModel>('/api/users/authorization', user);
   }
 
   getSortParameter(): Observable<string[]> {
@@ -35,16 +39,19 @@ export class UserService {
   }
 
   getSortedUser(parameter: string, page: number, size: number, direction: boolean, search: string = ''): Observable<UserPaginationModel> {
-    console.log(parameter,page,size,direction);
     return this.http.get<UserPaginationModel>(
       '/api/users/sort',
       {
         params: new HttpParams()
-          .set('parameter',parameter)
-          .set('page',page.toString())
-          .set('size',size.toString())
-          .set('direction',direction.toString())
-          .set('search',search)
+          .set('parameter', parameter)
+          .set('page', page.toString())
+          .set('size', size.toString())
+          .set('direction', direction.toString())
+          .set('search', search)
       })
+  }
+
+  getUserViewModel(id: number): Observable<UserViewModel> {
+    return this.http.get<UserViewModel>('/api/users', {params: new HttpParams().set('id', id.toString())});
   }
 }

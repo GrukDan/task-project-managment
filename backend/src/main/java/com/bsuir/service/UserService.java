@@ -14,7 +14,7 @@ public interface UserService {
 
     UserViewModel saveUser(User user);
 
-    boolean saveUser(UserViewModel userViewModel);
+    UserViewModel saveUserViewModel(UserViewModel userViewModel);
 
     UserViewModel authorization(String login, String password);
 
@@ -23,4 +23,6 @@ public interface UserService {
     List<String> getSortParameter();
 
     UserPaginationModel getSortedUser(String parameter, int page, int size, boolean direction);
+
+    UserViewModel getUserViewModelById(long id);
 }

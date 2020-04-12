@@ -58,8 +58,7 @@ export class ValidationService {
       description: ['',
         [
           Validators.minLength(2),
-          Validators.maxLength(200),
-          Validators.pattern(/^[ а-яА-ЯёЁa-zA-Z0-9]+$/)]],
+          Validators.maxLength(200)]],
       status: ['', [Validators.required]],
       priority: ['', [Validators.required]],
       dueDate:['',[Validators.required]],

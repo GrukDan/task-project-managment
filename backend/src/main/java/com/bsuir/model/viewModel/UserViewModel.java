@@ -37,6 +37,10 @@ public class UserViewModel {
         this.assignProjectName = assignProjectName;
     }
 
+    public User getUser(){
+        return new User(iduser,role,userName,userSurname,email,assignProject);
+    }
+
     @Override
     public String toString() {
         return "UserViewModel{" +

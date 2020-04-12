@@ -17,6 +17,29 @@ public class User {
     private String login;
     private String password;
 
+    public User() {
+    }
+
+    public User(long iduser, Long role, String userName, String userSurname, String email, Long assignProject, String login, String password) {
+        this.iduser = iduser;
+        this.role = role;
+        this.userName = userName;
+        this.userSurname = userSurname;
+        this.email = email;
+        this.assignProject = assignProject;
+        this.login = login;
+        this.password = password;
+    }
+
+    public User(long iduser, Long role, String userName, String userSurname, String email, Long assignProject) {
+        this.iduser = iduser;
+        this.role = role;
+        this.userName = userName;
+        this.userSurname = userSurname;
+        this.email = email;
+        this.assignProject = assignProject;
+    }
+
     @Id
     @Column(name = "iduser", nullable = false)
     public long getIduser() {

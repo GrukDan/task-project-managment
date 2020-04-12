@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProjectViewModel} from "../../model/view-model/project-view-model";
 import {PageChangedEvent} from "ngx-bootstrap";
 import {Subscription} from "rxjs";
@@ -10,7 +10,7 @@ import {ProjectService} from "../../service/project.service";
   templateUrl: './project-table.component.html',
   styleUrls: ['./project-table.component.css']
 })
-export class ProjectTableComponent implements OnInit {
+export class ProjectTableComponent implements OnInit, OnDestroy {
 
   private parameters: string[];
   private projects: ProjectViewModel[];
@@ -69,5 +69,12 @@ export class ProjectTableComponent implements OnInit {
       // this.pagesCount = (this.taskPaginationModel.pagesCount/5) * 10;
       this.spinnerService.hide();
     }))
+  }
+
+  btoa(str: string): string {
+    return btoa(str);
+  }
+
+  ngOnDestroy(): void {
   }
 }

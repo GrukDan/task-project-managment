@@ -7,7 +7,16 @@
             <h2>Информация о проекте</h2>
           </div>
         </ng-template>
-        <div *ngTemplateOutlet="tabBody1"></div>
+        <div class="container mt-5">
+          <div *ngIf="!edit;then tabBody1;else editProjectTemplate"></div>
+        </div>
+        <div class="my-5 text-right">
+          <button class="btn btn-primary mr-3" *ngIf="!edit" (click)="startEdit()">Редактировать</button>
+          <button class="btn btn-primary mr-3" *ngIf="edit" [disabled]="projectForm.invalid" (click)="save()">Сохранить
+          </button>
+          <button class="btn btn-primary mr-3" *ngIf="edit" (click)="changeEdit()">Отмена</button>
+          <button class="btn btn-primary">Удалить</button>
+        </div>
       </tab>
       <tab>
         <ng-template tabHeading>
@@ -23,41 +32,32 @@
 
 
 <ng-template #tabBody1>
-  <div class="container mt-5">
-    <div>
-      <h1>Название проекта:</h1>
-      <h2>Name</h2>
-    </div>
-    <div>
-      <h1>Код проекта:</h1>
-      <h2>Name</h2>
-    </div>
-    <div>
-      <h1>Дата завершения:</h1>
-      <h2>Name</h2>
-    </div>
-    <div>
-      <h1>Степень готовности:</h1>
-      <h2>Name</h2>
-    </div>
-
-    <div>
-      <h1>Создатель проекта:</h1>
-      <h2><a routerLink="">Name</a></h2></div>
-    <div>
-      <h1>Описание проекта:</h1>
-      <h3 class="text-justify">Note that tabs can be given role="tablist", role="tab" and role="tabpanel" attributes.
-        These are
-        appropriate for tabbed interfaces, as described in the WAIARIA Authoring Practices.
-        If your control element is targeting a single collapsible element - you should add the aria-c
-        ontrols attribute to the control element, containing the id of the collapsible element. </h3>
-    </div>
-    <div class="my-5 text-right">
-      <span >
-        <button class="btn btn-primary mr-5">Редактировать</button>
-        <button class="btn btn-primary">Удалить</button>
-      </span>
-    </div>
+  <div>
+    <h1>Название проекта:</h1>
+    <h2>{{projectViewModel.projectName}}</h2>
+  </div>
+  <div>
+    <h1>Код проекта:</h1>
+    <h2>{{projectViewModel.projectCode}}</h2>
+  </div>
+  <div>
+    <h1>Дата завершения:</h1>
+    <h2>{{projectViewModel.dateOfCompletion | date}}</h2>
+  </div>
+  <div>
+    <h1>Степень готовности:</h1>
+    <h2>{{projectViewModel.readinessDegree}}</h2>
+  </div>
+  <div>
+    <h1>Создатель проекта:</h1>
+    <h2><a
+      [routerLink]="['/home',btoa(projectViewModel?.projectCreator?.toString()),
+        projectViewModel?.projectCreatorName + ' ' + projectViewModel?.projectCreatorSurname]">
+      {{projectViewModel.projectCreatorSurname}} {{projectViewModel.projectCreatorName}}
+    </a></h2></div>
+  <div>
+    <h1>Описание проекта:</h1>
+    <h3 class="text-justify">{{projectViewModel.description}}</h3>
   </div>
 </ng-template>
 
@@ -89,7 +89,9 @@
           <td class="h6">{{task.dueDate | date}}</td>
           <td class="h6">{{task.updated | date }}</td>
           <td class="h6"><a
-            [routerLink]="['/account',task.taskExecutor]">{{task.taskExecutorSurname}} {{task.taskExecutorName}}</a>
+            [routerLink]="['/home',btoa(task.taskExecutor.toString()),
+            task.taskExecutorName + ' ' + task.taskExecutorSurname]"
+          >{{task.taskExecutorSurname}} {{task.taskExecutorName}}</a>
           </td>
           <td>
             <button class="btn btn-primary" [routerLink]="['/task']">Подробнее</button>
@@ -103,4 +105,45 @@
       </tr>
     </ng-template>
   </div>
+</ng-template>
+
+
+<ng-template #editProjectTemplate>
+  <form [formGroup]="projectForm" novalidate>
+    <div class="form-group">
+      <label for="projectName" class="mt-3 h5">Название проекта</label>
+      <input type="text" class="form-control" id="projectName" formControlName="projectName"
+             [(ngModel)]="editProjectViewModel.projectName">
+      <div *ngIf="_projectName.invalid && (_projectName.touched || _projectName.dirty)" class="alert alert-danger">
+        <p *ngIf="_projectName.errors?.required">Обязательное поле</p>
+        <p *ngIf="_projectName.errors?.minlength">Слишком короткое название</p>
+        <p *ngIf="_projectName.errors?.maxlength">Слишком длинное название</p>
+        <p *ngIf="_projectName.errors?.pattern">Ошибка введенных данных</p>
+      </div>
+      <label for="dateOfCompletion" class="mt-3 h5">Дата сдачи проета</label>
+      <input type="text"
+             placeholder="Выберите дату"
+             class="form-control"
+             id="dateOfCompletion"
+             formControlName="dateOfCompletion"
+             [(ngModel)]="editProjectViewModel.dateOfCompletion"
+             bsDatepicker
+             [minDate]="minDate"
+             [bsConfig]="{
+               isAnimated: true,
+                dateInputFormat: 'DD.MM.YYYY'}">
+      <div *ngIf="_dateOfCompletion.invalid && (_dateOfCompletion.touched || _dateOfCompletion.dirty)"
+           class="alert alert-danger">
+        <p *ngIf="_dateOfCompletion.errors?.required">Обязательное поле</p>
+      </div>
+      <label for="description" class="mt-3 h5">Описание проекта</label>
+      <textarea type="text" class="form-control" id="description" formControlName="description"
+                [(ngModel)]="editProjectViewModel.description"></textarea>
+      <div *ngIf="_projectDescription.invalid && (_projectDescription.touched || _projectDescription.dirty)"
+           class="alert alert-danger">
+        <p *ngIf="_projectDescription.errors?.minlength">Слишком короткое описание</p>
+        <p *ngIf="_projectDescription.errors?.maxlength">Слишком длинное описание</p>
+      </div>
+    </div>
+  </form>
 </ng-template>

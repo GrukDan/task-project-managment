@@ -14,8 +14,12 @@ export class ProjectService {
   constructor(private http: HttpClient) {
   }
 
-  getAllProject(): Observable<ProjectViewModel[]> {
+  getAllProjectViewModel(): Observable<ProjectViewModel[]> {
     return this.http.get<ProjectViewModel[]>('/api/projects/views');
+  }
+
+  getAllProject(): Observable<Project[]> {
+    return this.http.get<Project[]>('/api/projects/all-projects');
   }
 
   getAllProjectForTask(): Observable<ProjectForTask[]> {
@@ -42,5 +46,13 @@ export class ProjectService {
           .set('direction',direction.toString())
           .set('search',search)
       })
+  }
+
+  getProjectViewModelById(idProject: number):Observable<ProjectViewModel> {
+    return this.http.get<ProjectViewModel>('/api/projects',{params:new HttpParams().set('id',idProject.toString())});
+  }
+
+  saveProjectViewModel(projectViewModel: ProjectViewModel):Observable<ProjectViewModel> {
+    return this.http.post<ProjectViewModel>('/api/projects/project-view-model',projectViewModel);
   }
 }

@@ -58,8 +58,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean saveUser(UserViewModel userViewModel) {
-        return false;
+    public UserViewModel saveUserViewModel(UserViewModel userViewModel) {
+        User user = userViewModel.getUser();
+        User user2 = userRepository.getOne(user.getIduser());
+        user.setLogin(user2.getLogin());
+        user.setPassword(user2.getPassword());
+        userRepository.save(user);
+        return userViewModel;
     }
 
     @Override
@@ -116,5 +121,18 @@ public class UserServiceImpl implements UserService {
         userViewModelList.toArray(userViewModelArray);
 
         return new UserPaginationModel(userPage.getTotalPages(),page,userViewModelArray);
+    }
+
+    @Override
+    public UserViewModel getUserViewModelById(long id) {
+        User user = userRepository.getOne(id);
+        UserViewModel userViewModel = new UserViewModel(user);
+        if(user.getAssignProject()!=null) {
+            Project project = projectRepository.getOne(user.getAssignProject());
+            userViewModel.setAssignProjectName(project.getProjectName());
+        }
+        Role role = roleRepository.findByIdrole(user.getRole());
+        userViewModel.setRoleName(role.getRole());
+        return userViewModel;
     }
 }

@@ -8,7 +8,14 @@ import {HomeComponent} from "../../component/home/home.component";
 import {NotFoundPageComponent} from "../../component/not-found-page/not-found-page.component";
 import {ProjectPageComponent} from "../../component/project-page/project-page.component";
 import {TaskPageComponent} from "../../component/task-page/task-page.component";
-import {BsDatepickerModule, BsLocaleService, CarouselModule, PaginationModule, TabsModule} from "ngx-bootstrap";
+import {
+  BsDatepickerModule,
+  BsLocaleService,
+  CarouselModule,
+  DatepickerModule,
+  PaginationModule,
+  TabsModule
+} from "ngx-bootstrap";
 import {TaskTableComponent} from "../../component/task-table/task-table.component";
 import {ProjectTableComponent} from "../../component/project-table/project-table.component";
 import {UserTableComponent} from "../../component/user-table/user-table.component";
@@ -18,6 +25,7 @@ import {RoleService} from "../../service/role.service";
 import {PriorityService} from "../../service/priority.service";
 import {StatusService} from "../../service/status.service";
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -39,7 +47,10 @@ import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
     TabsModule,
     HttpClientModule,
     Ng4LoadingSpinnerModule,
-
+    FormsModule,
+    ReactiveFormsModule,
+    BsDatepickerModule,
+    DatepickerModule,
   ],
   exports: [
     FirstPageComponent,

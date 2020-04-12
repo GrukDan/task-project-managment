@@ -17,6 +17,19 @@ public class Project {
     private Double readinessDegree;
     private String description;
 
+    public Project() {
+    }
+
+    public Project(long idproject, String projectCode, String projectName, long projectCreator, Date dateOfCompletion, Double readinessDegree, String description) {
+        this.idproject = idproject;
+        this.projectCode = projectCode;
+        this.projectName = projectName;
+        this.projectCreator = projectCreator;
+        this.dateOfCompletion = dateOfCompletion;
+        this.readinessDegree = readinessDegree;
+        this.description = description;
+    }
+
     @Id
     @Column(name = "idproject", nullable = false)
     public long getIdproject() {
