@@ -1,55 +1,71 @@
 <div class="container " style="background-color: navajowhite">
-  <div class="pt-5 row">
-    <div class="col" id="col1">
-      <div>
-        <h1>Название задачи:</h1>
-        <h2>Name</h2>
+  <div *ngIf="!edit;else editTask">
+    <div class="pt-5 row">
+      <div class="col" id="col1">
+        <div>
+          <h1>Название задачи:</h1>
+          <h2>{{taskViewModel.taskName}}</h2>
+        </div>
+        <div>
+          <h1>Код задачи:</h1>
+          <h2>{{taskViewModel.taskCode}}</h2>
+        </div>
+        <div>
+          <h1>Статус задачи:</h1>
+          <h2>{{taskViewModel.statusName}}</h2>
+        </div>
+        <div>
+          <h1>Приоритет задачи:</h1>
+          <h2>{{taskViewModel.priorityName}}</h2>
+        </div>
+        <div>
+          <h1>Проект задачи:</h1>
+          <h2><a routerLinkActive="active"
+                 [routerLink]="['/projects',btoa(taskViewModel?.project?.toString()),
+        taskViewModel?.projectName]">{{taskViewModel.projectName}}</a></h2>
+        </div>
       </div>
-      <div>
-        <h1>Код задачи:</h1>
-        <h2>Name</h2>
-      </div>
-      <div>
-        <h1>Статус задачи:</h1>
-        <h2>Name</h2>
-      </div>
-      <div>
-        <h1>Приоритет задачи:</h1>
-        <h2>Name</h2>
+      <div class="col" id="col2">
+        <div>
+          <h1>Дата создания:</h1>
+          <h2>{{taskViewModel.dateOfCreation | date}}</h2>
+        </div>
+        <div>
+          <h1>Дата завершения:</h1>
+          <h2>{{taskViewModel.dueDate | date}}</h2>
+        </div>
+        <div>
+          <h1>Дата обновления:</h1>
+          <h2>{{taskViewModel.updated |  date :'medium'}}</h2>
+        </div>
+        <div>
+          <h1>Создатель задачи:</h1>
+          <h2><a routerLinkActive="active"
+                 [routerLink]="['/home',btoa(taskViewModel?.taskCreator?.toString()),
+        taskViewModel?.taskCreatorName+ ' ' + taskViewModel?.taskCreatorSurname]">{{taskViewModel.taskCreatorSurname}}
+            {{taskViewModel.taskCreatorName}}</a></h2>
+        </div>
+        <div>
+          <h1>Исполнитель задачи:</h1>
+          <h2><a routerLinkActive="active"
+                 [routerLink]="['/home',btoa(taskViewModel?.taskExecutor?.toString()),
+        taskViewModel?.taskExecutorName+ ' ' + taskViewModel?.taskExecutorSurname]">{{taskViewModel.taskExecutorSurname}}
+            {{taskViewModel.taskExecutorName}}</a></h2>
+        </div>
       </div>
     </div>
-    <div class="col" id="col2">
-      <div>
-        <h1>Дата создания:</h1>
-        <h2>Name</h2>
-      </div>
-      <div>
-        <h1>Дата завершения:</h1>
-        <h2>Name</h2>
-      </div>
-      <div>
-        <h1>Создатель задачи:</h1>
-        <h2><a routerLink="">Name</a></h2>
-      </div>
-      <div>
-        <h1>Исполнитель задачи:</h1>
-        <h2><a routerLink="">Name</a></h2>
-      </div>
+    <div class="mt-3">
+      <h1>Описание задачи:</h1>
+      <h3 class="text-justify">{{taskViewModel.description}}</h3>
     </div>
   </div>
-  <div class="mt-3">
-    <h1>Описание задачи:</h1>
-    <h3 class="text-justify">Note that tabs can be given role="tablist", role="tab" and role="tabpanel" attributes.
-      These are
-      appropriate for tabbed interfaces, as described in the WAIARIA Authoring Practices.
-      If your control element is targeting a single collapsible element - you should add the aria-c
-      ontrols attribute to the control element, containing the id of the collapsible element. </h3>
-  </div>
-  <div class="my-3 text-right">
-      <span>
-        <button class="btn btn-primary mr-5">Редактировать</button>
-        <button class="btn btn-primary">Удалить</button>
-      </span>
+
+  <div class="my-5 text-right">
+    <button class="btn btn-primary mr-3" *ngIf="!edit" (click)="startEdit()">Редактировать</button>
+    <button class="btn btn-primary mr-3" *ngIf="edit" [disabled]="taskForm.invalid" (click)="save()">Сохранить
+    </button>
+    <button class="btn btn-primary mr-3" *ngIf="edit" (click)="changeEdit()">Отмена</button>
+    <button class="btn btn-primary" (click)="delete()">Удалить</button>
   </div>
   <div>
     <h1>Комментарии:</h1>
@@ -67,3 +83,101 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #editTask>
+  <div class="pt-5 row">
+    <div class="col">
+      <form [formGroup]="taskForm" novalidate>
+        <div class="form-group">
+          <label for="taskName" class="mt-3 h1">Название задачи</label>
+          <input type="text" class="form-control" id="taskName" formControlName="taskName"
+                 [(ngModel)]="editTaskViewModel.taskName">
+          <div *ngIf="_taskName.invalid && (_taskName.touched || _taskName.dirty)" class="alert alert-danger">
+            <p *ngIf="_taskName.errors?.required">Обязательное поле</p>
+            <p *ngIf="_taskName.errors?.minlength">Слишком короткое название</p>
+            <p *ngIf="_taskName.errors?.maxlength">Слишком длинное название</p>
+            <p *ngIf="_taskName.errors?.pattern">Ошибка введенных данных</p>
+          </div>
+          <div>
+            <h1>Код задачи:</h1>
+            <h2>{{editTaskViewModel.taskCode}}</h2>
+          </div>
+          <label for="statusSelect" class="mt-3 h1">Статус задачи</label>
+          <select class="form-control" id="statusSelect" name="statusSelect" formControlName="status"
+                  [(ngModel)]="editTaskViewModel.status">
+            <option *ngFor="let status of statuses"
+                    [value]="status.idstatus">{{status.status}}</option>
+          </select>
+          <label for="prioritySelect" class="mt-3 h1">Приоритет задачи</label>
+          <select class="form-control" id="prioritySelect" name="prioritySelect" formControlName="priority"
+                  [(ngModel)]="editTaskViewModel.priority">
+            <option *ngFor="let priority of priorities"
+                    [value]="priority.idpriority">{{priority.priority}}</option>
+          </select>
+          <div *ngIf="_priority.invalid && (_priority.touched || _priority.dirty)" class="alert alert-danger">
+            <p *ngIf="_priority.errors?.required">Обязательное поле</p>
+          </div>
+          <div>
+            <h1>Проект задачи:</h1>
+            <h2><a routerLinkActive="active"
+                   [routerLink]="['/projects',btoa(taskViewModel?.project?.toString()),
+        taskViewModel?.projectName]">{{taskViewModel.projectName}}</a></h2>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col">
+      <form [formGroup]="taskForm" novalidate>
+        <div class="form-group">
+          <div>
+            <h1>Дата создания:</h1>
+            <h2>{{editTaskViewModel.dateOfCreation | date}}</h2>
+          </div>
+          <label for="dueDate" class="mt-3 h1">Дата завершения:</label>
+          <input type="text"
+                 placeholder="Выберите дату"
+                 class="form-control"
+                 id="dueDate"
+                 formControlName="dueDate"
+                 [(ngModel)]="dueDate"
+                 bsDatepicker
+                 [minDate]="minDate"
+                 [bsConfig]="{
+               isAnimated: true,
+                dateInputFormat: 'DD.MM.YYYY'}">
+          <div *ngIf="_dueDate.invalid && (_dueDate.touched || _dueDate.dirty)" class="alert alert-danger">
+            <p *ngIf="_dueDate.errors?.required">Обязательное поле</p>
+          </div>
+          <div>
+            <h1>Дата обновления:</h1>
+            <h2>{{editTaskViewModel.updated |  date :'medium'}}</h2>
+          </div>
+          <div>
+            <h1>Создатель задачи:</h1>
+            <h2><a routerLinkActive="active"
+                   [routerLink]="['/home',btoa(editTaskViewModel?.taskCreator?.toString()),
+        editTaskViewModel?.taskCreatorName+ ' ' + editTaskViewModel?.taskCreatorSurname]">{{editTaskViewModel.taskCreatorSurname}}
+              {{editTaskViewModel.taskCreatorName}}</a></h2>
+          </div>
+          <label for="taskExecutor" class="mt-3 h1">Исполнитель задачи:</label>
+          <select class="form-control" id="taskExecutor" name="taskExecutor" formControlName="taskExecutor"
+                  [(ngModel)]="editTaskViewModel.taskExecutor">
+            <option *ngFor="let executor of executors"
+                    [value]="executor.iduser">{{executor.userSurname}} {{executor.userName}}</option>
+          </select>
+        </div>
+        <div class="mt-3">
+          <label for="descriptionTask" class="mt-3 h1">Описание задачи:</label>
+          <textarea type="text" class="form-control" id="descriptionTask" formControlName="description"
+                    [(ngModel)]="editTaskViewModel.description"></textarea>
+          <div *ngIf="_taskDescription.invalid && (_taskDescription.touched || _taskDescription.dirty)"
+               class="alert alert-danger">
+            <p *ngIf="_taskDescription.errors?.minlength">Слишком короткое описание</p>
+            <p *ngIf="_taskDescription.errors?.maxlength">Слишком длинное описание</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>

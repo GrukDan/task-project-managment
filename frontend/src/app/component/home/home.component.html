@@ -24,7 +24,9 @@
           </div>
           <div id="assignProject">
             <h2>Выполняемый проект:</h2>
-            <h4 *ngIf="userViewModel?.assignProjectName!=null">{{userViewModel.assignProjectName}}</h4>
+            <h4 *ngIf="userViewModel?.assignProjectName!=null">
+              <a [routerLink]="['/projects',btoa(userViewModel?.assignProject?.toString()),
+        userViewModel?.assignProjectName]">{{userViewModel.assignProjectName}}</a></h4>
             <h4 *ngIf="userViewModel?.assignProjectName==null">Проект остутствует</h4>
           </div>
         </div>
@@ -43,23 +45,33 @@
         <table class="table table-hover table-dark">
           <thead>
           <tr>
-            <th>#</th>
-            <th>Имя задачи</th>
-            <th>Код задачи</th>
-            <th>Статус</th>
-            <th>Приоритет</th>
+            <th class="text-center">#</th>
+            <th class="text-center">Имя задачи</th>
+            <th class="text-center">Код задачи</th>
+            <th class="text-center">Статус</th>
+            <th class="text-center">Приоритет</th>
+            <th class="text-center">Дата создания</th>
+            <th class="text-center">Дата сдачи</th>
+            <th class="text-center">Создатель задачи</th>
             <th></th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
+          <tr *ngFor="let taskViewModel of taskViewModels; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{taskViewModel.taskName}}</td>
+            <td>{{taskViewModel.taskCode}}</td>
+            <td>{{taskViewModel.statusName}}</td>
+            <td>{{taskViewModel.priorityName}}</td>
+            <td>{{taskViewModel.dateOfCreation | date}}</td>
+            <td>{{taskViewModel.dueDate | date}}</td>
+            <td><a routerLinkActive="active"
+                   [routerLink]="['/home',btoa(taskViewModel.taskCreator.toString()),taskViewModel.taskCreatorName + ' ' + taskViewModel.taskCreatorSurname]"
+            >{{taskViewModel.taskCreatorName}} {{taskViewModel.taskCreatorSurname}}</a></td>
             <td>
-              <button class="btn btn-primary" [routerLink]="['/task']">More</button>
+              <button class="btn btn-primary" routerLinkActive="active"
+                      [routerLink]="['/tasks',btoa(taskViewModel.idtask.toString()),taskViewModel.taskName]">More
+              </button>
             </td>
           </tr>
           </tbody>

@@ -1,5 +1,6 @@
 package com.bsuir.model.viewModel;
 
+import com.bsuir.model.Project;
 import com.bsuir.model.Task;
 
 import java.sql.Date;
@@ -29,6 +30,7 @@ public class TaskViewModel {
     private long project;
     private String projectName;
 
+    private String description;
     private Timestamp updated;
 
     public TaskViewModel(){}
@@ -44,28 +46,16 @@ public class TaskViewModel {
         this.taskCreator = task.getTaskCreator();
         this.taskExecutor = task.getTaskExecutor();
         this.project = task.getProject();
+        this.description = task.getDescription();
         this.updated = task.getUpdated();
     }
 
-    public TaskViewModel(long idtask, String taskName, Date dateOfCreation, Date dueDate, String taskCode, long status, String statusName, long priority, String priorityName, long taskCreator, String taskCreatorName, String taskCreatorSurname, Long taskExecutor, String taskExecutorName, String taskExecutorSurname, long project, String projectName, Timestamp updated) {
-        this.idtask = idtask;
-        this.taskName = taskName;
-        this.dateOfCreation = dateOfCreation;
-        this.dueDate = dueDate;
-        this.taskCode = taskCode;
-        this.status = status;
-        this.statusName = statusName;
-        this.priority = priority;
-        this.priorityName = priorityName;
-        this.taskCreator = taskCreator;
-        this.taskCreatorName = taskCreatorName;
-        this.taskCreatorSurname = taskCreatorSurname;
-        this.taskExecutor = taskExecutor;
-        this.taskExecutorName = taskExecutorName;
-        this.taskExecutorSurname = taskExecutorSurname;
-        this.project = project;
-        this.projectName = projectName;
-        this.updated = updated;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -88,8 +78,35 @@ public class TaskViewModel {
                 ", taskExecutorSurname='" + taskExecutorSurname + '\'' +
                 ", project=" + project +
                 ", projectName='" + projectName + '\'' +
+                ", description='" + description + '\'' +
                 ", updated=" + updated +
                 '}';
+    }
+
+    public TaskViewModel(long idtask, String taskName, Date dateOfCreation, Date dueDate, String taskCode, long status, String statusName, long priority, String priorityName, long taskCreator, String taskCreatorName, String taskCreatorSurname, Long taskExecutor, String taskExecutorName, String taskExecutorSurname, long project, String projectName, String description, Timestamp updated) {
+        this.idtask = idtask;
+        this.taskName = taskName;
+        this.dateOfCreation = dateOfCreation;
+        this.dueDate = dueDate;
+        this.taskCode = taskCode;
+        this.status = status;
+        this.statusName = statusName;
+        this.priority = priority;
+        this.priorityName = priorityName;
+        this.taskCreator = taskCreator;
+        this.taskCreatorName = taskCreatorName;
+        this.taskCreatorSurname = taskCreatorSurname;
+        this.taskExecutor = taskExecutor;
+        this.taskExecutorName = taskExecutorName;
+        this.taskExecutorSurname = taskExecutorSurname;
+        this.project = project;
+        this.projectName = projectName;
+        this.description = description;
+        this.updated = updated;
+    }
+
+    public Task buildTask(){
+        return new Task(idtask,taskName,dateOfCreation,dueDate,taskCode,status,priority,taskCreator,taskExecutor,project,description,updated);
     }
 
     public long getIdtask() {

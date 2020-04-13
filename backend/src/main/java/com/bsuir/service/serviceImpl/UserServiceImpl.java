@@ -68,6 +68,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getUsersByAssignProject(long id) {
+        return userRepository.findByAssignProject(id);
+    }
+
+    @Override
     public UserViewModel authorization(String login, String password) {
         return new UserViewModel(userRepository.findByLoginAndPassword(login, password));
     }

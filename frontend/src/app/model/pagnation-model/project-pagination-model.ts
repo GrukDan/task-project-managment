@@ -1,7 +1,7 @@
 import {ProjectViewModel} from "../view-model/project-view-model";
 
-export class ProjectPaginationModel{
-    countOfPages:number;
-    numberOfPage:number;
-    projectViewModels:ProjectViewModel[];
+export class ProjectPaginationModel {
+  countPages: number;
+  numberPage: number;
+  projectViewModels: ProjectViewModel[];
 }

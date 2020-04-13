@@ -81,13 +81,13 @@ public class ProjectServiceImpl implements ProjectService {
         List<ProjectViewModel> projectViewModelList = new ArrayList<>();
         for (Project project : projectList) {
             ProjectViewModel projectViewModel = new ProjectViewModel(project);
-            for (User user : users) {//цикл установки имени и фамилии создателя проекта
-                if (user.getIduser() == projectViewModel.getProjectCreator()) {
-                    projectViewModel.setProjectCreatorName(user.getUserName());
-                    projectViewModel.setProjectCreatorSurname(user.getUserSurname());
-                    break;
-                }
-            }
+
+            users.stream()
+                    .filter(user -> projectViewModel.getProjectCreator() == user.getIduser())
+                    .forEach(user -> {
+                        projectViewModel.setProjectCreatorName(user.getUserName());
+                        projectViewModel.setProjectCreatorSurname(user.getUserSurname());
+                    });
             projectViewModelList.add(projectViewModel);
         }
 
@@ -112,13 +112,13 @@ public class ProjectServiceImpl implements ProjectService {
         List<ProjectViewModel> projectViewModels = new ArrayList<>();
         for (Project project : projects) {
             ProjectViewModel projectViewModel = new ProjectViewModel(project);
-            for (User user : users) {//цикл установки имени и фамилии создателя проекта
-                if (user.getIduser() == projectViewModel.getProjectCreator()) {
-                    projectViewModel.setProjectCreatorName(user.getUserName());
-                    projectViewModel.setProjectCreatorSurname(user.getUserSurname());
-                    break;
-                }
-            }
+
+            users.stream()
+                    .filter(user -> projectViewModel.getProjectCreator() == user.getIduser())
+                    .forEach(user -> {
+                        projectViewModel.setProjectCreatorName(user.getUserName());
+                        projectViewModel.setProjectCreatorSurname(user.getUserSurname());
+                    });
             projectViewModels.add(projectViewModel);
         }
         return projectViewModels;

@@ -12,7 +12,7 @@ import {UserTableComponent} from "./component/user-table/user-table.component";
 
 const routes: Routes = [
   {path: "", component: FirstPageComponent},
-  {path: "tasks", component: TaskPageComponent},
+  {path: "tasks/:id/:task_name", component: TaskPageComponent},
   {path: "projects/:id/:project_name", component: ProjectPageComponent},
   {path: "home/:id/:username", component: HomeComponent},
   {path: "projects/table", component: ProjectTableComponent},

@@ -23,6 +23,24 @@ public class Task {
     private String description;
     private Timestamp updated;
 
+    public Task() {
+    }
+
+    public Task(long idtask, String taskName, Date dateOfCreation, Date dueDate, String taskCode, long status, long priority, long taskCreator, Long taskExecutor, long project, String description, Timestamp updated) {
+        this.idtask = idtask;
+        this.taskName = taskName;
+        this.dateOfCreation = dateOfCreation;
+        this.dueDate = dueDate;
+        this.taskCode = taskCode;
+        this.status = status;
+        this.priority = priority;
+        this.taskCreator = taskCreator;
+        this.taskExecutor = taskExecutor;
+        this.project = project;
+        this.description = description;
+        this.updated = updated;
+    }
+
     @Id
     @Column(name = "idtask", nullable = false)
     public long getIdtask() {

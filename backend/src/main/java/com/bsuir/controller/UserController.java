@@ -39,6 +39,11 @@ public class UserController {
         return userService.getUserViewModelById(id);
     }
 
+    @RequestMapping(value = "/project",method = RequestMethod.GET)
+    public List<User> getUsersByAssignProject(@RequestParam("assignProject")long id){
+        return userService.getUsersByAssignProject(id);
+    }
+
     @RequestMapping(value = "/all",method = RequestMethod.GET)
     public List<UserViewModel> getAllUserViewModel() {
         return userService.getAllUserViewModel();

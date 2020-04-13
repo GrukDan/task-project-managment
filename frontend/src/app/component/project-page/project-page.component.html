@@ -83,18 +83,22 @@
         <tr *ngFor="let task of taskViewModels " class="text-center ">
           <td class="h6">{{task.taskCode}}</td>
           <td class="h6">{{task.taskName}}</td>
-          <td class="h6">{{task.priority}}</td>
-          <td class="h6">{{task.status}}</td>
+          <td class="h6">{{task.priorityName}}</td>
+          <td class="h6">{{task.statusName}}</td>
           <td class="h6">{{task.dateOfCreation | date}}</td>
           <td class="h6">{{task.dueDate | date}}</td>
           <td class="h6">{{task.updated | date }}</td>
           <td class="h6"><a
             [routerLink]="['/home',btoa(task.taskExecutor.toString()),
             task.taskExecutorName + ' ' + task.taskExecutorSurname]"
+            routerLinkActive="active"
           >{{task.taskExecutorSurname}} {{task.taskExecutorName}}</a>
           </td>
           <td>
-            <button class="btn btn-primary" [routerLink]="['/task']">Подробнее</button>
+            <button class="btn btn-primary" [routerLink]="['/tasks',btoa(task.idtask.toString()),task.taskName]"
+                    routerLinkActive="active">
+              Подробнее
+            </button>
           </td>
         </tr>
       </ng-template>

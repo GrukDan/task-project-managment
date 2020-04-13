@@ -12,6 +12,7 @@ import {Project} from "../../model/project";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ValidationService} from "../../service/validation.service";
 import {Task} from "../../model/task";
+import {TaskViewModel} from "../../model/view-model/task-view-model";
 
 @Component({
   selector: 'app-home',
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
   private editUserViewModel: UserViewModel;
   private roles: Role[];
   private projects: Project[];
-  private tasks: Task[];
+  private taskViewModels: TaskViewModel[];
   private edit: boolean;
   private userForm: FormGroup;
 
@@ -42,15 +43,18 @@ export class HomeComponent implements OnInit {
     this.userViewModel = new UserViewModel();
     this.editUserViewModel = new UserViewModel();
     this.edit = false;
+    this.taskViewModels = [];
 
     // subscribe to the parameters observable
     this.route.paramMap.subscribe(params => {
       this.idUser = Number(atob(params.get('id')));
+      this.loadUserViewModel();
     });
+
+
   }
 
   ngOnInit() {
-    this.loadUserViewModel();
   }
 
   loadUserViewModel() {
@@ -58,6 +62,7 @@ export class HomeComponent implements OnInit {
     this.subscriptions.push(this.userService.getUserViewModel(this.idUser).subscribe(user => {
       this.userViewModel = user as UserViewModel;
       this.editUserViewModel = UserViewModel.clone(user);
+      this.loadTaskViewModels(user.iduser);
       this.spinnerService.hide();
     }))
   }
@@ -82,13 +87,17 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  loadTasks(){
-
+  loadTaskViewModels(idUser:number) {
+    this.spinnerService.show();
+    this.subscriptions.push(this.taskService.getTaskViewModelsByTaskExecutor(idUser).subscribe(taskViewModels=>{
+      this.taskViewModels = taskViewModels as TaskViewModel[];
+      this.spinnerService.hide();
+    }))
   }
 
-  saveUserViewModel(userViewModelForSaving:UserViewModel){
+  saveUserViewModel(userViewModelForSaving: UserViewModel) {
     this.spinnerService.show();
-    this.subscriptions.push(this.userService.saveUserViewModel(userViewModelForSaving).subscribe(userViewModel=>{
+    this.subscriptions.push(this.userService.saveUserViewModel(userViewModelForSaving).subscribe(userViewModel => {
       this.userViewModel = userViewModel as UserViewModel;
       this.editUserViewModel = UserViewModel.clone(userViewModel);
       this.spinnerService.hide();
@@ -134,5 +143,9 @@ export class HomeComponent implements OnInit {
     this.changeEdit()
     this.loadProject();
     this.loadRole()
+  }
+
+  btoa(s: string) {
+    return btoa(s);
   }
 }

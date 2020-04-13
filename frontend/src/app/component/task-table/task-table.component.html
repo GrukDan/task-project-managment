@@ -1,15 +1,17 @@
 <div class="container-fluid">
+  <ng4-loading-spinner [threshold]="2000" [timeout]="40000" [loadingText]="'Please wait...'"
+                       [zIndex]="9999"></ng4-loading-spinner>
   <table class="table table-hover table-dark mt-5">
     <thead class="h4">
     <tr>
       <th class="text-center">Код задачи</th>
-      <th style="cursor: pointer" (click)="sort(parameters[0])">Название задачи</th>
-      <th style="cursor: pointer" (click)="sort(parameters[1])">Приоритет</th>
-      <th style="cursor: pointer" (click)="sort(parameters[2])">Статус</th>
-      <th style="cursor: pointer" (click)="sort(parameters[3])">Дата создания</th>
-      <th style="cursor: pointer" (click)="sort(parameters[4])">Дата выполнения</th>
-      <th style="cursor: pointer" (click)="sort(parameters[5])">Обновлено</th>
-      <th style="cursor: pointer" >Испонитель</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[0])">Название задачи</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[1])">Приоритет</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[2])">Статус</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[3])">Дата создания</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[4])">Дата выполнения</th>
+      <th class="text-center" style="cursor: pointer" (click)="sort(parameters[5])">Обновлено</th>
+      <th class="text-center">Испонитель</th>
       <th></th>
     </tr>
     </thead>
@@ -19,21 +21,24 @@
       <tr *ngFor="let task of taskViewModels " class="text-center ">
         <td class="h6">{{task.taskCode}}</td>
         <td class="h6">{{task.taskName}}</td>
-        <td class="h6">{{task.priority}}</td>
-        <td class="h6">{{task.status}}</td>
+        <td class="h6">{{task.priorityName}}</td>
+        <td class="h6">{{task.statusName}}</td>
         <td class="h6">{{task.dateOfCreation | date}}</td>
         <td class="h6">{{task.dueDate | date}}</td>
         <td class="h6">{{task.updated | date }}</td>
-        <td class="h6"><a [routerLink]="['/account',task.taskExecutor]">{{task.taskExecutorSurname}} {{task.taskExecutorName}}</a></td>
+        <td class="h6" *ngIf="task?.taskExecutor!=null"><a
+          [routerLink]="['/home',btoa(task.taskExecutor.toString()),task.taskExecutorName + ' ' + task.taskExecutorSurname]"
+          routerLinkActive="active">{{task.taskExecutorSurname}} {{task.taskExecutorName}}</a></td>
+        <td *ngIf="task?.taskExecutor == null">Нет испонителя!</td>
         <td>
-          <button class="btn btn-primary" [routerLink]="['/task']">Подробнее</button>
+          <button class="btn btn-primary" [routerLink]="['/tasks',btoa(task.idtask.toString()),task.taskName]">Подробнее</button>
         </td>
       </tr>
     </ng-template>
   </table>
   <div class="row">
     <div class="col-xs-12 col-12">
-      <pagination [boundaryLinks]="true" [totalItems]=""  class="justify-content-center"
+      <pagination [boundaryLinks]="true" [totalItems]="countOfPages" class="justify-content-center"
                   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
                   (pageChanged)="pageChanged($event)">
       </pagination>

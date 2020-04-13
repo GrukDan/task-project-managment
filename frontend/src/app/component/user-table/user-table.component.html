@@ -1,5 +1,6 @@
 <div class="container-fluid">
-  <ng4-loading-spinner [threshold]="2000" [timeout]="40000"  [loadingText]="'Please wait...'" [zIndex]="9999"></ng4-loading-spinner>
+  <ng4-loading-spinner [threshold]="2000" [timeout]="40000" [loadingText]="'Please wait...'"
+                       [zIndex]="9999"></ng4-loading-spinner>
   <table class="table table-hover table-dark mt-5">
     <thead class="h4">
     <tr>
@@ -20,11 +21,15 @@
         <td class="h6">{{user.email}}</td>
         <td class="h6">{{user.roleName}}</td>
         <td class="h6">
-          <a *ngIf="user?.assignProject!=null;" [routerLink]="['/home']">{{user.assignProjectName}}</a>
+          <a *ngIf="user?.assignProject!=null;"
+             routerLinkActive="active"
+             [routerLink]="['/projects',btoa(user.assignProject.toString()),user.assignProjectName]">{{user.assignProjectName}}</a>
           <span *ngIf="user?.assignProject==null;">Нет проекта!</span>
         </td>
         <td>
-          <button class="btn btn-primary" [routerLink]="['/projects']">Подробнее</button>
+          <button class="btn btn-primary" [routerLink]="['/home',btoa(user?.iduser?.toString()),
+        user?.userName+ ' ' + user?.userSurname]">Подробнее
+          </button>
         </td>
       </tr>
     </ng-template>

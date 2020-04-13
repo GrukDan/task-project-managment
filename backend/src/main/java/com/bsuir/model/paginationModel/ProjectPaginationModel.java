@@ -5,41 +5,41 @@ import com.bsuir.model.viewModel.ProjectViewModel;
 import java.util.Arrays;
 
 public class ProjectPaginationModel {
-    private int countOfPages;
-    private int numberOfPage;
+    private int countPages;
+    private int numberPage;
     private ProjectViewModel projectViewModels[];
 
     public ProjectPaginationModel(){}
 
-    public ProjectPaginationModel(int countOfPages, int numberOfPage, ProjectViewModel[] projectViewModels) {
-        this.countOfPages = countOfPages;
-        this.numberOfPage = numberOfPage;
+    public ProjectPaginationModel(int countPages, int numberPage, ProjectViewModel[] projectViewModels) {
+        this.countPages = countPages;
+        this.numberPage = numberPage;
         this.projectViewModels = projectViewModels;
     }
 
     @Override
     public String toString() {
         return "ProjectPaginationModel{" +
-                "countOfPages=" + countOfPages +
-                ", numberOfPage=" + numberOfPage +
+                "countOfPages=" + countPages +
+                ", numberOfPage=" + numberPage +
                 ", projectViewModels=" + Arrays.toString(projectViewModels) +
                 '}';
     }
 
-    public int getCountOfPages() {
-        return countOfPages;
+    public int getCountPages() {
+        return countPages;
     }
 
-    public void setCountOfPages(int countOfPages) {
-        this.countOfPages = countOfPages;
+    public void setCountPages(int countPages) {
+        this.countPages = countPages;
     }
 
-    public int getNumberOfPage() {
-        return numberOfPage;
+    public int getNumberPage() {
+        return numberPage;
     }
 
-    public void setNumberOfPage(int numberOfPage) {
-        this.numberOfPage = numberOfPage;
+    public void setNumberPage(int numberPage) {
+        this.numberPage = numberPage;
     }
 
     public ProjectViewModel[] getProjectViewModels() {

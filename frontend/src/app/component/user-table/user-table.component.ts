@@ -70,4 +70,8 @@ export class UserTableComponent implements OnInit {
       this.spinnerService.hide();
     }))
   }
+
+  btoa(s: string) {
+    return btoa(s);
+  }
 }

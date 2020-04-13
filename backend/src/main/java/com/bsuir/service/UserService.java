@@ -25,4 +25,6 @@ public interface UserService {
     UserPaginationModel getSortedUser(String parameter, int page, int size, boolean direction);
 
     UserViewModel getUserViewModelById(long id);
+
+    List<User> getUsersByAssignProject(long id);
 }

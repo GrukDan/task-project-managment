@@ -30,7 +30,7 @@ export class ProjectPageComponent implements OnInit {
 
   locale = "ru";
   minDate: Date;
-  date:Date;
+  date: Date;
 
   constructor(private projectService: ProjectService,
               private taskService: TaskService,
@@ -44,7 +44,7 @@ export class ProjectPageComponent implements OnInit {
     this.editProjectViewModel = new ProjectViewModel();
     this.minDate = new Date();
     this.localeService.use(this.locale);
-this.edit = false;
+    this.edit = false;
 // subscribe to the parameters observable
     this.route.paramMap.subscribe(params => {
       this.idProject = Number(atob(params.get('id')));
@@ -109,7 +109,7 @@ this.edit = false;
   save() {
     this.changeEdit();
     this.editProjectViewModel.dateOfCompletion = this.date.toISOString();
-     this.saveProjectViewModel(this.editProjectViewModel);
+    this.saveProjectViewModel(this.editProjectViewModel);
   }
 
   startEdit() {

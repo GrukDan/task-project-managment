@@ -15,7 +15,7 @@ export class UserService {
   }
 
   getUserByAssignProject(assignProject: number): Observable<User[]> {
-    return this.http.get<User[]>('/api/users', {
+    return this.http.get<User[]>('/api/users/project', {
       params: new HttpParams()
         .set('assignProject', assignProject.toString())
     });

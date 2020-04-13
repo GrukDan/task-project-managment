@@ -28,7 +28,6 @@ public class ProjectController {
         return projectService.saveProject(project);
     }
 
-//    todo: не работает description - бэк видит null
     @RequestMapping(value = "/project-view-model",method = RequestMethod.POST)
     public ProjectViewModel saveProject(@RequestBody ProjectViewModel projectViewModel){
         System.out.println(projectViewModel.toString());
