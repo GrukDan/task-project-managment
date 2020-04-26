@@ -1,20 +1,21 @@
 package com.bsuir.controller;
 
-import com.bsuir.jwtSecurity.JwtResponse;
-import com.bsuir.jwtSecurity.JwtToken;
-import com.bsuir.jwtSecurity.JwtUserDetailsService;
+import com.bsuir.security.jwt.JwtResponse;
+import com.bsuir.security.jwt.JwtToken;
+import com.bsuir.security.jwt.JwtUserDetailsService;
 import com.bsuir.model.User;
 import com.bsuir.model.paginationModel.UserPaginationModel;
 import com.bsuir.model.viewModel.UserViewModel;
-import com.bsuir.service.RoleService;
 import com.bsuir.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -35,8 +36,15 @@ public class UserController {
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
 
+    @Autowired
+    private PasswordEncoder bCryptPasswordEncoder;
+
+    @Value("${aes.encryption.key}")
+    private String key;
+
     @RequestMapping(method = RequestMethod.PUT)
     public UserViewModel save(@RequestBody User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userService.saveUser(user);
     }
 
@@ -46,46 +54,37 @@ public class UserController {
         return userService.getUserViewModelById(userViewModel.getIduser());
     }
 
-    @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
-    public JwtResponse getUserByLoginAndPassword(@RequestBody User req) {
-
+    @RequestMapping(value = "/sign-in", method = RequestMethod.POST)
+    public JwtResponse signIn(@RequestBody User req)  {
         try {
             authenticate(req.getLogin(), req.getPassword());
         } catch (Exception e) {
-            e.printStackTrace();
         }
 
-        final UserDetails userDetails = jwtUserDetailsService
-
-                .loadUserByUsername(req.getLogin());
-
+        final UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(req.getLogin());
         final String token = jwtToken.generateToken(userDetails);
-
         User user = userService.getByLogin(req.getLogin());
-        return new JwtResponse(token,user.getUserName(),user.getUserSurname(),user.getIduser());
+        String idUser = String.valueOf(user.getIduser());
+        return new JwtResponse(
+                token,
+                user.getUserName(),
+                user.getUserSurname(),
+                idUser);
     }
 
 
     private void authenticate(String username, String password) throws Exception {
-
         try {
-
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-
         } catch (DisabledException e) {
-
             throw new Exception("USER_DISABLED", e);
-
         } catch (BadCredentialsException e) {
-
             throw new Exception("INVALID_CREDENTIALS", e);
-
         }
-
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public UserViewModel getUserViewModelById(@RequestParam("id") long id) {
+    public UserViewModel getUserViewModelById(@RequestParam("id") String id) {
         return userService.getUserViewModelById(id);
     }
 

@@ -3,7 +3,7 @@ package com.bsuir.model.viewModel;
 import com.bsuir.model.User;
 
 public class UserViewModel {
-    private long iduser;
+    private String iduser;
 
     private Long role;
     private String roleName;
@@ -19,7 +19,7 @@ public class UserViewModel {
     }
 
     public UserViewModel(User user) {
-        this.iduser = user.getIduser();
+        this.iduser = String.valueOf(user.getIduser());
         this.role = user.getRole();
         this.userName = user.getUserName();
         this.userSurname = user.getUserSurname();
@@ -28,7 +28,7 @@ public class UserViewModel {
     }
 
     public UserViewModel(long iduser, Long role, String roleName, String userName, String userSurname, String email, Long assignProject, String assignProjectName) {
-        this.iduser = iduser;
+        this.iduser = String.valueOf(iduser);
         this.role = role;
         this.roleName = roleName;
         this.userName = userName;
@@ -39,7 +39,7 @@ public class UserViewModel {
     }
 
     public User buildUser() {
-        return new User(iduser, role, userName, userSurname, email, assignProject);
+        return new User(Long.valueOf(iduser), role, userName, userSurname, email, assignProject);
     }
 
     @Override
@@ -56,11 +56,11 @@ public class UserViewModel {
                 '}';
     }
 
-    public long getIduser() {
+    public String getIduser() {
         return iduser;
     }
 
-    public void setIduser(long iduser) {
+    public void setIduser(String iduser) {
         this.iduser = iduser;
     }
 

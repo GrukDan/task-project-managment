@@ -18,7 +18,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(credentials:User): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(AUTH_API + 'sign-up', credentials, httpOptions);
+    return this.http.post<JwtResponse>(AUTH_API + 'sign-in', credentials, httpOptions);
   }
 
   register(user): Observable<any> {

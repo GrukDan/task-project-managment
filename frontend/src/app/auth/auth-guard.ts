@@ -13,7 +13,6 @@ export class AuthGuardService implements CanActivate {
   constructor(public tokenStorage: TokenStorageService, public router: Router) {}
   canActivate(): boolean {
     if (this.tokenStorage.getToken()!=null) {
-      //this.router.navigate(['projects/table']);
       return true;
     }
     return false;

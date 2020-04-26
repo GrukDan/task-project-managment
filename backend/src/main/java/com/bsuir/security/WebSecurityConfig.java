@@ -1,5 +1,8 @@
-package com.bsuir.jwtSecurity;
+package com.bsuir.security;
 
+import com.bsuir.security.jwt.JwtAuthenticationEntryPoint;
+import com.bsuir.security.jwt.JwtRequestFilter;
+import com.bsuir.security.jwt.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,13 +33,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
-
     }
 
     @Bean
-    public JwtAuthenticationEntryPoint jwtAuthenticationEntryPointBean() throws Exception{
+    public JwtAuthenticationEntryPoint jwtAuthenticationEntryPointBean() throws Exception {
         return new JwtAuthenticationEntryPoint();
     }
 
@@ -50,24 +51,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-
     }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-
         httpSecurity.csrf().disable()
-
-                .authorizeRequests().antMatchers("/api/users/sign-up").permitAll().
-
-                anyRequest().authenticated().and().
-
-                exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-
+                .authorizeRequests().antMatchers("/api/users/sign-in").permitAll()
+                .anyRequest().authenticated().and()
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
     }
-
 }

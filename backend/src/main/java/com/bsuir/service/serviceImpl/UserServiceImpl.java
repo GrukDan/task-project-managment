@@ -10,10 +10,10 @@ import com.bsuir.repository.RoleRepository;
 import com.bsuir.repository.UserRepository;
 import com.bsuir.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,8 +32,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ProjectRepository projectRepository;
 
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Value("${aes.encryption.key}")
+    private String key;
 
     @Override
     public List<User> getAllUser() {
@@ -47,7 +47,9 @@ public class UserServiceImpl implements UserService {
         List<User> users = userRepository.findAll();
         List<UserViewModel> userViewModels = new ArrayList<>();
         for (User user : users) {
-            userViewModels.add(new UserViewModel(user));
+            userViewModels.add(
+                    new UserViewModel(user)
+            );
         }
         return userViewModels;
     }
@@ -77,18 +79,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getByLoginAndPassword(String login, String password) {
-        return userRepository.findByLoginAndPassword(login, password);
-    }
-
-    @Override
     public User getByLogin(String login) {
         return userRepository.findByLogin(login);
-    }
-
-    @Override
-    public User getUserById(long iduser) {
-        return null;
     }
 
     @Override
@@ -115,22 +107,12 @@ public class UserServiceImpl implements UserService {
             }
             userViewModelList.add(new UserViewModel(user));
         }
-
         List<Project> projectList = projectRepository.findByIdprojectIn(assignProjects);
         for(UserViewModel userViewModel:userViewModelList){
-            for(Project project : projectList) {
-                if (userViewModel.getAssignProject()!=null && userViewModel.getAssignProject().equals(project.getIdproject())) {
-                    userViewModel.setAssignProjectName(project.getProjectName());
-                    break;
-                }
-            }
-            for(Role role: roleList){
-                if(userViewModel.getRole().equals(role.getIdrole())){
-                    userViewModel.setRoleName(role.getRole());
-                    break;
-                }
-            }
+            setAssignProjectName(userViewModel,projectList);
+            setRoleName(userViewModel,roleList);
         }
+
         UserViewModel[] userViewModelArray = new UserViewModel[userViewModelList.size()];
         userViewModelList.toArray(userViewModelArray);
 
@@ -138,15 +120,47 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserViewModel getUserViewModelById(long id) {
-        User user = userRepository.getOne(id);
+    public UserViewModel getUserViewModelById(String encodingId) {
+        User user = userRepository.getOne(Long.parseLong(encodingId));
         UserViewModel userViewModel = new UserViewModel(user);
-        if(user.getAssignProject()!=null) {
-            Project project = projectRepository.getOne(user.getAssignProject());
-            userViewModel.setAssignProjectName(project.getProjectName());
-        }
-        Role role = roleRepository.findByIdrole(user.getRole());
-        userViewModel.setRoleName(role.getRole());
+        setAssignProjectName(userViewModel);
+        setRoleName(userViewModel);
         return userViewModel;
     }
+
+    private UserViewModel setRoleName(UserViewModel userViewModel,List<Role> roles){
+        if(userViewModel.getRole()!=null) {
+            roles.stream()
+                    .filter(role -> role.getIdrole() == userViewModel.getRole())
+                    .forEach(role -> {
+                        userViewModel.setRoleName(role.getRole());
+                    });
+        }
+        return userViewModel;
+    }
+
+    private UserViewModel setAssignProjectName(UserViewModel userViewModel){
+        if(userViewModel.getAssignProject()!=null) {
+            Project project = projectRepository.getOne(userViewModel.getAssignProject());
+            userViewModel.setAssignProjectName(project.getProjectName());
+        }
+        return userViewModel;
+    }
+    
+    private UserViewModel setRoleName(UserViewModel userViewModel){
+        if(userViewModel.getRole()!=null){
+            Role role = roleRepository.findByIdrole(userViewModel.getRole());
+            userViewModel.setRoleName(role.getRole());
+        }
+        return  userViewModel;
+    }
+    
+    private UserViewModel setAssignProjectName(UserViewModel userViewModel,List<Project> projects){
+        if(userViewModel.getAssignProject()!=null)
+            projects.stream()
+                    .filter(project -> project.getIdproject() == userViewModel.getAssignProject())
+                    .forEach(project -> userViewModel.setAssignProjectName(project.getProjectName()));
+        return userViewModel;
+    }
+    
 }

@@ -16,16 +16,13 @@ public interface UserService {
 
     UserViewModel saveUserViewModel(UserViewModel userViewModel);
 
-    User getByLoginAndPassword(String login, String password);
     User getByLogin(String login);
-
-    User getUserById(long iduser);
 
     List<String> getSortParameter();
 
     UserPaginationModel getSortedUser(String parameter, int page, int size, boolean direction);
 
-    UserViewModel getUserViewModelById(long id);
+    UserViewModel getUserViewModelById(String encodingId);
 
     List<User> getUsersByAssignProject(long id);
 }

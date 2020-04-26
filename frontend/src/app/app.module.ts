@@ -12,7 +12,6 @@ import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {ChartsModule} from "ng2-charts";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {authInterceptorProviders} from "./auth/interceptor";
 
 @NgModule({
@@ -22,7 +21,6 @@ import {authInterceptorProviders} from "./auth/interceptor";
   imports: [
     BrowserModule,
     AppRoutingModule,
-
     CustomModule,
     HeaderModule,
 

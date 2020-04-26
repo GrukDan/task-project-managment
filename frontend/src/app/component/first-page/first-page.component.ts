@@ -50,11 +50,13 @@ export class FirstPageComponent implements OnInit {
       data => {
         this.tokenStorage.saveToken(data.jwttoken);
         this.tokenStorage.saveUser(data);
-
+        this.router.navigate(['/home',
+          btoa(data.idUser),
+          data.userName + data.userSurname ]);
+        this.modalRef.hide()
       },
       err => {
-        // this.errorMessage = err.error.message;
-        // this.isLoginFailed = true;
+        console.log(err.error.message)
       }
     );
   }

@@ -17,17 +17,8 @@ export const TOKEN_NAME: string = 'jwt_token';
 })
 export class UserService {
 
-  private headers = new HttpHeaders({'Content-Type': 'application/json'})
 
   constructor(private http: HttpClient) {
-  }
-
-  getToken(): string {
-    return localStorage.getItem(TOKEN_NAME);
-  }
-
-  setToken(token: string): void {
-    localStorage.setItem(TOKEN_NAME, token);
   }
 
   getUserByAssignProject(assignProject: number): Observable<User[]> {
@@ -45,17 +36,6 @@ export class UserService {
   saveUserViewModel(userViewModel: UserViewModel): Observable<UserViewModel> {
     return this.http.post<UserViewModel>('/api/users/user-view-model', userViewModel);
   }
-
-  authorization(user:User): Observable<User> {
-    console.log(user)
-    return this.http.post<User>('/api/users/sign-up', JSON.stringify(user),
-      {headers:this.headers})
-     this.http.post<JwtResponse>('/api/users/sign-up', JSON.stringify(user),
-      {headers:this.headers})
-      // .toPromise()
-      // .then(res=>res.text())
-  }
-
 
   getSortParameter(): Observable<string[]> {
     return this.http.get<string[]>('/api/users/sort-parameter');
@@ -78,7 +58,4 @@ export class UserService {
     return this.http.get<UserViewModel>('/api/users', {params: new HttpParams().set('id', id.toString())});
   }
 
-  isToken() {
-    return false;
-  }
 }

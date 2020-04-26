@@ -1,4 +1,4 @@
-package com.bsuir.jwtSecurity;
+package com.bsuir.security.jwt;
 
 import java.io.Serializable;
 
@@ -9,9 +9,9 @@ public class JwtResponse implements Serializable {
     private final String jwttoken;
     private final String userName;
     private final String userSurname;
-    private final long idUser;
+    private final String idUser;
 
-    public JwtResponse(String jwttoken, String userName, String userSurname, long idUser) {
+    public JwtResponse(String jwttoken, String userName, String userSurname, String idUser) {
         this.jwttoken = jwttoken;
         this.userName = userName;
         this.userSurname = userSurname;
@@ -31,7 +31,7 @@ public class JwtResponse implements Serializable {
         return userSurname;
     }
 
-    public long getIdUser() {
+    public String getIdUser() {
         return idUser;
     }
 }
