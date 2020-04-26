@@ -13,6 +13,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ValidationService} from "../../service/validation.service";
 import {Task} from "../../model/task";
 import {TaskViewModel} from "../../model/view-model/task-view-model";
+import {Color} from "ng2-charts";
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,35 @@ export class HomeComponent implements OnInit {
   private taskViewModels: TaskViewModel[];
   private edit: boolean;
   private userForm: FormGroup;
+
+  public pieData = {
+    pieChartLabels: [],
+    pieChartData: [],
+    pieChartType: 'pie',
+  }
+
+  public doughnutData = {
+    doughnutChartLabels: [],
+    doughnutChartData: [],
+    doughnutChartType: 'doughnut',
+  }
+
+  public ChartColors: Color[] = [
+    {
+      backgroundColor: [
+        'rgba(90,22,255,0.3)',
+        'rgba(70,50,255,0.3)',
+        'rgba(255,99,76,0.3)',
+        'rgba(118,255,106,0.3)',
+        'rgba(0,255,0,0.3)',
+        'rgba(84,51,116,0.3)',
+        'rgba(80,113,79,0.3)',
+        'rgba(0,255,0,0.3)',
+        'rgba(255,240,189,0.3)',
+        'rgba(133,35,25,0.3)'
+      ]
+    }
+  ];
 
   constructor(private userService: UserService,
               private projectService: ProjectService,
@@ -91,8 +121,36 @@ export class HomeComponent implements OnInit {
     this.spinnerService.show();
     this.subscriptions.push(this.taskService.getTaskViewModelsByTaskExecutor(idUser).subscribe(taskViewModels=>{
       this.taskViewModels = taskViewModels as TaskViewModel[];
+      this.groupByStatus();
+      this.groupByPriority();
       this.spinnerService.hide();
     }))
+  }
+
+  groupByStatus() {
+    this.taskViewModels.forEach(task => {
+      if (this.doughnutData.doughnutChartLabels.includes(task.priorityName)) {
+        this.doughnutData.doughnutChartData[this.doughnutData.doughnutChartLabels.indexOf(task.priorityName)]
+          = this.doughnutData.doughnutChartData[this.doughnutData.doughnutChartLabels.indexOf(task.priorityName)] + 1;
+      } else {
+        this.doughnutData.doughnutChartLabels.push(task.priorityName);
+        this.doughnutData.doughnutChartData[this.doughnutData.doughnutChartLabels.indexOf(task.priorityName)]
+          = 1;
+      }
+    })
+  }
+
+  groupByPriority() {
+    this.taskViewModels.forEach(task => {
+      if (this.pieData.pieChartLabels.includes(task.statusName)) {
+        this.pieData.pieChartData[this.pieData.pieChartLabels.indexOf(task.statusName)]
+          = this.pieData.pieChartData[this.pieData.pieChartLabels.indexOf(task.statusName)] + 1;
+      } else {
+        this.pieData.pieChartLabels.push(task.statusName);
+        this.pieData.pieChartData[this.pieData.pieChartLabels.indexOf(task.statusName)]
+          = 1;
+      }
+    })
   }
 
   saveUserViewModel(userViewModelForSaving: UserViewModel) {

@@ -16,7 +16,8 @@ public interface UserService {
 
     UserViewModel saveUserViewModel(UserViewModel userViewModel);
 
-    UserViewModel authorization(String login, String password);
+    User getByLoginAndPassword(String login, String password);
+    User getByLogin(String login);
 
     User getUserById(long iduser);
 

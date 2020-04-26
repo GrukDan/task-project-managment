@@ -26,6 +26,7 @@ import {PriorityService} from "../../service/priority.service";
 import {StatusService} from "../../service/status.service";
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ChartsModule} from "ng2-charts";
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     ReactiveFormsModule,
     BsDatepickerModule,
     DatepickerModule,
+    ChartsModule
   ],
   exports: [
     FirstPageComponent,
@@ -72,6 +74,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     PriorityService,
     StatusService,
     BsLocaleService
+
   ]
 })
 export class CustomModule {

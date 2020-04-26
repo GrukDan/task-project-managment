@@ -30,7 +30,6 @@ public class ProjectController {
 
     @RequestMapping(value = "/project-view-model",method = RequestMethod.POST)
     public ProjectViewModel saveProject(@RequestBody ProjectViewModel projectViewModel){
-        System.out.println(projectViewModel.toString());
         return projectService.saveProjectViewModel(projectViewModel);
     }
 

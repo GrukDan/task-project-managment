@@ -57,7 +57,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let taskViewModel of taskViewModels; let i = index">
+          <tr  *ngFor="let taskViewModel of taskViewModels; let i = index" >
             <td>{{i + 1}}</td>
             <td>{{taskViewModel.taskName}}</td>
             <td>{{taskViewModel.taskCode}}</td>
@@ -76,6 +76,26 @@
           </tr>
           </tbody>
         </table>
+        <div class="row" *ngIf="taskViewModels?.length>0">
+          <div style="display: block" class="col">
+            <h4>Диаграмма задач по статусу</h4>
+            <canvas baseChart
+                    [data]="pieData.pieChartData"
+                    [labels]="pieData.pieChartLabels"
+                    [chartType]="pieData.pieChartType"
+                    [colors]="ChartColors"
+            ></canvas>
+          </div>
+          <div style="display: block" class="col">
+            <h4>Диаграмма задач по приоритету</h4>
+            <canvas baseChart
+                    [data]="doughnutData.doughnutChartData"
+                    [labels]="doughnutData.doughnutChartLabels"
+                    [chartType]="doughnutData.doughnutChartType"
+                    [colors]="ChartColors.reverse()">
+            </canvas>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -128,4 +148,9 @@
               [value]="project.idproject">{{project.projectName}}</option>
     </select>
   </div>
+</ng-template>
+
+
+<ng-template #noTasks>
+  <span>Задачи отсутствуют!</span>
 </ng-template>

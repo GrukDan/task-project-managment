@@ -1,5 +1,7 @@
 package com.bsuir.model;
 
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -150,6 +152,7 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
+
 
     @Basic
     @Column(name = "updated", nullable = true)

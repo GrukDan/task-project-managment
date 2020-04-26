@@ -19,4 +19,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByAssignProject(Long assignProject);
 
     User findByLoginAndPassword(String login, String password);
+
+    User findByLogin(String login);
 }

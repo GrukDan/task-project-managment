@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ProjectRepository projectRepository;
+
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<User> getAllUser() {
@@ -73,8 +77,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserViewModel authorization(String login, String password) {
-        return new UserViewModel(userRepository.findByLoginAndPassword(login, password));
+    public User getByLoginAndPassword(String login, String password) {
+        return userRepository.findByLoginAndPassword(login, password);
+    }
+
+    @Override
+    public User getByLogin(String login) {
+        return userRepository.findByLogin(login);
     }
 
     @Override

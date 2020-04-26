@@ -20,7 +20,7 @@
       </tab>
       <tab>
         <ng-template tabHeading>
-          <div (click)="loadTaskViewModels()">
+          <div>
             <h2>Задачи проекта</h2>
           </div>
         </ng-template>
@@ -32,34 +32,61 @@
 
 
 <ng-template #tabBody1>
-  <div>
-    <h1>Название проекта:</h1>
-    <h2>{{projectViewModel.projectName}}</h2>
-  </div>
-  <div>
-    <h1>Код проекта:</h1>
-    <h2>{{projectViewModel.projectCode}}</h2>
-  </div>
-  <div>
-    <h1>Дата завершения:</h1>
-    <h2>{{projectViewModel.dateOfCompletion | date}}</h2>
-  </div>
-  <div>
-    <h1>Степень готовности:</h1>
-    <h2>{{projectViewModel.readinessDegree}}</h2>
-  </div>
-  <div>
-    <h1>Создатель проекта:</h1>
-    <h2><a
-      [routerLink]="['/home',btoa(projectViewModel?.projectCreator?.toString()),
+  <div class="row">
+    <div class="col">
+      <div>
+        <h1>Название проекта:</h1>
+        <h2>{{projectViewModel.projectName}}</h2>
+      </div>
+      <div>
+        <h1>Код проекта:</h1>
+        <h2>{{projectViewModel.projectCode}}</h2>
+      </div>
+      <div>
+        <h1>Дата завершения:</h1>
+        <h2>{{projectViewModel.dateOfCompletion | date}}</h2>
+      </div>
+      <div>
+        <h1>Степень готовности:</h1>
+        <h2>{{projectViewModel.readinessDegree}}</h2>
+      </div>
+      <div>
+        <h1>Создатель проекта:</h1>
+        <h2><a
+          [routerLink]="['/home',btoa(projectViewModel?.projectCreator?.toString()),
         projectViewModel?.projectCreatorName + ' ' + projectViewModel?.projectCreatorSurname]">
-      {{projectViewModel.projectCreatorSurname}} {{projectViewModel.projectCreatorName}}
-    </a></h2></div>
-  <div>
-    <h1>Описание проекта:</h1>
-    <h3 class="text-justify"><span>{{projectViewModel.description}}</span></h3>
+          {{projectViewModel.projectCreatorSurname}} {{projectViewModel.projectCreatorName}}
+        </a></h2></div>
+      <div>
+        <h1>Описание проекта:</h1>
+        <h3 class="text-justify"><span>{{projectViewModel.description}}</span></h3>
+      </div>
+    </div>
+    <div class="col">
+      <div class="container-fluid">
+        <div style="display: block">
+          <h4>Диаграмма задач по статусу</h4>
+          <canvas baseChart
+                  [data]="pieData.pieChartData"
+                  [labels]="pieData.pieChartLabels"
+                  [chartType]="pieData.pieChartType"
+                  [colors]="ChartColors"
+          ></canvas>
+        </div>
+        <div style="display: block" class="mt-5">
+          <h4>Диаграмма задач по приоритету</h4>
+          <canvas baseChart
+                  [data]="doughnutData.doughnutChartData"
+                  [labels]="doughnutData.doughnutChartLabels"
+                  [chartType]="doughnutData.doughnutChartType"
+                  [colors]="ChartColors.reverse()">
+          </canvas>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-template>
+
 
 <ng-template #tabBody2>
   <div class="container-fluid">

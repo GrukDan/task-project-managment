@@ -104,11 +104,11 @@
       <form>
         <div class="form-group">
           <label for="loginInput">Login</label>
-          <input type="text" id="loginInput" class="form-control" name="userLogin"/>
+          <input type="text" id="loginInput" class="form-control" name="userLogin" [(ngModel)]="user.login"/>
         </div>
         <div class="form-group">
           <label for="passwordInput">Password</label>
-          <input type="password" id="passwordInput" class="form-control" name="userPassword" />
+          <input type="password" id="passwordInput" class="form-control" name="userPassword" [(ngModel)]="user.password"/>
         </div>
       </form>
     </div>

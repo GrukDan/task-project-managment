@@ -8,17 +8,41 @@ import {NotFoundPageComponent} from "./component/not-found-page/not-found-page.c
 import {ProjectTableComponent} from "./component/project-table/project-table.component";
 import {TaskTableComponent} from "./component/task-table/task-table.component";
 import {UserTableComponent} from "./component/user-table/user-table.component";
+import {AuthGuardService} from "./auth/auth-guard";
 
 
 const routes: Routes = [
-  {path: "", component: FirstPageComponent},
-  {path: "tasks/:id/:task_name", component: TaskPageComponent},
-  {path: "projects/:id/:project_name", component: ProjectPageComponent},
-  {path: "home/:id/:username", component: HomeComponent},
-  {path: "projects/table", component: ProjectTableComponent},
-  {path: "tasks/table", component: TaskTableComponent},
-  {path: "users/table", component: UserTableComponent},
-  {path: "**", component: NotFoundPageComponent}
+  {
+    path: "",
+    component: FirstPageComponent},
+  {
+    path: "tasks/:id/:task_name",
+    component: TaskPageComponent,
+  canActivate:[AuthGuardService]
+  },
+  {
+    path: "projects/:id/:project_name",
+    component: ProjectPageComponent,
+    canActivate:[AuthGuardService]},
+  {
+    path: "home/:id/:username",
+    component: HomeComponent,
+    canActivate:[AuthGuardService]},
+  {
+    path: "projects/table",
+    component: ProjectTableComponent,
+    canActivate:[AuthGuardService]},
+  {
+    path: "tasks/table",
+    component: TaskTableComponent,
+    canActivate:[AuthGuardService]},
+  {
+    path: "users/table",
+    component: UserTableComponent,
+    canActivate:[AuthGuardService]},
+  {
+    path: "**",
+    component: NotFoundPageComponent}
 ];
 
 @NgModule({
