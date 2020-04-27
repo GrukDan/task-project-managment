@@ -23,6 +23,11 @@ public class ProjectController {
         return projectService.save(project);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void delete(@RequestParam("idProject") long idProject){
+        projectService.delete(idProject);
+    }
+
     @RequestMapping(value = "/project",method = RequestMethod.POST)
     public ProjectViewModel saveProject(@RequestBody Project project){
         return projectService.saveProject(project);

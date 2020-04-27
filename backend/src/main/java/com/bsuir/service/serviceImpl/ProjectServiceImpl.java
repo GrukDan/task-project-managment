@@ -43,6 +43,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public void delete(long idproject) {
+        projectRepository.deleteById(idproject);
+    }
+
+    @Override
     public Project getProjectById(long idproject) {
         return projectRepository.getOne(idproject);
     }

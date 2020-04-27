@@ -35,14 +35,14 @@
           <button class="btn btn-primary mr-3" *ngIf="edit" [disabled]="userForm.invalid" (click)="save()">Сохранить
           </button>
           <button class="btn btn-primary mr-3" *ngIf="edit" (click)="changeEdit()">Отмена</button>
-          <button class="btn btn-primary">Удалить</button>
+          <button class="btn btn-primary" (click)="delete(userViewModel.iduser)">Удалить</button>
         </div>
       </div>
     </div>
     <div class="col-8" id="tasks">
       <h1 class="text-center">Задачи пользователя</h1>
       <div class="container-fluid">
-        <table class="table table-hover table-dark">
+        <table class="table table-hover table-dark" *ngIf="taskViewModels?.length">
           <thead>
           <tr>
             <th class="text-center">#</th>
@@ -76,7 +76,8 @@
           </tr>
           </tbody>
         </table>
-        <div class="row" *ngIf="taskViewModels?.length>0">
+        <h3 *ngIf="!taskViewModels?.length"><i>У пользователя нет задач.</i></h3>
+        <div class="row" *ngIf="taskViewModels?.length">
           <div style="display: block" class="col">
             <h4>Диаграмма задач по статусу</h4>
             <canvas baseChart

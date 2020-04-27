@@ -48,6 +48,11 @@ public class UserController {
         return userService.saveUser(user);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void delete(@RequestParam("idUser") long idUser){
+        userService.delete(idUser);
+    }
+
     @RequestMapping(value = "/user-view-model", method = RequestMethod.POST)
     public UserViewModel saveUserViewModel(@RequestBody UserViewModel userViewModel) {
         userService.saveUserViewModel(userViewModel);

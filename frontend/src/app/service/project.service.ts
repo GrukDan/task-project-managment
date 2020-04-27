@@ -26,9 +26,12 @@ export class ProjectService {
     return this.http.get<ProjectForTask[]>('/api/projects/for-task');
   }
 
-  //todo заменть буль на объект
-  save(project: Project): Observable<boolean> {
-    return this.http.put<boolean>('/api/projects', project);
+  save(project: Project): Observable<Project> {
+    return this.http.put<Project>('/api/projects', project);
+  }
+
+  delete(idProject: number): Observable<void> {
+    return this.http.delete<void>('/api/projects', {params: new HttpParams().set('idProject', idProject.toString())})
   }
 
   getSortParameter(): Observable<string[]> {
@@ -40,19 +43,19 @@ export class ProjectService {
       '/api/projects/sort',
       {
         params: new HttpParams()
-          .set('parameter',parameter)
-          .set('page',page.toString())
-          .set('size',size.toString())
-          .set('direction',direction.toString())
-          .set('search',search)
+          .set('parameter', parameter)
+          .set('page', page.toString())
+          .set('size', size.toString())
+          .set('direction', direction.toString())
+          .set('search', search)
       })
   }
 
-  getProjectViewModelById(idProject: number):Observable<ProjectViewModel> {
-    return this.http.get<ProjectViewModel>('/api/projects',{params:new HttpParams().set('id',idProject.toString())});
+  getProjectViewModelById(idProject: number): Observable<ProjectViewModel> {
+    return this.http.get<ProjectViewModel>('/api/projects', {params: new HttpParams().set('id', idProject.toString())});
   }
 
-  saveProjectViewModel(projectViewModel: ProjectViewModel):Observable<ProjectViewModel> {
-    return this.http.post<ProjectViewModel>('/api/projects/project-view-model',projectViewModel);
+  saveProjectViewModel(projectViewModel: ProjectViewModel): Observable<ProjectViewModel> {
+    return this.http.post<ProjectViewModel>('/api/projects/project-view-model', projectViewModel);
   }
 }

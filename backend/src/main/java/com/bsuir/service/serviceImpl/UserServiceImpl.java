@@ -40,6 +40,11 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public void delete(long iduser) {
+        userRepository.deleteById(iduser);
+    }
+
     private String[] parameterForSorting = {"userName","userSurname","email","role"};
 
     @Override

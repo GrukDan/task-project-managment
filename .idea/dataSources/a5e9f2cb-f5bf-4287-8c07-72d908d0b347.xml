@@ -1243,21 +1243,18 @@
       <RefTableName>status</RefTableName>
       <RefColNames>idstatus</RefColNames>
       <OnUpdate>cascade</OnUpdate>
-      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="298" parent="238" name="fk_priority">
       <ColNames>priority</ColNames>
       <RefTableName>priority</RefTableName>
       <RefColNames>idpriority</RefColNames>
       <OnUpdate>cascade</OnUpdate>
-      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="299" parent="238" name="fk_task_creator">
       <ColNames>task_creator</ColNames>
       <RefTableName>user</RefTableName>
       <RefColNames>iduser</RefColNames>
       <OnUpdate>cascade</OnUpdate>
-      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="300" parent="238" name="fk_task_executor">
       <ColNames>task_executor</ColNames>

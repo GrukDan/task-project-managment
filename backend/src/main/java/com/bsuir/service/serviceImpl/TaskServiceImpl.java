@@ -35,10 +35,9 @@ public class TaskServiceImpl implements TaskService {
 
     private String[] parameterForSorting = {"taskName", "priority", "status", "dateOfCreation", "dueDate", "updated"};
 
-
     @Override
-    public List<Task> getByProject(long project) {
-        return null;
+    public void delete(long idtask) {
+        taskRepository.deleteById(idtask);
     }
 
     @Override
@@ -58,7 +57,11 @@ public class TaskServiceImpl implements TaskService {
 
         for (Task task : taskList) {
             TaskViewModel taskViewModel = new TaskViewModel(task);
-            setValues(taskViewModel);
+            setValues(taskViewModel,
+                    projectRepository.findAll(),
+                    statusRepository.findAll(),
+                    priorityRepository.findAll(),
+                    userRepository.findAll());
             taskViewModel.setProjectName(project1.getProjectName());
             taskViewModelList.add(taskViewModel);
         }
@@ -70,34 +73,102 @@ public class TaskServiceImpl implements TaskService {
         return Arrays.asList(parameterForSorting);
     }
 
+    private TaskViewModel setValues(
+            TaskViewModel taskViewModel,
+            List<Project> projects,
+            List<Status> statuses,
+            List<Priority> priorities,
+            List<User> users) {
+        setProjectName(taskViewModel,projects);
+        setPriorityName(taskViewModel,priorities);
+        setStatusName(taskViewModel,statuses);
+        setCreatorNameSurname(taskViewModel,users);
+        setExecutorNameSurname(taskViewModel,users);
+        return taskViewModel;
+    }
 
-    @Override
-    public TaskViewModel setValues(TaskViewModel taskViewModel) {
-        List<Priority> priorityList = (List<Priority>) priorityRepository.findAll();
-        List<Status> statusList = (List<Status>) statusRepository.findAll();
-        List<User> userList = userRepository.findAll();
+    private TaskViewModel setValues(TaskViewModel taskViewModel){
+        setProjectName(taskViewModel);
+        setPriorityName(taskViewModel);
+        setStatusName(taskViewModel);
+        setCreatorNameSurname(taskViewModel);
+        setExecutorNameSurname(taskViewModel);
+        return taskViewModel;
+    }
 
-        priorityList.stream()
+    private TaskViewModel setPriorityName(TaskViewModel taskViewModel,List<Priority> priorities){
+        priorities.stream()
                 .filter(priority -> taskViewModel.getPriority() == priority.getIdpriority())
                 .forEach(priority -> taskViewModel.setPriorityName(priority.getPriority()));
+        return taskViewModel;
+    }
 
-        statusList.stream()
+    private TaskViewModel setProjectName(TaskViewModel taskViewModel,List<Project> projects){
+        projects.stream()
+                .filter(project -> taskViewModel.getProject() == project.getIdproject())
+                .forEach(project -> taskViewModel.setProjectName(project.getProjectName()));
+        return taskViewModel;
+    }
+
+    private TaskViewModel setStatusName(TaskViewModel taskViewModel,List<Status> statuses){
+        statuses.stream()
                 .filter(status -> taskViewModel.getStatus() == status.getIdstatus())
                 .forEach(status -> taskViewModel.setStatusName(status.getStatus()));
+        return taskViewModel;
+    }
 
-        userList.stream()
+    private TaskViewModel setCreatorNameSurname(TaskViewModel taskViewModel,List<User> users){
+        users.stream()
                 .filter(user -> taskViewModel.getTaskCreator() == user.getIduser())
                 .forEach(user -> {
                     taskViewModel.setTaskCreatorName(user.getUserName());
                     taskViewModel.setTaskCreatorSurname(user.getUserSurname());
                 });
+        return taskViewModel;
+    }
 
-        userList.stream()
-                .filter(user -> taskViewModel.getTaskExecutor() == user.getIduser())
-                .forEach(user -> {
-                    taskViewModel.setTaskExecutorName(user.getUserName());
-                    taskViewModel.setTaskExecutorSurname(user.getUserSurname());
-                });
+    private TaskViewModel setExecutorNameSurname(TaskViewModel taskViewModel,List<User> users){
+        if(taskViewModel.getTaskExecutor()!=null)
+            users.stream()
+                    .filter(user -> taskViewModel.getTaskExecutor() == user.getIduser())
+                    .forEach(user -> {
+                        taskViewModel.setTaskExecutorName(user.getUserName());
+                        taskViewModel.setTaskExecutorSurname(user.getUserSurname());
+                    });
+        return taskViewModel;
+    }
+
+    private TaskViewModel setPriorityName(TaskViewModel taskViewModel){
+        Priority priority = priorityRepository.getOne(taskViewModel.getPriority());
+        taskViewModel.setPriorityName(priority.getPriority());
+        return taskViewModel;
+    }
+
+    private TaskViewModel setProjectName(TaskViewModel taskViewModel){
+        Project project = projectRepository.getOne(taskViewModel.getProject());
+        taskViewModel.setProjectName(project.getProjectName());
+        return taskViewModel;
+    }
+
+    private TaskViewModel setStatusName(TaskViewModel taskViewModel){
+        Status status = statusRepository.getOne(taskViewModel.getStatus());
+        taskViewModel.setStatusName(status.getStatus());
+        return taskViewModel;
+    }
+
+    private TaskViewModel setCreatorNameSurname(TaskViewModel taskViewModel){
+        User creator = userRepository.getOne(taskViewModel.getTaskCreator());
+        taskViewModel.setTaskCreatorName(creator.getUserName());
+        taskViewModel.setTaskCreatorSurname(creator.getUserSurname());
+        return taskViewModel;
+    }
+
+    private TaskViewModel setExecutorNameSurname(TaskViewModel taskViewModel){
+        if(taskViewModel.getTaskExecutor()!=null){
+            User executor = userRepository.getOne(taskViewModel.getTaskExecutor());
+            taskViewModel.setTaskExecutorName(executor.getUserName());
+            taskViewModel.setTaskExecutorSurname(executor.getUserSurname());
+        }
         return taskViewModel;
     }
 
@@ -106,8 +177,32 @@ public class TaskServiceImpl implements TaskService {
         List<Task> taskList = taskRepository.findByTaskExecutor(executor);
         List<TaskViewModel> taskViewModelList = new ArrayList<>();
         taskList.stream().forEach(task -> taskViewModelList
-                .add(setValues(new TaskViewModel(task))));
+                .add(setValues(
+                        new TaskViewModel(task),
+                        projectRepository.findAll(),
+                        statusRepository.findAll(),
+                        priorityRepository.findAll(),
+                        userRepository.findAll())));
         return taskViewModelList;
+    }
+
+    @Override
+    public List<TaskViewModel> getTaskViewModelBySearch(String search) {
+        return taskViewModelsFromTasks(taskRepository
+                .findByTaskNameContainingIgnoreCaseOrTaskCodeContainingIgnoreCaseOrderByTaskName(search,search));
+    }
+
+    private List<TaskViewModel> taskViewModelsFromTasks(List<Task> tasks){
+        List<TaskViewModel> taskViewModels = new ArrayList<>();
+        tasks.stream().forEach(task -> {
+            taskViewModels.add(setValues(
+                    new TaskViewModel(task),
+                    projectRepository.findAll(),
+                    statusRepository.findAll(),
+                    priorityRepository.findAll(),
+                    userRepository.findAll()));
+        });
+        return taskViewModels;
     }
 
     @Override
@@ -119,19 +214,7 @@ public class TaskServiceImpl implements TaskService {
             taskPage = taskRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, parameter)));
         }
         List<Task> taskList = taskPage.getContent();
-        List<TaskViewModel> taskViewModelList = new ArrayList<>();
-        List<Project> projectList = projectRepository.findAll();
-
-        for (Task task : taskList) {
-            TaskViewModel taskViewModel = new TaskViewModel(task);
-
-            projectList.stream()
-                    .filter(project -> taskViewModel.getProject() == project.getIdproject())
-                    .forEach(project -> taskViewModel.setProjectName(project.getProjectName()));
-            setValues(taskViewModel);
-
-            taskViewModelList.add(taskViewModel);
-        }
+        List<TaskViewModel> taskViewModelList = taskViewModelsFromTasks(taskList);
         TaskViewModel[] taskViewModels = new TaskViewModel[taskViewModelList.size()];
         taskViewModelList.toArray(taskViewModels);
 
@@ -140,14 +223,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskViewModel getTaskViewModelById(long id) {
-        Task task = taskRepository.getOne(id);
-        TaskViewModel taskViewModel = new TaskViewModel(task);
-
-        Project project = projectRepository.getOne(taskViewModel.getProject());
-        taskViewModel.setProjectName(project.getProjectName());
-        setValues(taskViewModel);
-
-        return taskViewModel;
+        TaskViewModel taskViewModel = new TaskViewModel(taskRepository.getOne(id));
+         return setValues(taskViewModel);
     }
 
     @Override

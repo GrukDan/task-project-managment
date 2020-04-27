@@ -21,9 +21,19 @@ public class TaskController {
         return taskService.saveTask(task);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void delete(@RequestParam("idTask") long idTask){
+        taskService.delete(idTask);
+    }
+
     @RequestMapping(value = "/task-view-model",method = RequestMethod.GET)
     public List<TaskViewModel> getTaskViewModelsByProject(@RequestParam("project")long project){
         return taskService.getTaskViewModelsByProject(project);
+    }
+
+    @RequestMapping(value = "/search",method = RequestMethod.GET)
+    public List<TaskViewModel> getTaskViewModelBySearch(@RequestParam("search") String search){
+        return taskService.getTaskViewModelBySearch(search);
     }
 
     @RequestMapping(value = "/sort-parameter", method = RequestMethod.GET)

@@ -5,7 +5,7 @@ import {RoleService} from "../../service/role.service";
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 import {Subscription} from "rxjs";
 import {TaskService} from "../../service/task.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserViewModel} from "../../model/view-model/user-view-model";
 import {Role} from "../../model/role";
 import {Project} from "../../model/project";
@@ -68,7 +68,8 @@ export class HomeComponent implements OnInit {
               private spinnerService: Ng4LoadingSpinnerService,
               private route: ActivatedRoute,
               private fb: FormBuilder,
-              private validationService: ValidationService,) {
+              private validationService: ValidationService,
+              private router:Router) {
 
     this.userViewModel = new UserViewModel();
     this.editUserViewModel = new UserViewModel();
@@ -205,5 +206,10 @@ export class HomeComponent implements OnInit {
 
   btoa(s: string) {
     return btoa(s);
+  }
+
+  delete(iduser: number) {
+    this.router.navigate(['/'])
+    this.subscriptions.push(this.userService.delete(iduser).subscribe())
   }
 }

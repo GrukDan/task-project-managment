@@ -67,7 +67,7 @@ export class TaskTableComponent implements OnInit {
       this.direction
     ).subscribe(sorted => {
       this.taskViewModels = sorted.taskViewModels as TaskViewModel[];
-      this.countOfPages = sorted.countPages * 2;
+      this.countOfPages = sorted.countPages * 10;
       this.spinnerService.hide();
     }))
   }

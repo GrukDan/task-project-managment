@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {User} from "../../model/user";
 import {AuthService} from "../../auth/auth-service";
 import {TokenStorageService} from "../../auth/token-storage.service";
+import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 
 @Component({
   selector: 'app-first-page',
@@ -27,6 +28,7 @@ export class FirstPageComponent implements OnInit {
 
   constructor(private modalService: BsModalService,
               private userService: UserService,
+              private spinnerService: Ng4LoadingSpinnerService,
               private router: Router, private authService: AuthService,
               private tokenStorage: TokenStorageService) {
     this.templateShow = true;
@@ -39,14 +41,15 @@ export class FirstPageComponent implements OnInit {
     this.templateShow = !this.tokenStorage.isAuthorized()
   }
 
-
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, this.config);
   }
 
   authorization() {
+    this.spinnerService.show()
     this.authService.login(this.user).subscribe(
       data => {
+        this.spinnerService.hide()
         this.tokenStorage.saveToken(data.jwttoken);
         this.tokenStorage.saveUser(data);
         this.router.navigate(['/home',

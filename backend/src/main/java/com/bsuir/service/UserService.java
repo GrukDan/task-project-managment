@@ -10,6 +10,8 @@ public interface UserService {
 
     List<User> getAllUser();
 
+    void delete(long iduser);
+
     List<UserViewModel> getAllUserViewModel();
 
     UserViewModel saveUser(User user);

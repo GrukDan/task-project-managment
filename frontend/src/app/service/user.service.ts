@@ -22,9 +22,14 @@ export class UserService {
     });
   }
 
-
   save(user: User): Observable<UserViewModel> {
     return this.http.put<UserViewModel>('/api/users', user);
+  }
+
+  delete(idUser: number): Observable<void> {
+    return this.http.delete<void>('/api/users', {
+      params: new HttpParams()
+        .set('idUser', idUser.toString())})
   }
 
   saveUserViewModel(userViewModel: UserViewModel): Observable<UserViewModel> {
@@ -49,7 +54,9 @@ export class UserService {
   }
 
   getUserViewModel(id: number): Observable<UserViewModel> {
-    return this.http.get<UserViewModel>('/api/users', {params: new HttpParams().set('id', id.toString())});
+    return this.http.get<UserViewModel>('/api/users', {
+      params: new HttpParams()
+        .set('id', id.toString())});
   }
 
 }

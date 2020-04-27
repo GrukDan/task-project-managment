@@ -5,7 +5,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ProjectService} from "../../service/project.service";
 import {TaskService} from "../../service/task.service";
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ValidationService} from "../../service/validation.service";
 import {Subscription} from "rxjs";
 import {ruLocale} from 'ngx-bootstrap/locale';
@@ -40,7 +40,8 @@ export class ProjectPageComponent implements OnInit {
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private validationService: ValidationService,
-              private localeService: BsLocaleService,) {
+              private localeService: BsLocaleService,
+              private router:Router) {
     this.taskViewModels = [];
     this.projectViewModel = new ProjectViewModel();
     this.editProjectViewModel = new ProjectViewModel();
@@ -181,7 +182,8 @@ export class ProjectPageComponent implements OnInit {
   }
 
 
-  delete() {
-    console.log(this.projectViewModel)
+  delete(idProject) {
+    this.router.navigate(['/'])
+    this.subscriptions.push(this.projectService.delete(idProject).subscribe())
   }
 }

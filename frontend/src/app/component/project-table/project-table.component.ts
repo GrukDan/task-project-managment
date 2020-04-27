@@ -65,8 +65,7 @@ export class ProjectTableComponent implements OnInit, OnDestroy {
       this.direction
     ).subscribe(sortedProjects => {
       this.projects = sortedProjects.projectViewModels as ProjectViewModel[];
-      this.countOfPages = sortedProjects.countPages * 2;
-      // this.pagesCount = (this.taskPaginationModel.pagesCount/5) * 10;
+      this.countOfPages = sortedProjects.countPages * 10;
       this.spinnerService.hide();
     }))
   }

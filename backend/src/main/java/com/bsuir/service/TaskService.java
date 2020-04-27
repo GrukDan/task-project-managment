@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TaskService {
 
-    List<Task> getByProject(long project);
+    void delete(long idtask);
 
     Task saveTask(Task task);
 
@@ -22,7 +22,7 @@ public interface TaskService {
 
     TaskViewModel saveTaskViewModel(TaskViewModel taskViewModel);
 
-    TaskViewModel setValues(TaskViewModel taskViewModel);
-
     List<TaskViewModel> getTaskViewModelByTaskExecutor(long executor);
+
+    List<TaskViewModel> getTaskViewModelBySearch(String search);
 }

@@ -6,7 +6,7 @@ import {BsLocaleService, defineLocale, ruLocale} from "ngx-bootstrap";
 import {ProjectService} from "../../service/project.service";
 import {TaskService} from "../../service/task.service";
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ValidationService} from "../../service/validation.service";
 import {ProjectViewModel} from "../../model/view-model/project-view-model";
 import {UserService} from "../../service/user.service";
@@ -61,7 +61,8 @@ export class TaskPageComponent implements OnInit {
               private fb: FormBuilder,
               private validationService: ValidationService,
               private localeService: BsLocaleService,
-              private tokenStorage:TokenStorageService) {
+              private tokenStorage:TokenStorageService,
+              private router:Router) {
     this.comment = new Comment();
     this.commentViewModels = [];
     this.statuses = [];
@@ -196,8 +197,9 @@ export class TaskPageComponent implements OnInit {
     return btoa(s);
   }
 
-  delete() {
-    console.log(this.taskViewModel)
+  delete(idTask) {
+    this.router.navigate(['/'])
+    this.subscriptions.push(this.taskService.delete(idTask).subscribe())
   }
 
   get _taskName() {
