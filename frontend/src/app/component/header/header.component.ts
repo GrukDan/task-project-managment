@@ -20,6 +20,8 @@ import {ProjectService} from "../../service/project.service";
 import {ProjectForTask} from "../../model/view-model/project-for-task";
 import {UserForTask} from "../../model/view-model/user-for-task";
 import {TaskService} from "../../service/task.service";
+import {TokenStorageService} from "../../auth/token-storage.service";
+import {Router} from "@angular/router";
 defineLocale('ru', ruLocale);
 
 @Component({
@@ -64,7 +66,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private priorityService:PriorityService,
               private localeService: BsLocaleService,
               private projectService:ProjectService,
-              private taskService:TaskService) {
+              private taskService:TaskService,
+              private tokenStorage:TokenStorageService,
+              private router: Router) {
     this._createForm();
     this.minDate = new Date();
     this.localeService.use(this.locale);
@@ -243,5 +247,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.loadPriority();
     this.loadStatus();
     this.loadProjectForTask();
+  }
+
+  signOut() {
+    this.tokenStorage.signOut()
+    this.router.navigate(['/'])
   }
 }

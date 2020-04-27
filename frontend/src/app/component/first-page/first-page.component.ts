@@ -1,9 +1,7 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {BsModalRef, BsModalService, CarouselConfig} from "ngx-bootstrap";
 import {UserService} from "../../service/user.service";
-import {AuthorizationModel} from "../../model/authorization-model";
 import {Subscription} from "rxjs";
-import {log} from "util";
 import {Router} from "@angular/router";
 import {User} from "../../model/user";
 import {AuthService} from "../../auth/auth-service";
@@ -38,6 +36,7 @@ export class FirstPageComponent implements OnInit {
 
 
   ngOnInit() {
+    this.templateShow = !this.tokenStorage.isAuthorized()
   }
 
 

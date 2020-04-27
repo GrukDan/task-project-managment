@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface CommentService {
 
-     boolean saveComment(Comment comment);
+     void saveComment(Comment comment);
      List<CommentViewModel> getAllCommentByTask(int size, long task);
 }

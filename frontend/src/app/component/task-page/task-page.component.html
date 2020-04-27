@@ -67,23 +67,27 @@
     <button class="btn btn-primary mr-3" *ngIf="edit" (click)="changeEdit()">Отмена</button>
     <button class="btn btn-primary" (click)="delete()">Удалить</button>
   </div>
-  <div>
+  <div class="mb-5">
     <h1>Комментарии:</h1>
-    <div>
+    <div *ngFor=" let commentViewModel of commentViewModels">
       <div>
-        <span><a class="h3" routerLink="">Surname Name</a></span>
-        <span class="h6"> 12.12.2011</span>
+        <span><a class="h3" routerLinkActive="active"
+                 [routerLink]="['/home',btoa(commentViewModel?.user?.toString()),
+        commentViewModel?.userName+ ' ' + commentViewModel?.userSurname]">{{commentViewModel.userSurname}} {{commentViewModel.userName}}</a></span>
+        <span class="h6"> {{commentViewModel.timeOfCreation | date}}</span>
       </div>
-      <h4 class="text-justify">Note that tabs can be given role="tablist", r
-        ole="tab" and role="tabpanel" attributes.
-        These are
-        appropriate for tabbed interfaces, as described in the WAIARIA Authoring Practices.
-        If your control element is targeting a single collapsible element - you should add the</h4>
-      <button class="btn btn-primary btn-block my-4">Показать еще <i class="fa fa-angle-double-down h3"></i></button>
+      <h4 class="text-justify">{{commentViewModel.comment}}</h4>
     </div>
+    <button class="btn btn-primary btn-block my-4" *ngIf="moreCommentsButton" (click)="more()">Показать еще<i
+      class="fa fa-angle-double-down h3"></i></button>
+    <h3 *ngIf="commentViewModels.length<1" class="my-3">Еще нет комментариев к задаче.</h3>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Ваш комментарий:</label>
+      <textarea [(ngModel)]="comment.comment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <button class="btn btn-primary mr-3  mb-5" (click)="saveComment(comment)">Добавить</button>
   </div>
 </div>
-
 
 <ng-template #editTask>
   <div class="pt-5 row">

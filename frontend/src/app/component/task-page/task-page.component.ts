@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {TaskViewModel} from "../../model/view-model/task-view-model";
 import {FormBuilder, FormGroup} from "@angular/forms";
@@ -15,6 +15,11 @@ import {StatusService} from "../../service/status.service";
 import {Status} from "../../model/status";
 import {Priority} from "../../model/priority";
 import {User} from "../../model/user";
+import {Comment} from "../../model/comment";
+import {CommentService} from "../../service/comment.service";
+import {CommentViewModel} from "../../model/view-model/comment-view-model";
+import {TokenStorageService} from "../../auth/token-storage.service";
+import {log} from "util";
 
 defineLocale('ru', ruLocale);
 
@@ -26,38 +31,48 @@ defineLocale('ru', ruLocale);
 export class TaskPageComponent implements OnInit {
 
   private subscriptions: Subscription[] = []
-  private taskViewModel:TaskViewModel;
-  private editTaskViewModel:TaskViewModel;
+  private taskViewModel: TaskViewModel;
+  private editTaskViewModel: TaskViewModel;
 
-  private comments:Comment[];
-private statuses:Status[];
-private priorities:Priority[];
-private executors:User[];
+  private comment: Comment;
+  private commentViewModels: CommentViewModel[];
+  private statuses: Status[];
+  private priorities: Priority[];
+  private executors: User[];
 
   private idTask: number;
   private edit: boolean;
+  private size:number;
+  private totalComments:number;
+  private moreCommentsButton:boolean;
   private taskForm: FormGroup;
 
   locale = "ru";
   minDate: Date;
-  dueDate:Date;
+  dueDate: Date;
 
   constructor(private taskService: TaskService,
-              private userService:UserService,
-              private priorityService:PriorityService,
-              private statusService:StatusService,
+              private userService: UserService,
+              private priorityService: PriorityService,
+              private statusService: StatusService,
+              private commentService: CommentService,
               private spinnerService: Ng4LoadingSpinnerService,
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private validationService: ValidationService,
-              private localeService: BsLocaleService,) {
-    this.comments = [];
+              private localeService: BsLocaleService,
+              private tokenStorage:TokenStorageService) {
+    this.comment = new Comment();
+    this.commentViewModels = [];
     this.statuses = [];
     this.priorities = [];
     this.executors = []
     this.taskViewModel = new TaskViewModel();
     this.editTaskViewModel = new TaskViewModel();
     this.edit = false;
+    this.size = 5;
+    this.totalComments = 0;
+    this.moreCommentsButton = true;
     this.minDate = new Date();
 
     this.localeService.use(this.locale);
@@ -69,6 +84,7 @@ private executors:User[];
 
   ngOnInit() {
     this.loadTaskViewModel();
+    this.loadComments();
   }
 
   loadTaskViewModel() {
@@ -81,16 +97,22 @@ private executors:User[];
     }))
   }
 
-  // loadComments() {
-  //   this.spinnerService.show()
-  //   this.subscriptions.push(this..getTaskViewModelsByProject(this.idProject).subscribe(taskViewModels => {
-  //     this.taskViewModels = taskViewModels as TaskViewModel[];
-  //     this.spinnerService.hide();
-  //   }))
-  // }
+  loadComments() {
+    this.spinnerService.show()
+    this.subscriptions.push(this.commentService.getAll(this.size,this.idTask).subscribe(commentViewModels=>{
+      this.commentViewModels= commentViewModels as CommentViewModel[];
+      if(this.commentViewModels.length!=0){
+        console.log(this.commentViewModels[0])
+        this.totalComments = this.commentViewModels[0].totalComments;
+      }else {
+        this.moreCommentsButton = false;
+      }
+      this.spinnerService.hide();
+    }))
+  }
 
-  private loadPriority():void{
-    if(this.priorities.length==0) {
+  private loadPriority(): void {
+    if (this.priorities.length == 0) {
       this.spinnerService.show();
       this.subscriptions.push(this.priorityService.getAllPriority().subscribe(priorities => {
         this.priorities = priorities as Priority[];
@@ -99,8 +121,8 @@ private executors:User[];
     }
   }
 
-  private loadStatus():void{
-    if(this.statuses.length==0) {
+  private loadStatus(): void {
+    if (this.statuses.length == 0) {
       this.spinnerService.show();
       this.subscriptions.push(this.statusService.getAllStatus().subscribe(statuses => {
         this.statuses = statuses as Status[];
@@ -109,8 +131,8 @@ private executors:User[];
     }
   }
 
-  private loadExecutors(idProject:number):void{
-    if(this.executors.length==0) {
+  private loadExecutors(idProject: number): void {
+    if (this.executors.length == 0) {
       this.spinnerService.show();
       this.subscriptions.push(this.userService.getUserByAssignProject(idProject).subscribe(executors => {
         this.executors = executors as User[];
@@ -121,7 +143,7 @@ private executors:User[];
 
   changeEdit() {
     this.edit = !this.edit;
-    if(this.edit){
+    if (this.edit) {
       this.loadExecutors(this.editTaskViewModel.project);
       this.loadPriority();
       this.loadStatus()
@@ -142,6 +164,20 @@ private executors:User[];
       this.editTaskViewModel = TaskViewModel.clone(taskViewModel);
       this.spinnerService.hide();
     }))
+  }
+
+  saveComment(comment: Comment) {
+    if(comment.comment != "") {
+      this.comment.timeOfCreation = Date.now().toString();
+      this.comment.task = this.idTask;
+      this.comment.user = this.tokenStorage.getUser()['idUser'];
+      this.spinnerService.show()
+      this.subscriptions.push(this.commentService.save(comment).subscribe(() => {
+        this.loadComments();
+        this.spinnerService.hide();
+      }))
+      this.comment = new Comment();
+    }
   }
 
   save() {
@@ -186,5 +222,14 @@ private executors:User[];
 
   get _dueDate() {
     return this.taskForm.get('dueDate')
+  }
+
+  more() {
+    if(this.size < this.totalComments) {
+      this.size = this.size + 5;
+    }else {
+      this.moreCommentsButton = false;
+    }
+    this.loadComments()
   }
 }

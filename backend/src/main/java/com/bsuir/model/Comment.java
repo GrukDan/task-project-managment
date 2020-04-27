@@ -15,6 +15,16 @@ public class Comment {
     private Timestamp timeOfCreation;
     private long user;
 
+    public Comment(){}
+
+    public Comment(long idcomment, Long task, String comment, Timestamp timeOfCreation, long user) {
+        this.idcomment = idcomment;
+        this.task = task;
+        this.comment = comment;
+        this.timeOfCreation = timeOfCreation;
+        this.user = user;
+    }
+
     @Id
     @Column(name = "idcomment", nullable = false)
     public long getIdcomment() {

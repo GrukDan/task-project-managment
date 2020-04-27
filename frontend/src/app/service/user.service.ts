@@ -3,14 +3,8 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../model/user";
 import {UserViewModel} from "../model/view-model/user-view-model";
-import {ProjectPaginationModel} from "../model/pagnation-model/project-pagination-model";
 import {UserPaginationModel} from "../model/pagnation-model/user-pagination-model";
-import {AuthorizationModel} from "../model/authorization-model";
-import {MapType} from "@angular/compiler";
-import {map} from "rxjs/operators";
-import {JwtResponse} from "../model/jwt-response";
 
-export const TOKEN_NAME: string = 'jwt_token';
 
 @Injectable({
   providedIn: 'root'
