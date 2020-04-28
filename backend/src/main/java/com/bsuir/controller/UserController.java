@@ -1,5 +1,6 @@
 package com.bsuir.controller;
 
+import com.bsuir.mail.MailService;
 import com.bsuir.security.jwt.JwtResponse;
 import com.bsuir.security.jwt.JwtToken;
 import com.bsuir.security.jwt.JwtUserDetailsService;
@@ -17,6 +18,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
 import java.util.List;
 
 
@@ -37,6 +40,9 @@ public class UserController {
     private JwtUserDetailsService jwtUserDetailsService;
 
     @Autowired
+    private MailService mailService;
+
+    @Autowired
     private PasswordEncoder bCryptPasswordEncoder;
 
     @Value("${aes.encryption.key}")
@@ -44,8 +50,22 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public UserViewModel save(@RequestBody User user) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        return userService.saveUser(user);
+        UserViewModel userViewModel =  userService.saveUser(user);
+        if(userViewModel!=null){
+            try {
+                mailService.sendEmail(
+                        user.getUserName(),
+                        user.getUserSurname(),
+                        user.getEmail(),
+                        user.getLogin(),
+                        user.getPassword()
+                );
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }
+        //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        return userViewModel;
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
