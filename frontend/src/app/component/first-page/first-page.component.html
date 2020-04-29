@@ -1,4 +1,4 @@
-<ng4-loading-spinner [threshold]="2000" [timeout]="40000" [loadingText]="'Please wait...'"
+<ng4-loading-spinner [threshold]="200" [timeout]="400" [loadingText]="'Please wait...'"
                      [zIndex]="9999"></ng4-loading-spinner>
 <carousel>
   <slide>
@@ -106,17 +106,41 @@
       <form>
         <div class="form-group">
           <label for="loginInput">Login</label>
-          <input type="text" id="loginInput" class="form-control" name="userLogin" [(ngModel)]="user.login"/>
+          <input type="text"
+                 id="loginInput"
+                 class="form-control"
+                 name="userLogin"
+                 required
+                 [(ngModel)]="user.login"
+                 #userLogin="ngModel"/>
+          <div [hidden]="userLogin.valid||userLogin.untouched" class="alert alert-danger">
+            Ошибка ввода логина
+          </div>
         </div>
         <div class="form-group">
           <label for="passwordInput">Password</label>
-          <input type="password" id="passwordInput" class="form-control" name="userPassword" [(ngModel)]="user.password"/>
+          <input type="password"
+                 id="passwordInput"
+                 class="form-control"
+                 name="userPassword"
+                 required
+                 [(ngModel)]="user.password"
+                 #userPassword="ngModel"/>
+          <div [hidden]="userPassword.valid||userPassword.untouched" class="alert alert-danger">
+            Ошибка ввода пароля
+          </div>
         </div>
       </form>
+      <div *ngIf="error"
+      class="alert alert-danger">
+        <span>{{errorMessage}}</span>
+      </div>
     </div>
   </div>
   <div class="modal-footer">
     <button class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
-    <button class="btn btn-primary" (click)="authorization()">Log in</button>
+    <button class="btn btn-primary"
+            [disabled]=" userLogin.invalid || userPassword.invalid|| userLogin.untouched ||userPassword.untouched"
+            (click)="authorization() ">Log in</button>
   </div>
 </ng-template>

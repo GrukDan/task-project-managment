@@ -22,6 +22,9 @@ export class FirstPageComponent implements OnInit {
   config = {
     animated: true
   };
+
+  error:boolean;
+  errorMessage:string;
   templateShow: boolean;
   private subscriptions: Subscription[];
   private user: User;
@@ -34,6 +37,7 @@ export class FirstPageComponent implements OnInit {
     this.templateShow = true;
     this.user = new User();
     this.subscriptions = [];
+    this.error = false;
   }
 
 
@@ -46,20 +50,26 @@ export class FirstPageComponent implements OnInit {
   }
 
   authorization() {
-    this.spinnerService.show()
-    this.authService.login(this.user).subscribe(
-      data => {
-        this.spinnerService.hide()
-        this.tokenStorage.saveToken(data.jwttoken);
-        this.tokenStorage.saveUser(data);
-        this.router.navigate(['/home',
-          btoa(data.idUser),
-          data.userName + data.userSurname ]);
-        this.modalRef.hide()
-      },
-      err => {
-        console.log(err.error.message)
-      }
-    );
+    if(this.user.login!="" && this.user.password!="") {
+      console.log(this.user)
+      this.spinnerService.show()
+      this.authService.login(this.user).subscribe(
+        data => {
+          this.spinnerService.hide()
+          this.tokenStorage.saveToken(data.jwttoken);
+          this.tokenStorage.saveUser(data);
+          this.router.navigate(['/home',
+            btoa(data.idUser),
+            data.userName + data.userSurname]);
+          this.modalRef.hide()
+        },
+        err => {
+          if (err.status == 401) {
+            this.error = true;
+            this.errorMessage = "Невозможно авторизоваться. Проверьте логин или пароль"
+          }
+        }
+      );
+    }
   }
 }

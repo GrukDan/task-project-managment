@@ -12,6 +12,7 @@ import {ruLocale} from 'ngx-bootstrap/locale';
 import {BsLocaleService, defineLocale} from "ngx-bootstrap";
 import {Color, Label, MultiDataSet} from "ng2-charts";
 import {ChartType} from "chart.js";
+import {TokenStorageService} from "../../auth/token-storage.service";
 
 defineLocale('ru', ruLocale);
 
@@ -41,14 +42,14 @@ export class ProjectPageComponent implements OnInit {
               private fb: FormBuilder,
               private validationService: ValidationService,
               private localeService: BsLocaleService,
-              private router:Router) {
+              private router:Router,
+              private tokenStorage:TokenStorageService) {
     this.taskViewModels = [];
     this.projectViewModel = new ProjectViewModel();
     this.editProjectViewModel = new ProjectViewModel();
     this.minDate = new Date();
     this.localeService.use(this.locale);
     this.edit = false;
-// subscribe to the parameters observable
     this.route.paramMap.subscribe(params => {
       this.idProject = Number(atob(params.get('id')));
     });

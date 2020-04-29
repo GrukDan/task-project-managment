@@ -27,6 +27,7 @@ import {StatusService} from "../../service/status.service";
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ChartsModule} from "ng2-charts";
+import {SearchTaskComponent} from "../../component/search-task/search-task.component";
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {ChartsModule} from "ng2-charts";
     TaskPageComponent,
     TaskTableComponent,
     ProjectTableComponent,
-    UserTableComponent
+    UserTableComponent,
+    SearchTaskComponent
   ],
   imports: [
     CommonModule,
@@ -64,6 +66,7 @@ import {ChartsModule} from "ng2-charts";
     ProjectTableComponent,
     UserTableComponent,
     BsDatepickerModule,
+    SearchTaskComponent
   ],
 
   providers: [
@@ -74,7 +77,6 @@ import {ChartsModule} from "ng2-charts";
     PriorityService,
     StatusService,
     BsLocaleService
-
   ]
 })
 export class CustomModule {

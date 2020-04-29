@@ -3,4 +3,5 @@ export class JwtResponse {
   userName:string;
   userSurname:string;
   idUser:string;
+  role:string;
 }

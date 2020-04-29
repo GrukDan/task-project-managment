@@ -36,12 +36,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   taskForm: FormGroup;
   projectForm: FormGroup;
 
+  search:string;
+
   subscriptions: Subscription[] = [];
 
   user: User;
   task: Task;
   project: Project;
-
 
   userForTask:UserForTask[];
   projectsForTask:ProjectForTask[];
@@ -130,9 +131,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.spinnerService.show();
       this.subscriptions.push(this.projectService.getAllProjectForTask().subscribe(projectForTask => {
         this.projectsForTask = projectForTask as ProjectForTask[];
-        this.spinnerService.hide()
+        this.spinnerService.hide();
       }))
     }
+  }
+
+  private loadUserForTask(assignProject:number):void{
+    this.spinnerService.show();
+    this.subscriptions.push(this.userService.getUserForTasks(assignProject).subscribe(userForTasks=>{
+      this.userForTask = userForTasks as UserForTask[];
+      this.spinnerService.hide();
+    }))
   }
 
   private _createForm() {
@@ -159,15 +168,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
 
-  //todo: пофиксить исполнителя и создателя, добавить статус и на бэке
   addTask(): void {
     this.task.taskExecutor;
     this.task.dateOfCreation = Date.now().toString();
     this.task.updated = Date.now().toString();
-    if(this.task.status == null)this.task.status = 1;
-    this.task.taskCreator = 4;
-    this.task.taskExecutor = 11;
-    console.log(this.task);
+    this.task.taskCreator = this.tokenStorage.getUser()['idUser'];
     this.subscriptions.push(this.taskService.save(this.task).subscribe(task=>{
       this.modalRef.hide();
     }))
@@ -252,5 +257,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   signOut() {
     this.tokenStorage.signOut()
     this.router.navigate(['/'])
+  }
+
+  searchTasks(){
+    console.log(this.search)
+    this.router.navigate(['/search',this.search])
+  }
+
+  btoa(s: string) {
+    return btoa(s);
   }
 }

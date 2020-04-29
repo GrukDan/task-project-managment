@@ -1,9 +1,11 @@
 package com.bsuir.service.serviceImpl;
 
+import com.bsuir.mail.MailService;
 import com.bsuir.model.Project;
 import com.bsuir.model.Role;
 import com.bsuir.model.User;
 import com.bsuir.model.paginationModel.UserPaginationModel;
+import com.bsuir.model.viewModel.UserForTask;
 import com.bsuir.model.viewModel.UserViewModel;
 import com.bsuir.repository.ProjectRepository;
 import com.bsuir.repository.RoleRepository;
@@ -16,12 +18,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private MailService mailService;
 
     @Autowired
     private UserRepository userRepository;
@@ -64,8 +70,23 @@ public class UserServiceImpl implements UserService {
         UserViewModel userViewModel = null;
         if (userRepository.findByLoginAndPassword(user.getLogin(), user.getPassword()) == null) {
             userViewModel = new UserViewModel(userRepository.save(user));
+            if(userViewModel!=null){
+                //sendEmail(user);
+            }
         }
         return userViewModel;
+    }
+
+    private void sendEmail(User user){
+        try {
+            mailService.sendEmail(
+                    user.getEmail(),
+                    user.getLogin(),
+                    user.getPassword()
+            );
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -81,6 +102,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsersByAssignProject(long id) {
         return userRepository.findByAssignProject(id);
+    }
+
+    @Override
+    public List<UserForTask> getUserForTaskByAssignProject(long assignProject) {
+        List<User> users = userRepository.findByAssignProject(assignProject);
+        List<UserForTask> userForTasks = new ArrayList<>();
+        for(User user:users){
+            userForTasks.add(new UserForTask(user));
+        }
+        return userForTasks;
+    }
+
+    @Override
+    public User getByLoginAndPassword(String login, String password) {
+        return userRepository.findByLoginAndPassword(login,password);
     }
 
     @Override

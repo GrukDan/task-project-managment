@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {User} from "../model/user";
 import {UserViewModel} from "../model/view-model/user-view-model";
 import {UserPaginationModel} from "../model/pagnation-model/user-pagination-model";
+import {UserForTask} from "../model/view-model/user-for-task";
 
 
 @Injectable({
@@ -59,4 +60,10 @@ export class UserService {
         .set('id', id.toString())});
   }
 
+  getUserForTasks(assignProject:number):Observable<UserForTask[]>{
+    return this.http.get<UserForTask[]>('/api/users/for-task',{
+      params:new HttpParams()
+        .set('assignProject',assignProject.toString())
+    })
+  }
 }

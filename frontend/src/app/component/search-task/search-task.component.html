@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <ng4-loading-spinner [threshold]="2000" [timeout]="40000" [loadingText]="'Please wait...'"
+                       [zIndex]="9999"></ng4-loading-spinner>
+  <table class="table table-hover table-dark mt-5">
+    <thead class="h4">
+    <tr>
+      <th class="text-center">Код задачи</th>
+      <th class="text-center" style="cursor: pointer" >Название задачи</th>
+      <th class="text-center" style="cursor: pointer" >Приоритет</th>
+      <th class="text-center" style="cursor: pointer" >Статус</th>
+      <th class="text-center" style="cursor: pointer" >Дата создания</th>
+      <th class="text-center" style="cursor: pointer" >Дата выполнения</th>
+      <th class="text-center" style="cursor: pointer" >Обновлено</th>
+      <th class="text-center">Испонитель</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody *ngIf="taskViewModels.length>0; then table else void_table;">
+    </tbody>
+    <ng-template #table>
+      <tr *ngFor="let task of taskViewModels " class="text-center ">
+        <td class="h6">{{task.taskCode}}</td>
+        <td class="h6">{{task.taskName}}</td>
+        <td class="h6">{{task.priorityName}}</td>
+        <td class="h6">{{task.statusName}}</td>
+        <td class="h6">{{task.dateOfCreation | date}}</td>
+        <td class="h6">{{task.dueDate | date}}</td>
+        <td class="h6">{{task.updated | date }}</td>
+        <td class="h6" *ngIf="task?.taskExecutor!=null"><a
+          [routerLink]="['/home',btoa(task.taskExecutor.toString()),task.taskExecutorName + ' ' + task.taskExecutorSurname]"
+          routerLinkActive="active">{{task.taskExecutorSurname}} {{task.taskExecutorName}}</a></td>
+        <td *ngIf="task?.taskExecutor == null">Нет испонителя!</td>
+        <td>
+          <button class="btn btn-primary" [routerLink]="['/tasks',btoa(task.idtask.toString()),task.taskName]">Подробнее</button>
+        </td>
+      </tr>
+    </ng-template>
+  </table>
+  <ng-template #void_table>
+    <tr>
+      <td colspan="6" class="h3">Созданных задач нет.</td>
+    </tr>
+  </ng-template>
+</div>

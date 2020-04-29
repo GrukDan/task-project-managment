@@ -2,6 +2,7 @@ package com.bsuir.service;
 
 import com.bsuir.model.User;
 import com.bsuir.model.paginationModel.UserPaginationModel;
+import com.bsuir.model.viewModel.UserForTask;
 import com.bsuir.model.viewModel.UserViewModel;
 
 import java.util.List;
@@ -27,4 +28,8 @@ public interface UserService {
     UserViewModel getUserViewModelById(String encodingId);
 
     List<User> getUsersByAssignProject(long id);
+
+    List<UserForTask> getUserForTaskByAssignProject(long assignProject);
+
+    User getByLoginAndPassword(String login,String password);
 }

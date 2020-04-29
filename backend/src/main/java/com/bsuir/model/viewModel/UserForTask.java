@@ -1,14 +1,22 @@
 package com.bsuir.model.viewModel;
 
+import com.bsuir.model.User;
+
 public class UserForTask {
 
     private long iduser;
     private String userName;
     private String userSurname;
     private long assignProject;
-    private String assignProjectName;
 
     public UserForTask(){}
+
+    public UserForTask(User user){
+        this.iduser = user.getIduser();
+        this.userName = user.getUserName();
+        this.userSurname = user.getUserSurname();
+        this.assignProject = user.getAssignProject();
+    }
 
     @Override
     public String toString() {
@@ -17,7 +25,7 @@ public class UserForTask {
                 ", userName='" + userName + '\'' +
                 ", userSurname='" + userSurname + '\'' +
                 ", assignProject=" + assignProject +
-                ", assignProjectName='" + assignProjectName + '\'' +
+                ", assignProjectName='"  + '\'' +
                 '}';
     }
 
@@ -53,19 +61,10 @@ public class UserForTask {
         this.assignProject = assignProject;
     }
 
-    public String getAssignProjectName() {
-        return assignProjectName;
-    }
-
-    public void setAssignProjectName(String assignProjectName) {
-        this.assignProjectName = assignProjectName;
-    }
-
     public UserForTask(long iduser, String userName, String userSurname, long assignProject, String assignProjectName) {
         this.iduser = iduser;
         this.userName = userName;
         this.userSurname = userSurname;
         this.assignProject = assignProject;
-        this.assignProjectName = assignProjectName;
     }
 }

@@ -49,7 +49,7 @@ export class TaskPageComponent implements OnInit {
 
   locale = "ru";
   minDate: Date;
-  dueDate: Date;
+  dueDateInput: Date;
 
   constructor(private taskService: TaskService,
               private userService: UserService,
@@ -93,7 +93,7 @@ export class TaskPageComponent implements OnInit {
     this.subscriptions.push(this.taskService.getTaskViewModelById(this.idTask).subscribe(taskViewModel => {
       this.taskViewModel = taskViewModel as TaskViewModel;
       this.editTaskViewModel = TaskViewModel.clone(taskViewModel);
-      this.dueDate = new Date(taskViewModel.dueDate);
+      this.dueDateInput = new Date(taskViewModel.dueDate);
       this.spinnerService.hide();
     }))
   }
@@ -154,7 +154,17 @@ export class TaskPageComponent implements OnInit {
   private _createForm() {
     if (this.taskForm == null) {
       this.taskForm = this.validationService.getTaskFormGroup();
-      this.taskForm.controls['taskProject'].clearValidators()
+      this.taskForm.controls['taskProject'].clearValidators();
+    }
+    if (this.tokenStorage.isTester()){
+      this.taskForm.controls['priority'].clearValidators();
+    }
+    if(this.tokenStorage.isDeveloper() || this.tokenStorage.isTester()){
+      this.taskForm.controls['taskName'].clearValidators();
+      this.taskForm.controls['dueDate'].clearValidators();
+    }else {
+      this.taskForm.controls['status'].clearValidators();
+      this.taskForm.controls['priority'].clearValidators();
     }
   }
 
@@ -183,7 +193,7 @@ export class TaskPageComponent implements OnInit {
 
   save() {
     this.changeEdit();
-    this.editTaskViewModel.dueDate = this.dueDate.toISOString();
+    this.editTaskViewModel.dueDate = this.dueDateInput.toISOString();
     this.editTaskViewModel.updated = Date.now().toString();
     this.saveTaskViewModel(this.editTaskViewModel);
   }

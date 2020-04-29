@@ -9,6 +9,7 @@ import {ProjectTableComponent} from "./component/project-table/project-table.com
 import {TaskTableComponent} from "./component/task-table/task-table.component";
 import {UserTableComponent} from "./component/user-table/user-table.component";
 import {AuthGuardService} from "./auth/auth-guard";
+import {SearchTaskComponent} from "./component/search-task/search-task.component";
 
 
 const routes: Routes = [
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: "users/table",
     component: UserTableComponent,
+    canActivate:[AuthGuardService]},
+  {
+    path: "search/:search",
+    component: SearchTaskComponent,
     canActivate:[AuthGuardService]},
   {
     path: "**",

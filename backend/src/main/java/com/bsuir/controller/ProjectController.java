@@ -6,6 +6,8 @@ import com.bsuir.model.paginationModel.ProjectPaginationModel;
 import com.bsuir.model.viewModel.ProjectForTask;
 import com.bsuir.model.viewModel.ProjectViewModel;
 import com.bsuir.service.ProjectService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,28 +20,35 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProjectController.class);
+
     @RequestMapping(method = RequestMethod.PUT)
     public Project save(@RequestBody Project project) {
+        LOGGER.info("Save project: " + project.getProjectName());
         return projectService.save(project);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     public void delete(@RequestParam("idProject") long idProject){
+        LOGGER.info("Delete project");
         projectService.delete(idProject);
     }
 
     @RequestMapping(value = "/project",method = RequestMethod.POST)
     public ProjectViewModel saveProject(@RequestBody Project project){
+        LOGGER.info("Save project: " + project.getProjectName());
         return projectService.saveProject(project);
     }
 
     @RequestMapping(value = "/project-view-model",method = RequestMethod.POST)
     public ProjectViewModel saveProject(@RequestBody ProjectViewModel projectViewModel){
+        LOGGER.info("Save project: " + projectViewModel.getProjectName());
         return projectService.saveProjectViewModel(projectViewModel);
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public ProjectViewModel getProjectViewModelById(@RequestParam("id")long id){
+        LOGGER.info("Get project");
         return projectService.getProjectViewModelById(id);
     }
 
@@ -50,6 +59,7 @@ public class ProjectController {
 
     @RequestMapping(value = "/all-projects", method = RequestMethod.GET)
     public List<Project> getAllProject() {
+        LOGGER.info("Get all projects");
         return projectService.getAllProject();
     }
 
@@ -60,6 +70,7 @@ public class ProjectController {
 
     @RequestMapping(value = "/sort-parameter", method = RequestMethod.GET)
     public List<String> getSortParameter() {
+        LOGGER.info("Get parameters for project sorting");
         return projectService.getSortParameter();
     }
 
@@ -70,6 +81,10 @@ public class ProjectController {
             @RequestParam("size") int size,
             @RequestParam("direction") boolean direction,
             @RequestParam("search") String search) {
+        LOGGER.info("Get sorted users with parameters " +
+                "page: " + String.valueOf(page) +
+                "size: " + String.valueOf(size) +
+                "direction: " + String.valueOf(direction));
         return projectService.getSortedProject(parameter, page, size, direction);
     }
 }

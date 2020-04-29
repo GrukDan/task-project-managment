@@ -139,4 +139,18 @@ public class User {
     public int hashCode() {
         return Objects.hash(iduser, role, userName, userSurname, email, assignProject, login, password);
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "iduser=" + iduser +
+                ", role=" + role +
+                ", userName='" + userName + '\'' +
+                ", userSurname='" + userSurname + '\'' +
+                ", email='" + email + '\'' +
+                ", assignProject=" + assignProject +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

@@ -13,11 +13,19 @@
           <div *ngIf="!edit;then tabBody1;else editProjectTemplate"></div>
         </div>
         <div class="my-5 text-right">
-          <button class="btn btn-primary mr-3" *ngIf="!edit" (click)="startEdit()">Редактировать</button>
-          <button class="btn btn-primary mr-3" *ngIf="edit" [disabled]="projectForm.invalid" (click)="save()">Сохранить
+          <button class="btn btn-primary mr-3"
+                  *ngIf="!edit && tokenStorage.isProjectManager()"
+                  (click)="startEdit()">Редактировать</button>
+          <button class="btn btn-primary mr-3"
+                  *ngIf="edit && tokenStorage.isProjectManager()"
+                  [disabled]="projectForm.invalid" (click)="save()">Сохранить
           </button>
-          <button class="btn btn-primary mr-3" *ngIf="edit" (click)="changeEdit()">Отмена</button>
-          <button class="btn btn-primary" (click)="delete(projectViewModel.idproject)">Удалить</button>
+          <button class="btn btn-primary mr-3"
+                  *ngIf="edit"
+                  (click)="changeEdit()">Отмена</button>
+          <button class="btn btn-primary"
+                  *ngIf="tokenStorage.isProjectManager()"
+                  (click)="delete(projectViewModel.idproject)">Удалить</button>
         </div>
       </tab>
       <tab>

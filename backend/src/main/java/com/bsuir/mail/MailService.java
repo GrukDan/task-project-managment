@@ -16,8 +16,7 @@ public class MailService {
     @Autowired
     public JavaMailSender emailSender;
 
-    public String sendEmail(String userName,
-                            String userSurname,
+    public String sendEmail(
                             String recipientMail,
                             String login,
                             String password) throws MessagingException {

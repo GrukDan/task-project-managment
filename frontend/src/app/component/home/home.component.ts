@@ -14,6 +14,7 @@ import {ValidationService} from "../../service/validation.service";
 import {Task} from "../../model/task";
 import {TaskViewModel} from "../../model/view-model/task-view-model";
 import {Color} from "ng2-charts";
+import {TokenStorageService} from "../../auth/token-storage.service";
 
 @Component({
   selector: 'app-home',
@@ -69,7 +70,8 @@ export class HomeComponent implements OnInit {
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private validationService: ValidationService,
-              private router:Router) {
+              private router:Router,
+              private tokenStorage:TokenStorageService) {
 
     this.userViewModel = new UserViewModel();
     this.editUserViewModel = new UserViewModel();
@@ -172,6 +174,23 @@ export class HomeComponent implements OnInit {
       this.userForm = this.validationService.getUserFormGroup();
       this.userForm.controls['login'].clearValidators();
       this.userForm.controls['password'].clearValidators();
+      this.userForm.controls['role'].clearValidators();
+      if(this.tokenStorage.isAdmin() && this.userViewModel.iduser!=this.tokenStorage.getIdUser()){
+        this.userForm.controls['userName'].clearValidators();
+        this.userForm.controls['userSurname'].clearValidators();
+        this.userForm.controls['email'].clearValidators();
+      }
+      if(this.tokenStorage.isProjectManager() && this.userViewModel.iduser!=this.tokenStorage.getIdUser()){
+        this.userForm.controls['userName'].clearValidators();
+        this.userForm.controls['userSurname'].clearValidators();
+        this.userForm.controls['email'].clearValidators();
+        this.userForm.controls['role'].clearValidators();
+      }
+      if(!this.tokenStorage.isProjectManager()
+        && this.tokenStorage.isAdmin()
+      && this.tokenStorage.getIdUser() == this.userViewModel.iduser){
+        this.userForm.controls['role'].clearValidators();
+      }
     }
   }
 
