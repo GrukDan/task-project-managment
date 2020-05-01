@@ -21,21 +21,30 @@ export class TaskService {
   }
 
   delete(idTask: number): Observable<void> {
-    return this.http.delete<void>('/api/tasks', {
-      params: new HttpParams()
-        .set('idTask', idTask.toString())
-    })
+    return this.http.delete<void>(
+      '/api/tasks',
+      {
+        params: new HttpParams()
+          .set('idTask', idTask.toString())
+      })
   }
 
   getTaskViewModelsByProject(project: number): Observable<TaskViewModel[]> {
-    return this.http.get<TaskViewModel[]>('/api/tasks/task-view-model', {params: new HttpParams().set('project', project.toString())});
+    return this.http.get<TaskViewModel[]>(
+      '/api/tasks/task-view-model',
+      {
+        params: new HttpParams()
+          .set('project', project.toString())
+      });
   }
 
   getTaskViewModelsBySearch(search: string): Observable<TaskViewModel[]> {
-    return this.http.get<TaskViewModel[]>('/api/tasks/search', {
-      params: new HttpParams()
-        .set('search', search)
-    })
+    return this.http.get<TaskViewModel[]>(
+      '/api/tasks/search',
+      {
+        params: new HttpParams()
+          .set('search', search)
+      })
   }
 
   getSortParameter(): Observable<string[]> {
@@ -43,22 +52,25 @@ export class TaskService {
   }
 
   getSortedTaskViewModels(parameter: string, page: number, size: number, direction: boolean, search: string = ''): Observable<TaskPaginationModel> {
-    return this.http.get<TaskPaginationModel>('/api/tasks/sort', {
-      params: new HttpParams()
-        .set('parameter', parameter)
-        .set('page', page.toString())
-        .set('size', size.toString())
-        .set('direction', direction.toString())
-        .set('search', search)
-    })
+    return this.http.get<TaskPaginationModel>(
+      '/api/tasks/sort',
+      {
+        params: new HttpParams()
+          .set('parameter', parameter)
+          .set('page', page.toString())
+          .set('size', size.toString())
+          .set('direction', direction.toString())
+          .set('search', search)
+      })
   }
 
-
   getTaskViewModelById(idTask: number): Observable<TaskViewModel> {
-    return this.http.get<TaskViewModel>('/api/tasks', {
-      params: new HttpParams()
-        .set('id', idTask.toString())
-    });
+    return this.http.get<TaskViewModel>(
+      '/api/tasks',
+      {
+        params: new HttpParams()
+          .set('id', idTask.toString())
+      });
   }
 
   saveTaskViewModel(taskViewModel: TaskViewModel): Observable<TaskViewModel> {
@@ -66,9 +78,11 @@ export class TaskService {
   }
 
   getTaskViewModelsByTaskExecutor(iduser: number): Observable<TaskViewModel[]> {
-    return this.http.get<TaskViewModel[]>('/api/tasks/task-view-model/executor', {
-      params: new HttpParams()
-        .set('executor', iduser.toString())
-    })
+    return this.http.get<TaskViewModel[]>(
+      '/api/tasks/task-view-model/executor',
+      {
+        params: new HttpParams()
+          .set('executor', iduser.toString())
+      })
   }
 }

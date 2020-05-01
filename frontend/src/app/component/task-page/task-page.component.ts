@@ -90,26 +90,29 @@ export class TaskPageComponent implements OnInit {
 
   loadTaskViewModel() {
     this.spinnerService.show()
-    this.subscriptions.push(this.taskService.getTaskViewModelById(this.idTask).subscribe(taskViewModel => {
+    this.subscriptions.push(this.taskService.getTaskViewModelById(this.idTask).subscribe(
+      taskViewModel => {
       this.taskViewModel = taskViewModel as TaskViewModel;
       this.editTaskViewModel = TaskViewModel.clone(taskViewModel);
       this.dueDateInput = new Date(taskViewModel.dueDate);
       this.spinnerService.hide();
-    }))
+    },
+        err=>alert("Произошла ошибка! Попробуйте позже...")))
   }
 
   loadComments() {
     this.spinnerService.show()
-    this.subscriptions.push(this.commentService.getAll(this.size,this.idTask).subscribe(commentViewModels=>{
+    this.subscriptions.push(this.commentService.getAll(this.size,this.idTask).subscribe(
+      commentViewModels=>{
       this.commentViewModels= commentViewModels as CommentViewModel[];
       if(this.commentViewModels.length!=0){
-        console.log(this.commentViewModels[0])
         this.totalComments = this.commentViewModels[0].totalComments;
       }else {
         this.moreCommentsButton = false;
       }
       this.spinnerService.hide();
-    }))
+    },
+        err=>alert("Произошла ошибка! Попробуйте позже...")))
   }
 
   private loadPriority(): void {
@@ -186,7 +189,8 @@ export class TaskPageComponent implements OnInit {
       this.subscriptions.push(this.commentService.save(comment).subscribe(() => {
         this.loadComments();
         this.spinnerService.hide();
-      }))
+      },
+          err=>alert("Произошла ошибка! Попробуйте позже...")))
       this.comment = new Comment();
     }
   }
@@ -209,7 +213,10 @@ export class TaskPageComponent implements OnInit {
 
   delete(idTask) {
     this.router.navigate(['/'])
-    this.subscriptions.push(this.taskService.delete(idTask).subscribe())
+    this.subscriptions.push(this.taskService.delete(idTask).subscribe(
+      message=>{},
+        err=>alert("Произошла ошибка! Попробуйте позже...")
+    ))
   }
 
   get _taskName() {

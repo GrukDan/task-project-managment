@@ -45,8 +45,24 @@ public class TaskServiceImpl implements TaskService {
         String taskCode = task.getTaskName() + " " + (int) (Math.random() * 100);
         task.setTaskCode(taskCode);
         if (taskRepository.findByTaskCode(task.getTaskCode()) == null) {
-            return taskRepository.save(task);
+            Task savedTask = taskRepository.save(task);
+            updateReadinessDegree(task.getProject());
+            return savedTask;
         } else return null;
+    }
+
+    private void updateReadinessDegree(long idProject){
+        Project project = projectRepository.getOne(idProject);
+        project.setReadinessDegree(getReadinessDegreeByProject(idProject));
+        projectRepository.save(project);
+    }
+
+    public double getReadinessDegreeByProject(long idProject) {
+        List<Task> tasks = taskRepository.findByProject(idProject);
+        double readinessDegree = 0;
+        for(Task task : tasks)
+            readinessDegree+=(task.getStatus() - 1) * 33.3;
+        return readinessDegree/tasks.size();
     }
 
     @Override
@@ -230,6 +246,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskViewModel saveTaskViewModel(TaskViewModel taskViewModel) {
         taskRepository.save(taskViewModel.buildTask());
+        updateReadinessDegree(taskViewModel.getProject());
         return getTaskViewModelById(taskViewModel.getIdtask());
     }
 }

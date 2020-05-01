@@ -155,16 +155,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
   addUser(): void {
     this.subscriptions.push(this.userService.save(this.user).subscribe(user=>{
       this.modalRef.hide();
-      }
+      },
+        err=>alert("Произошла ошибка! Попробуйте позже...")
     ))
   }
 
   addProject(): void {
-    this.project.projectCreator = 1;
+    this.project.projectCreator = this.tokenStorage.getUser()['idUser'];
     this.project.readinessDegree = 0;
     this.subscriptions.push(this.projectService.save(this.project).subscribe(project=>{
       this.modalRef.hide();
-    }))
+    },err=>alert("Произошла ошибка! Попробуйте позже...")))
   }
 
 
@@ -175,7 +176,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.task.taskCreator = this.tokenStorage.getUser()['idUser'];
     this.subscriptions.push(this.taskService.save(this.task).subscribe(task=>{
       this.modalRef.hide();
-    }))
+    },err=>alert("Произошла ошибка! Попробуйте позже...")))
   }
 
   get _userName() {

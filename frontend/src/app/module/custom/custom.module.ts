@@ -13,7 +13,7 @@ import {
   BsLocaleService,
   CarouselModule,
   DatepickerModule,
-  PaginationModule,
+  PaginationModule, ProgressbarModule,
   TabsModule
 } from "ngx-bootstrap";
 import {TaskTableComponent} from "../../component/task-table/task-table.component";
@@ -54,7 +54,8 @@ import {SearchTaskComponent} from "../../component/search-task/search-task.compo
     ReactiveFormsModule,
     BsDatepickerModule,
     DatepickerModule,
-    ChartsModule
+    ChartsModule,
+    ProgressbarModule
   ],
   exports: [
     FirstPageComponent,

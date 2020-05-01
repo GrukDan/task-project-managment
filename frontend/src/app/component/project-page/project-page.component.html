@@ -58,7 +58,15 @@
       </div>
       <div>
         <h1>Степень готовности:</h1>
-        <h2>{{projectViewModel.readinessDegree}}</h2>
+        <div>
+          <progressbar
+            max="100"
+            [value]="readinessDegree"
+            type="danger"
+            [striped]="true"
+            [animate]="true"><i>{{readinessDegree | number}}/ 100</i>
+          </progressbar>
+        </div>
       </div>
       <div>
         <h1>Создатель проекта:</h1>
@@ -125,9 +133,10 @@
           <td class="h6">{{task.dateOfCreation | date}}</td>
           <td class="h6">{{task.dueDate | date}}</td>
           <td class="h6">{{task.updated | date }}</td>
-          <td class="h6"><a
-            [routerLink]="['/home',btoa(task.taskExecutor.toString()),
-            task.taskExecutorName + ' ' + task.taskExecutorSurname]"
+          <td class="h6">
+            <a *ngIf="task.taskExecutor;else noExecutor"
+            [routerLink]="['/home',btoa(task?.taskExecutor.toString()),
+            task?.taskExecutorName + ' ' + task?.taskExecutorSurname]"
             routerLinkActive="active"
           >{{task.taskExecutorSurname}} {{task.taskExecutorName}}</a>
           </td>
@@ -189,4 +198,9 @@
       </div>
     </div>
   </form>
+</ng-template>
+
+
+<ng-template #noExecutor>
+  Нет исполнителя
 </ng-template>

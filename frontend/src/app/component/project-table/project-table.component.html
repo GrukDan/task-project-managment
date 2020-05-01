@@ -21,7 +21,13 @@
         <td class="h6">{{project.projectCode}}</td>
         <td class="h6">{{project.projectName}}</td>
         <td class="h6">{{project.dateOfCompletion | date}}</td>
-        <td class="h6">{{project.readinessDegree}}</td>
+        <td class="h6"><progressbar
+          max="100"
+          [value]="project.readinessDegree"
+          type="danger"
+          [striped]="true"
+          [animate]="true"><i>{{project.readinessDegree | number}}/ 100</i>
+        </progressbar></td>
         <td class="h6"><a
           [routerLink]="['/home',btoa(project.projectCreator.toString()),project.projectCreatorName + ' ' + project.projectCreatorSurname]"
           routerLinkActive="active">

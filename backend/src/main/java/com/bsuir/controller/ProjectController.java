@@ -82,9 +82,9 @@ public class ProjectController {
             @RequestParam("direction") boolean direction,
             @RequestParam("search") String search) {
         LOGGER.info("Get sorted users with parameters " +
-                "page: " + String.valueOf(page) +
-                "size: " + String.valueOf(size) +
-                "direction: " + String.valueOf(direction));
+                " page: " + String.valueOf(page) +
+                " size: " + String.valueOf(size) +
+                " direction: " + String.valueOf(direction));
         return projectService.getSortedProject(parameter, page, size, direction);
     }
 }

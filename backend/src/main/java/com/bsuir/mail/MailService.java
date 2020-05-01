@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+//need stop avast
 @Service
 public class MailService {
 

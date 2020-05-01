@@ -4,49 +4,27 @@
     <list default="true" id="d0aa6911-27e9-42cb-b138-ed54147570d6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/controller/ProjectController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/controller/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/controller/TaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/mail/MailConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/mail/MailConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/mail/MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/mail/MailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/model/viewModel/UserForTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/model/viewModel/UserForTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/security/jwt/JwtResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/security/jwt/JwtResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/repository/TaskRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/repository/TaskRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/security/WebSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/security/jwt/JwtToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/security/jwt/JwtToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/service/serviceImpl/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/service/serviceImpl/RoleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/security/jwt/JwtUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/security/jwt/JwtUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/service/serviceImpl/TaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/service/serviceImpl/TaskServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/service/serviceImpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/bsuir/service/serviceImpl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/controller/ProjectController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/controller/ProjectController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/controller/TaskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/controller/TaskController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/mail/MailConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/mail/MailConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/mail/MailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/mail/MailService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/model/viewModel/UserForTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/model/viewModel/UserForTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/security/jwt/JwtResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/security/jwt/JwtResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/security/jwt/JwtToken.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/security/jwt/JwtToken.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/service/serviceImpl/RoleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/service/serviceImpl/RoleServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/service/serviceImpl/TaskServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/service/serviceImpl/TaskServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/target/classes/com/bsuir/service/serviceImpl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/bsuir/service/serviceImpl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/auth-service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/auth-service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/token-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/token-storage.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/first-page/first-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/first-page/first-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/first-page/first-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/first-page/first-page.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/header/header.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/home/home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/home/home.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/project-page/project-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/project-page/project-page.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/project-page/project-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/project-page/project-page.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/task-page/task-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/task-page/task-page.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/project-table/project-table.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/project-table/project-table.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/task-page/task-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/task-page/task-page.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/jwt-response.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/jwt-response.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/view-model/user-for-task.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/view-model/user-for-task.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/module/custom/custom.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/module/custom/custom.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/service/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/service/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/service/task.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/service/task.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/Loggs.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/Loggs.log" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +64,7 @@
         <item name="mydb@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="mydb: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="task: table" type="285a2a93:MysqlImplModel$Table" />
+        <item name="project: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -124,7 +102,7 @@
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/JSF2-Spring-Example" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/frontend/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="ts.external.directory.path" value="D:\kurs_project\frontend\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -203,12 +181,12 @@
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@c5180376" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@2f7b49d8" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@c5180376" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@7dd2f78c" type="9fbbdea:ServiceModel$ServiceNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@2f7b49d8" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@770b0dc8" type="9fbbdea:ServiceModel$ServiceNode" />
             </path>
           </expand>
           <select />
@@ -258,6 +236,8 @@
       <workItem from="1588069937019" duration="5376000" />
       <workItem from="1588156120257" duration="9568000" />
       <workItem from="1588171912045" duration="17115000" />
+      <workItem from="1588229389736" duration="676000" />
+      <workItem from="1588335167903" duration="12160000" />
     </task>
     <servers />
   </component>

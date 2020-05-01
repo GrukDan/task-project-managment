@@ -14,6 +14,7 @@ import {TabsModule} from 'ngx-bootstrap/tabs';
 import {ChartsModule} from "ng2-charts";
 import {authInterceptorProviders} from "./auth/interceptor";
 import { SearchTaskComponent } from './component/search-task/search-task.component';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SearchTaskComponent } from './component/search-task/search-task.compone
     TabsModule.forRoot(),
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    ProgressbarModule.forRoot()
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

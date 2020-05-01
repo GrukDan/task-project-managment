@@ -11,7 +11,6 @@ import {Subscription} from "rxjs";
 import {ruLocale} from 'ngx-bootstrap/locale';
 import {BsLocaleService, defineLocale} from "ngx-bootstrap";
 import {Color, Label, MultiDataSet} from "ng2-charts";
-import {ChartType} from "chart.js";
 import {TokenStorageService} from "../../auth/token-storage.service";
 
 defineLocale('ru', ruLocale);
@@ -30,6 +29,7 @@ export class ProjectPageComponent implements OnInit {
   private idProject: number;
   private edit: boolean;
   private projectForm: FormGroup;
+private readinessDegree:number;
 
   locale = "ru";
   minDate: Date;
@@ -48,6 +48,7 @@ export class ProjectPageComponent implements OnInit {
     this.projectViewModel = new ProjectViewModel();
     this.editProjectViewModel = new ProjectViewModel();
     this.minDate = new Date();
+    this.readinessDegree = 0;
     this.localeService.use(this.locale);
     this.edit = false;
     this.route.paramMap.subscribe(params => {
@@ -90,13 +91,18 @@ export class ProjectPageComponent implements OnInit {
 
   loadProject() {
     this.spinnerService.show()
-    this.subscriptions.push(this.projectService.getProjectViewModelById(this.idProject).subscribe(projectViewModel => {
+    this.subscriptions.push(this.projectService.getProjectViewModelById(this.idProject).subscribe(
+      projectViewModel => {
       this.projectViewModel = projectViewModel as ProjectViewModel;
       this.editProjectViewModel = ProjectViewModel.clone(projectViewModel);
       this.date = new Date(projectViewModel.dateOfCompletion);
+      if(projectViewModel.readinessDegree){
+        this.readinessDegree = projectViewModel.readinessDegree;
+      }
       this.loadTaskViewModels();
       this.spinnerService.hide();
-    }))
+    },
+        err=>alert("Произошла ошибка! Попробуйте позже...")))
   }
 
   loadTaskViewModels() {
@@ -159,12 +165,14 @@ export class ProjectPageComponent implements OnInit {
 
   saveProjectViewModel(projectViewModel: ProjectViewModel) {
     this.spinnerService.show()
-    this.subscriptions.push(this.projectService.saveProjectViewModel(projectViewModel).subscribe(projectViewModel => {
+    this.subscriptions.push(this.projectService.saveProjectViewModel(projectViewModel).subscribe(
+      projectViewModel => {
       console.log(projectViewModel)
       this.projectViewModel = projectViewModel as ProjectViewModel;
       this.editProjectViewModel = ProjectViewModel.clone(projectViewModel);
       this.spinnerService.hide();
-    }))
+    },
+        err=>alert("Произошла ошибка! Попробуйте позже...")))
   }
 
   save() {
@@ -182,9 +190,10 @@ export class ProjectPageComponent implements OnInit {
     return btoa(s);
   }
 
-
   delete(idProject) {
     this.router.navigate(['/'])
-    this.subscriptions.push(this.projectService.delete(idProject).subscribe())
+    this.subscriptions.push(this.projectService.delete(idProject).subscribe(
+      mess=>{}
+      ,err=>alert("Произошла ошибка! Попробуйте позже...")))
   }
 }
