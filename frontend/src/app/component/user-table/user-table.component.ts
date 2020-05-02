@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserViewModel} from "../../model/view-model/user-view-model";
 import {PageChangedEvent} from "ngx-bootstrap";
 import {Subscription} from "rxjs";
@@ -13,18 +13,18 @@ import {ProjectViewModel} from "../../model/view-model/project-view-model";
 })
 export class UserTableComponent implements OnInit {
 
-  private parameters:string[];
-  private userViewModels:UserViewModel[];
-  private subscriptions: Subscription[] = [];
+  parameters: string[];
+  userViewModels: UserViewModel[];
+  subscriptions: Subscription[] = [];
 
-  private countOfPages: number;
-  private parameter: string;
-  private direction: boolean;
-  private size: number;
-  private page: number;
+  countOfPages: number;
+  parameter: string;
+  direction: boolean;
+  size: number;
+  page: number;
 
   constructor(private spinnerService: Ng4LoadingSpinnerService,
-              private userService:UserService) {
+              private userService: UserService) {
     this.userViewModels = [];
     this.page = 0;
     this.size = 5;
@@ -66,7 +66,7 @@ export class UserTableComponent implements OnInit {
       this.direction
     ).subscribe(sortedUsers => {
       this.userViewModels = sortedUsers.userViewModels as UserViewModel[];
-      this.countOfPages = sortedUsers.countOfPages*10;
+      this.countOfPages = sortedUsers.countOfPages * 10;
       this.spinnerService.hide();
     }))
   }

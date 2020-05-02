@@ -26,8 +26,8 @@ export class FirstPageComponent implements OnInit {
   error:boolean;
   errorMessage:string;
   templateShow: boolean;
-  private subscriptions: Subscription[];
-  private user: User;
+   subscriptions: Subscription[];
+   user: User;
 
   constructor(private modalService: BsModalService,
               private userService: UserService,

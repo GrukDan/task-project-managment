@@ -12,15 +12,15 @@ import {ProjectService} from "../../service/project.service";
 })
 export class ProjectTableComponent implements OnInit, OnDestroy {
 
-  private parameters: string[];
-  private projects: ProjectViewModel[];
-  private subscriptions: Subscription[] = [];
+  parameters: string[];
+  projects: ProjectViewModel[];
+  subscriptions: Subscription[] = [];
 
-  private countOfPages: number;
-  private parameter: string;
-  private direction: boolean;
-  private size: number;
-  private page: number;
+  countOfPages: number;
+  parameter: string;
+  direction: boolean;
+  size: number;
+  page: number;
 
   constructor(private spinnerService: Ng4LoadingSpinnerService,
               private projectService: ProjectService,) {

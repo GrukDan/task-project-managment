@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TaskViewModel} from "../../model/view-model/task-view-model";
 import {PageChangedEvent} from "ngx-bootstrap";
 import {Subscription} from "rxjs";
@@ -13,18 +13,18 @@ import {ProjectViewModel} from "../../model/view-model/project-view-model";
 })
 export class TaskTableComponent implements OnInit {
 
-  private taskViewModels:TaskViewModel[];
-  private parameters: string[];
-  private subscriptions: Subscription[] = [];
+  taskViewModels: TaskViewModel[];
+  parameters: string[];
+  subscriptions: Subscription[] = [];
 
-  private countOfPages: number;
-  private parameter: string;
-  private direction: boolean;
-  private size: number;
-  private page: number;
+  countOfPages: number;
+  parameter: string;
+  direction: boolean;
+  size: number;
+  page: number;
 
   constructor(private spinnerService: Ng4LoadingSpinnerService,
-              private taskService:TaskService) {
+              private taskService: TaskService) {
     this.taskViewModels = [];
     this.taskViewModels = [];
     this.page = 0;

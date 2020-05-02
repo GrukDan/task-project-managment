@@ -22,14 +22,14 @@ defineLocale('ru', ruLocale);
 })
 export class ProjectPageComponent implements OnInit {
 
-  private subscriptions: Subscription[] = []
-  private taskViewModels: TaskViewModel[];
-  private projectViewModel: ProjectViewModel;
-  private editProjectViewModel: ProjectViewModel;
-  private idProject: number;
-  private edit: boolean;
-  private projectForm: FormGroup;
-private readinessDegree:number;
+  subscriptions: Subscription[] = []
+  taskViewModels: TaskViewModel[];
+  projectViewModel: ProjectViewModel;
+  editProjectViewModel: ProjectViewModel;
+  idProject: number;
+  edit: boolean;
+  projectForm: FormGroup;
+  readinessDegree: number;
 
   locale = "ru";
   minDate: Date;
@@ -42,8 +42,8 @@ private readinessDegree:number;
               private fb: FormBuilder,
               private validationService: ValidationService,
               private localeService: BsLocaleService,
-              private router:Router,
-              private tokenStorage:TokenStorageService) {
+              private router: Router,
+              public tokenStorage: TokenStorageService) {
     this.taskViewModels = [];
     this.projectViewModel = new ProjectViewModel();
     this.editProjectViewModel = new ProjectViewModel();
@@ -93,16 +93,16 @@ private readinessDegree:number;
     this.spinnerService.show()
     this.subscriptions.push(this.projectService.getProjectViewModelById(this.idProject).subscribe(
       projectViewModel => {
-      this.projectViewModel = projectViewModel as ProjectViewModel;
-      this.editProjectViewModel = ProjectViewModel.clone(projectViewModel);
-      this.date = new Date(projectViewModel.dateOfCompletion);
-      if(projectViewModel.readinessDegree){
-        this.readinessDegree = projectViewModel.readinessDegree;
-      }
-      this.loadTaskViewModels();
-      this.spinnerService.hide();
-    },
-        err=>alert("Произошла ошибка! Попробуйте позже...")))
+        this.projectViewModel = projectViewModel as ProjectViewModel;
+        this.editProjectViewModel = ProjectViewModel.clone(projectViewModel);
+        this.date = new Date(projectViewModel.dateOfCompletion);
+        if (projectViewModel.readinessDegree) {
+          this.readinessDegree = projectViewModel.readinessDegree;
+        }
+        this.loadTaskViewModels();
+        this.spinnerService.hide();
+      },
+      err => alert("Произошла ошибка! Попробуйте позже...")))
   }
 
   loadTaskViewModels() {
@@ -167,12 +167,12 @@ private readinessDegree:number;
     this.spinnerService.show()
     this.subscriptions.push(this.projectService.saveProjectViewModel(projectViewModel).subscribe(
       projectViewModel => {
-      console.log(projectViewModel)
-      this.projectViewModel = projectViewModel as ProjectViewModel;
-      this.editProjectViewModel = ProjectViewModel.clone(projectViewModel);
-      this.spinnerService.hide();
-    },
-        err=>alert("Произошла ошибка! Попробуйте позже...")))
+        console.log(projectViewModel)
+        this.projectViewModel = projectViewModel as ProjectViewModel;
+        this.editProjectViewModel = ProjectViewModel.clone(projectViewModel);
+        this.spinnerService.hide();
+      },
+      err => alert("Произошла ошибка! Попробуйте позже...")))
   }
 
   save() {
@@ -193,7 +193,8 @@ private readinessDegree:number;
   delete(idProject) {
     this.router.navigate(['/'])
     this.subscriptions.push(this.projectService.delete(idProject).subscribe(
-      mess=>{}
-      ,err=>alert("Произошла ошибка! Попробуйте позже...")))
+      mess => {
+      }
+      , err => alert("Произошла ошибка! Попробуйте позже...")))
   }
 }

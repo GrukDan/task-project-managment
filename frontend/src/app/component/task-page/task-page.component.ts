@@ -30,22 +30,22 @@ defineLocale('ru', ruLocale);
 })
 export class TaskPageComponent implements OnInit {
 
-  private subscriptions: Subscription[] = []
-  private taskViewModel: TaskViewModel;
-  private editTaskViewModel: TaskViewModel;
+  subscriptions: Subscription[] = []
+  taskViewModel: TaskViewModel;
+  editTaskViewModel: TaskViewModel;
 
-  private comment: Comment;
-  private commentViewModels: CommentViewModel[];
-  private statuses: Status[];
-  private priorities: Priority[];
-  private executors: User[];
+  comment: Comment;
+  commentViewModels: CommentViewModel[];
+  statuses: Status[];
+  priorities: Priority[];
+  executors: User[];
 
-  private idTask: number;
-  private edit: boolean;
-  private size:number;
-  private totalComments:number;
-  private moreCommentsButton:boolean;
-  private taskForm: FormGroup;
+  idTask: number;
+  edit: boolean;
+  size: number;
+  totalComments: number;
+  moreCommentsButton: boolean;
+  taskForm: FormGroup;
 
   locale = "ru";
   minDate: Date;
@@ -61,8 +61,8 @@ export class TaskPageComponent implements OnInit {
               private fb: FormBuilder,
               private validationService: ValidationService,
               private localeService: BsLocaleService,
-              private tokenStorage:TokenStorageService,
-              private router:Router) {
+              public tokenStorage: TokenStorageService,
+              private router: Router) {
     this.comment = new Comment();
     this.commentViewModels = [];
     this.statuses = [];
@@ -92,30 +92,30 @@ export class TaskPageComponent implements OnInit {
     this.spinnerService.show()
     this.subscriptions.push(this.taskService.getTaskViewModelById(this.idTask).subscribe(
       taskViewModel => {
-      this.taskViewModel = taskViewModel as TaskViewModel;
-      this.editTaskViewModel = TaskViewModel.clone(taskViewModel);
-      this.dueDateInput = new Date(taskViewModel.dueDate);
-      this.spinnerService.hide();
-    },
-        err=>alert("Произошла ошибка! Попробуйте позже...")))
+        this.taskViewModel = taskViewModel as TaskViewModel;
+        this.editTaskViewModel = TaskViewModel.clone(taskViewModel);
+        this.dueDateInput = new Date(taskViewModel.dueDate);
+        this.spinnerService.hide();
+      },
+      err => alert("Произошла ошибка! Попробуйте позже...")))
   }
 
   loadComments() {
     this.spinnerService.show()
-    this.subscriptions.push(this.commentService.getAll(this.size,this.idTask).subscribe(
-      commentViewModels=>{
-      this.commentViewModels= commentViewModels as CommentViewModel[];
-      if(this.commentViewModels.length!=0){
-        this.totalComments = this.commentViewModels[0].totalComments;
-      }else {
-        this.moreCommentsButton = false;
-      }
-      this.spinnerService.hide();
-    },
-        err=>alert("Произошла ошибка! Попробуйте позже...")))
+    this.subscriptions.push(this.commentService.getAll(this.size, this.idTask).subscribe(
+      commentViewModels => {
+        this.commentViewModels = commentViewModels as CommentViewModel[];
+        if (this.commentViewModels.length != 0) {
+          this.totalComments = this.commentViewModels[0].totalComments;
+        } else {
+          this.moreCommentsButton = false;
+        }
+        this.spinnerService.hide();
+      },
+      err => alert("Произошла ошибка! Попробуйте позже...")))
   }
 
-  private loadPriority(): void {
+  loadPriority(): void {
     if (this.priorities.length == 0) {
       this.spinnerService.show();
       this.subscriptions.push(this.priorityService.getAllPriority().subscribe(priorities => {
@@ -125,7 +125,7 @@ export class TaskPageComponent implements OnInit {
     }
   }
 
-  private loadStatus(): void {
+  loadStatus(): void {
     if (this.statuses.length == 0) {
       this.spinnerService.show();
       this.subscriptions.push(this.statusService.getAllStatus().subscribe(statuses => {
@@ -135,7 +135,7 @@ export class TaskPageComponent implements OnInit {
     }
   }
 
-  private loadExecutors(idProject: number): void {
+  loadExecutors(idProject: number): void {
     if (this.executors.length == 0) {
       this.spinnerService.show();
       this.subscriptions.push(this.userService.getUserByAssignProject(idProject).subscribe(executors => {
@@ -154,18 +154,18 @@ export class TaskPageComponent implements OnInit {
     }
   }
 
-  private _createForm() {
+  _createForm() {
     if (this.taskForm == null) {
       this.taskForm = this.validationService.getTaskFormGroup();
       this.taskForm.controls['taskProject'].clearValidators();
     }
-    if (this.tokenStorage.isTester()){
+    if (this.tokenStorage.isTester()) {
       this.taskForm.controls['priority'].clearValidators();
     }
-    if(this.tokenStorage.isDeveloper() || this.tokenStorage.isTester()){
+    if (this.tokenStorage.isDeveloper() || this.tokenStorage.isTester()) {
       this.taskForm.controls['taskName'].clearValidators();
       this.taskForm.controls['dueDate'].clearValidators();
-    }else {
+    } else {
       this.taskForm.controls['status'].clearValidators();
       this.taskForm.controls['priority'].clearValidators();
     }
@@ -181,16 +181,16 @@ export class TaskPageComponent implements OnInit {
   }
 
   saveComment(comment: Comment) {
-    if(comment.comment != "") {
+    if (comment.comment != "") {
       this.comment.timeOfCreation = Date.now().toString();
       this.comment.task = this.idTask;
       this.comment.user = this.tokenStorage.getUser()['idUser'];
       this.spinnerService.show()
       this.subscriptions.push(this.commentService.save(comment).subscribe(() => {
-        this.loadComments();
-        this.spinnerService.hide();
-      },
-          err=>alert("Произошла ошибка! Попробуйте позже...")))
+          this.loadComments();
+          this.spinnerService.hide();
+        },
+        err => alert("Произошла ошибка! Попробуйте позже...")))
       this.comment = new Comment();
     }
   }
@@ -214,8 +214,9 @@ export class TaskPageComponent implements OnInit {
   delete(idTask) {
     this.router.navigate(['/'])
     this.subscriptions.push(this.taskService.delete(idTask).subscribe(
-      message=>{},
-        err=>alert("Произошла ошибка! Попробуйте позже...")
+      message => {
+      },
+      err => alert("Произошла ошибка! Попробуйте позже...")
     ))
   }
 
@@ -244,9 +245,9 @@ export class TaskPageComponent implements OnInit {
   }
 
   more() {
-    if(this.size < this.totalComments) {
+    if (this.size < this.totalComments) {
       this.size = this.size + 5;
-    }else {
+    } else {
       this.moreCommentsButton = false;
     }
     this.loadComments()

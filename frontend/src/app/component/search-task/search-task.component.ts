@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {TaskViewModel} from "../../model/view-model/task-view-model";
 import {TaskService} from "../../service/task.service";
@@ -12,9 +12,9 @@ import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 })
 export class SearchTaskComponent implements OnInit {
 
-  private subscriptions: Subscription[] = []
-  private taskViewModels: TaskViewModel[];
-  private search:string;
+  subscriptions: Subscription[] = []
+  taskViewModels: TaskViewModel[];
+  search: string;
 
   constructor(private taskService: TaskService,
               private route: ActivatedRoute,
@@ -30,7 +30,7 @@ export class SearchTaskComponent implements OnInit {
     this.loadTaskViewModel(this.search)
   }
 
-  loadTaskViewModel(search:string) {
+  loadTaskViewModel(search: string) {
     this.spinnerService.show()
     this.subscriptions.push(this.taskService.getTaskViewModelsBySearch(search).subscribe(taskViewModels => {
       this.taskViewModels = taskViewModels as TaskViewModel[];

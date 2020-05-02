@@ -13,7 +13,7 @@ import {Role} from "../../model/role";
 import {Status} from "../../model/status";
 import {Priority} from "../../model/priority";
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
-import { ruLocale } from 'ngx-bootstrap/locale';
+import {ruLocale} from 'ngx-bootstrap/locale';
 import {StatusService} from "../../service/status.service";
 import {PriorityService} from "../../service/priority.service";
 import {ProjectService} from "../../service/project.service";
@@ -22,6 +22,7 @@ import {UserForTask} from "../../model/view-model/user-for-task";
 import {TaskService} from "../../service/task.service";
 import {TokenStorageService} from "../../auth/token-storage.service";
 import {Router} from "@angular/router";
+
 defineLocale('ru', ruLocale);
 
 @Component({
@@ -36,7 +37,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   taskForm: FormGroup;
   projectForm: FormGroup;
 
-  search:string;
+  search: string;
 
   subscriptions: Subscription[] = [];
 
@@ -44,8 +45,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   task: Task;
   project: Project;
 
-  userForTask:UserForTask[];
-  projectsForTask:ProjectForTask[];
+  userForTask: UserForTask[];
+  projectsForTask: ProjectForTask[];
   roles: Role[];
   statuses: Status[];
   priorities: Priority[];
@@ -64,11 +65,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private validationService: ValidationService,
               private roleService: RoleService,
               private statusService: StatusService,
-              private priorityService:PriorityService,
+              private priorityService: PriorityService,
               private localeService: BsLocaleService,
-              private projectService:ProjectService,
-              private taskService:TaskService,
-              private tokenStorage:TokenStorageService,
+              private projectService: ProjectService,
+              private taskService: TaskService,
+              public tokenStorage: TokenStorageService,
               private router: Router) {
     this._createForm();
     this.minDate = new Date();
@@ -90,14 +91,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-  ngOnDestroy(){
-    this.subscriptions.forEach(subscription =>{
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
     })
   }
 
-  private loadRole():void{
-    if(this.roles.length==0) {
+  loadRole(): void {
+    if (this.roles.length == 0) {
       this.spinnerService.show();
       this.subscriptions.push(this.roleService.getAllRole().subscribe(roles => {
         this.roles = roles as Role[];
@@ -106,8 +107,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  private loadPriority():void{
-    if(this.priorities.length==0) {
+  loadPriority(): void {
+    if (this.priorities.length == 0) {
       this.spinnerService.show();
       this.subscriptions.push(this.priorityService.getAllPriority().subscribe(priorities => {
         this.priorities = priorities as Priority[];
@@ -116,8 +117,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  private loadStatus():void{
-    if(this.statuses.length==0) {
+  loadStatus(): void {
+    if (this.statuses.length == 0) {
       this.spinnerService.show();
       this.subscriptions.push(this.statusService.getAllStatus().subscribe(statuses => {
         this.statuses = statuses as Status[];
@@ -126,8 +127,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  private loadProjectForTask():void{
-    if(this.projectsForTask.length==0) {
+  loadProjectForTask(): void {
+    if (this.projectsForTask.length == 0) {
       this.spinnerService.show();
       this.subscriptions.push(this.projectService.getAllProjectForTask().subscribe(projectForTask => {
         this.projectsForTask = projectForTask as ProjectForTask[];
@@ -136,15 +137,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  private loadUserForTask(assignProject:number):void{
+  loadUserForTask(assignProject: number): void {
     this.spinnerService.show();
-    this.subscriptions.push(this.userService.getUserForTasks(assignProject).subscribe(userForTasks=>{
+    this.subscriptions.push(this.userService.getUserForTasks(assignProject).subscribe(userForTasks => {
       this.userForTask = userForTasks as UserForTask[];
       this.spinnerService.hide();
     }))
   }
 
-  private _createForm() {
+  _createForm() {
     this.userForm = this.validationService.getUserFormGroup();
     this.taskForm = this.validationService.getTaskFormGroup();
     this.projectForm = this.validationService.getProjectFormGroup();
@@ -153,19 +154,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   addUser(): void {
-    this.subscriptions.push(this.userService.save(this.user).subscribe(user=>{
-      this.modalRef.hide();
+    this.subscriptions.push(this.userService.save(this.user).subscribe(user => {
+        this.modalRef.hide();
       },
-        err=>alert("Произошла ошибка! Попробуйте позже...")
+      err => alert("Произошла ошибка! Попробуйте позже...")
     ))
   }
 
   addProject(): void {
     this.project.projectCreator = this.tokenStorage.getUser()['idUser'];
     this.project.readinessDegree = 0;
-    this.subscriptions.push(this.projectService.save(this.project).subscribe(project=>{
+    this.subscriptions.push(this.projectService.save(this.project).subscribe(project => {
       this.modalRef.hide();
-    },err=>alert("Произошла ошибка! Попробуйте позже...")))
+    }, err => alert("Произошла ошибка! Попробуйте позже...")))
   }
 
 
@@ -174,9 +175,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.task.dateOfCreation = Date.now().toString();
     this.task.updated = Date.now().toString();
     this.task.taskCreator = this.tokenStorage.getUser()['idUser'];
-    this.subscriptions.push(this.taskService.save(this.task).subscribe(task=>{
+    this.subscriptions.push(this.taskService.save(this.task).subscribe(task => {
       this.modalRef.hide();
-    },err=>alert("Произошла ошибка! Попробуйте позже...")))
+    }, err => alert("Произошла ошибка! Попробуйте позже...")))
   }
 
   get _userName() {
@@ -260,9 +261,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(['/'])
   }
 
-  searchTasks(){
+  searchTasks() {
     console.log(this.search)
-    this.router.navigate(['/search',this.search])
+    this.router.navigate(['/search', this.search])
   }
 
   btoa(s: string) {

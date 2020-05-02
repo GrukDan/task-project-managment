@@ -23,15 +23,15 @@ import {TokenStorageService} from "../../auth/token-storage.service";
 })
 export class HomeComponent implements OnInit {
 
-  private subscriptions: Subscription[] = [];
-  private idUser: number;
-  private userViewModel: UserViewModel;
-  private editUserViewModel: UserViewModel;
-  private roles: Role[];
-  private projects: Project[];
-  private taskViewModels: TaskViewModel[];
-  private edit: boolean;
-  private userForm: FormGroup;
+  subscriptions: Subscription[] = [];
+  idUser: number;
+  userViewModel: UserViewModel;
+  editUserViewModel: UserViewModel;
+  roles: Role[];
+  projects: Project[];
+  taskViewModels: TaskViewModel[];
+  edit: boolean;
+  userForm: FormGroup;
 
   public pieData = {
     pieChartLabels: [],
@@ -70,8 +70,8 @@ export class HomeComponent implements OnInit {
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private validationService: ValidationService,
-              private router:Router,
-              private tokenStorage:TokenStorageService) {
+              private router: Router,
+              public tokenStorage: TokenStorageService) {
 
     this.userViewModel = new UserViewModel();
     this.editUserViewModel = new UserViewModel();
@@ -120,9 +120,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  loadTaskViewModels(idUser:number) {
+  loadTaskViewModels(idUser: number) {
     this.spinnerService.show();
-    this.subscriptions.push(this.taskService.getTaskViewModelsByTaskExecutor(idUser).subscribe(taskViewModels=>{
+    this.subscriptions.push(this.taskService.getTaskViewModelsByTaskExecutor(idUser).subscribe(taskViewModels => {
       this.taskViewModels = taskViewModels as TaskViewModel[];
       this.groupByStatus();
       this.groupByPriority();
@@ -169,26 +169,26 @@ export class HomeComponent implements OnInit {
     this.edit = !this.edit;
   }
 
-  private _createForm() {
+  _createForm() {
     if (this.userForm == null) {
       this.userForm = this.validationService.getUserFormGroup();
       this.userForm.controls['login'].clearValidators();
       this.userForm.controls['password'].clearValidators();
       this.userForm.controls['role'].clearValidators();
-      if(this.tokenStorage.isAdmin() && this.userViewModel.iduser!=this.tokenStorage.getIdUser()){
+      if (this.tokenStorage.isAdmin() && this.userViewModel.iduser != this.tokenStorage.getIdUser()) {
         this.userForm.controls['userName'].clearValidators();
         this.userForm.controls['userSurname'].clearValidators();
         this.userForm.controls['email'].clearValidators();
       }
-      if(this.tokenStorage.isProjectManager() && this.userViewModel.iduser!=this.tokenStorage.getIdUser()){
+      if (this.tokenStorage.isProjectManager() && this.userViewModel.iduser != this.tokenStorage.getIdUser()) {
         this.userForm.controls['userName'].clearValidators();
         this.userForm.controls['userSurname'].clearValidators();
         this.userForm.controls['email'].clearValidators();
         this.userForm.controls['role'].clearValidators();
       }
-      if(!this.tokenStorage.isProjectManager()
+      if (!this.tokenStorage.isProjectManager()
         && this.tokenStorage.isAdmin()
-      && this.tokenStorage.getIdUser() == this.userViewModel.iduser){
+        && this.tokenStorage.getIdUser() == this.userViewModel.iduser) {
         this.userForm.controls['role'].clearValidators();
       }
     }
