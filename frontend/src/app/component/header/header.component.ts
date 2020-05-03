@@ -155,6 +155,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   addUser(): void {
     this.subscriptions.push(this.userService.save(this.user).subscribe(user => {
+      this.user = new User();
+        this.userForm.reset();
         this.modalRef.hide();
       },
       err => alert("Произошла ошибка! Попробуйте позже...")
@@ -165,17 +167,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.project.projectCreator = this.tokenStorage.getUser()['idUser'];
     this.project.readinessDegree = 0;
     this.subscriptions.push(this.projectService.save(this.project).subscribe(project => {
+      this.project = new Project();
+      this.projectForm.reset();
       this.modalRef.hide();
     }, err => alert("Произошла ошибка! Попробуйте позже...")))
   }
 
 
-  addTask(): void {
-    this.task.taskExecutor;
+  addTask(executor): void {
+    if(!this.task.taskExecutor)this.task.taskExecutor = executor;
     this.task.dateOfCreation = Date.now().toString();
     this.task.updated = Date.now().toString();
     this.task.taskCreator = this.tokenStorage.getUser()['idUser'];
     this.subscriptions.push(this.taskService.save(this.task).subscribe(task => {
+      this.task = new Task();
+      this.taskForm.reset();
       this.modalRef.hide();
     }, err => alert("Произошла ошибка! Попробуйте позже...")))
   }

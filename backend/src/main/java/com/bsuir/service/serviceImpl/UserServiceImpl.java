@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByLoginAndPassword(user.getLogin(), user.getPassword()) == null) {
             userViewModel = new UserViewModel(userRepository.save(user));
             if(userViewModel!=null){
-                sendEmail(user);
+                //sendEmail(user);
             }
         }
         return userViewModel;

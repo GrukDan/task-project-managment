@@ -265,6 +265,7 @@
                 id="taskExecutor"
                 name="taskExecutor"
                 formControlName="taskExecutor"
+                #executor
                 [(ngModel)]="task.taskExecutor">
           <option *ngFor="let executor of userForTask"
                   [value]="executor.iduser">{{executor.userSurname}} {{executor.userName}}</option>
@@ -282,6 +283,6 @@
   </div>
   <div class="modal-footer">
     <button class="btn btn-secondary" (click)="modalRef.hide()">Закрыть</button>
-    <button class="btn btn-primary" [disabled]="taskForm.invalid" (click)="addTask()">Добавить</button>
+    <button class="btn btn-primary" [disabled]="taskForm.invalid" (click)="addTask(executor.value)">Добавить</button>
   </div>
 </ng-template>
