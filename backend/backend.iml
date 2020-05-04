@@ -4,9 +4,8 @@
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
-        <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="NewPersistenceUnit" value="a5e9f2cb-f5bf-4287-8c07-72d908d0b347" />
+          <factory-entry name="NewPersistenceUnit" />
           <factory-entry name="entityManagerFactory" />
         </datasource-mapping>
         <naming-strategy-map />

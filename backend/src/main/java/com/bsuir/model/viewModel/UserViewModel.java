@@ -39,7 +39,15 @@ public class UserViewModel {
     }
 
     public User buildUser() {
-        return new User(Long.valueOf(iduser), role, userName, userSurname, email, assignProject);
+        User user = new User();
+        user.setIduser(Long.valueOf(iduser));
+        user.setRole(role);
+        user.setUserName(userName);
+        user.setUserSurname(userSurname);
+        user.setEmail(email);
+        user.setAssignProject(assignProject);
+        return user;
+        //return new User(Long.valueOf(iduser), role, userName, userSurname, email, assignProject,null,null);
     }
 
     @Override

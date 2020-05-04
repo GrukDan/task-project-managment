@@ -2,6 +2,7 @@ package com.bsuir.security.jwt;
 
 import com.bsuir.model.User;
 import com.bsuir.repository.UserRepository;
+import com.bsuir.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,11 +15,11 @@ import java.util.ArrayList;
 public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByLogin(username);
+        User user = userService.getByLogin(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }

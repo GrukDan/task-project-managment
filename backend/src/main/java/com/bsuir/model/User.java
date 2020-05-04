@@ -1,12 +1,10 @@
 package com.bsuir.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "user")
 public class User {
     private long iduser;
     private Long role;
@@ -17,28 +15,7 @@ public class User {
     private String login;
     private String password;
 
-    public User() {
-    }
 
-    public User(long iduser, Long role, String userName, String userSurname, String email, Long assignProject, String login, String password) {
-        this.iduser = iduser;
-        this.role = role;
-        this.userName = userName;
-        this.userSurname = userSurname;
-        this.email = email;
-        this.assignProject = assignProject;
-        this.login = login;
-        this.password = password;
-    }
-
-    public User(long iduser, Long role, String userName, String userSurname, String email, Long assignProject) {
-        this.iduser = iduser;
-        this.role = role;
-        this.userName = userName;
-        this.userSurname = userSurname;
-        this.email = email;
-        this.assignProject = assignProject;
-    }
 
     @Id
     @Column(name = "iduser", nullable = false)
