@@ -23,5 +23,4 @@ COPY . /app
 # start app
 CMD ng serve --host 0.0.0.0
 
-
-# docker build -t frontend:dev .
+#docker build -t frontend:latest .

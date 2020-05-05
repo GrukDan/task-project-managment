@@ -185,3 +185,22 @@ DEFAULT CHARACTER SET = utf8;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+-- insert into user(role,user_name,user_surname,email,assign_project,login,password) values (1,'Oleg','Gorin','gor@mail.com',null,'qwe123','qwe123');
+-- insert into user(role,user_name,user_surname,email,assign_project,login,password) values (2,'Vasya','Bolin','gor@mail.com',null,'qwe321','qwe321');
+-- insert into user(role,user_name,user_surname,email,assign_project,login,password) values (3,'Oleg','Fomin','gor@mail.com',null,'qwe111','qwe111');
+-- insert into user(role,user_name,user_surname,email,assign_project,login,password) values (4,'Kolleg','Holin','gor@mail.com',null,'qwe333','qwe333');
+
+-- insert into status(status) values('open');
+-- insert into status(status) values('in progress');
+-- insert into status(status) values('ready for test');
+-- insert into status(status) values('closed');
+
+
+-- insert into priority(priority) values('min');
+-- insert into priority(priority) values('max');
+-- insert into priority(priority) values('middle');
+
+
